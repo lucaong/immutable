@@ -14,6 +14,8 @@ At the moment, `Immutable` implements the following persistent data structures:
 
   - `Vector` - efficient appends, updates and lookups
 
+More data structures are in the planning (like `Map` and `Set`).
+
 
 ## Acknowledgement
 
