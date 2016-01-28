@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lucaong/immutable.svg?branch=master)](https://travis-ci.org/lucaong/immutable)
+
 # Immutable
 
 Efficient, thread-safe immutable collections for Crystal.
