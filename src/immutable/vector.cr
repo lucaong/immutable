@@ -11,6 +11,12 @@ module Immutable
     def initialize(@trie : Trie(T), @tail : Array(T))
     end
 
+    def initialize(elems : Array(T))
+      leaves = elems.size / Trie::BLOCK_SIZE
+      @trie = Trie(T).from(elems[0...leaves])
+      @tail = elems[leaves..-1]
+    end
+
     def size
       @trie.size + @tail.size
     end

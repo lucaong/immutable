@@ -7,6 +7,23 @@ describe Immutable do
       vec.push(i)
     end
 
+    describe ".new" do
+      describe "without arguments" do
+        it "returns an empty Vector" do
+          Immutable::Vector(Int32).new.size.should eq(0)
+        end
+      end
+
+      describe "with an array of elements" do
+        it "returns a Vector containing the elements" do
+          vec = Immutable::Vector.new((0..99).to_a)
+          vec.size.should eq(100)
+          vec.first.should eq(0)
+          vec.last.should eq(99)
+        end
+      end
+    end
+
     describe "#size" do
       it "returns the correct size" do
         empty_vector.size.should eq(0)

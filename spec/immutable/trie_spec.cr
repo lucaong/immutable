@@ -3,10 +3,7 @@ require "../spec_helper"
 describe Immutable do
   describe Immutable::Trie do
     empty_trie = Immutable::Trie(Int32).empty
-
-    trie = (0...50).reduce(empty_trie) do |trie, i|
-      trie.push(i)
-    end
+    trie       = Immutable::Trie.from((0...50).to_a)
 
     describe "#size" do
       it "returns the number of elements in the trie" do
@@ -68,6 +65,15 @@ describe Immutable do
         t = empty_trie.push(1)
         empty_trie.size.should eq(0)
       end
+
+      it "works properly with bigger tries" do
+        t = (0..99).reduce(empty_trie) do |t, elem|
+          t.push(elem)
+        end
+        t.size.should eq(100)
+        t.get(0).should eq(0)
+        t.get(99).should eq(99)
+      end
     end
 
     describe "#push_leaf" do
@@ -100,6 +106,24 @@ describe Immutable do
           array << elem
         end
         array.should eq((0...trie.size).to_a)
+      end
+    end
+
+    describe ".empty" do
+      it "returns an empty trie" do
+        t = Immutable::Trie(Int32).empty
+        t.size.should eq(0)
+        t.should be_a(Immutable::Trie(Int32))
+      end
+    end
+
+    describe ".from" do
+      it "returns a trie containing the given elements" do
+        t = Immutable::Trie.from((0..999).to_a)
+        t.size.should eq(1000)
+        t.should be_a(Immutable::Trie(Int32))
+        t.get(0).should eq(0)
+        t.get(999).should eq(999)
       end
     end
   end

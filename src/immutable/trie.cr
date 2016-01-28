@@ -57,12 +57,7 @@ module Immutable
     end
 
     def push_leaf(leaf : Array(T)) : Trie(T)
-      if leaf.size > BLOCK_SIZE
-        raise ArgumentError.new("leaf cannot have more than #{BLOCK_SIZE} elements")
-      end
-      unless size % 32 == 0
-        raise ArgumentError.new("cannot push leaf on partially filled tree")
-      end
+      raise ArgumentError.new if leaf.size > BLOCK_SIZE || size % 32 != 0
       return Trie.new([self], @levels + 1).push_leaf(leaf) if full?
       return Trie.new(leaf) if empty?
       Trie.new(@children.dup.tap do |cs|
@@ -89,6 +84,14 @@ module Immutable
 
     def self.empty
       Trie.new([] of T)
+    end
+
+    def self.from(elems : Array(T))
+      trie = Trie(T).empty
+      elems.each_slice(BLOCK_SIZE) do |leaf|
+        trie = trie.push_leaf(leaf)
+      end
+      trie
     end
 
     protected def set(index : Int32, value : T) : Trie(T)
