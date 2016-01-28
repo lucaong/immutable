@@ -96,5 +96,51 @@ describe Immutable do
         iter.to_a.should eq((0...vector.size).to_a)
       end
     end
+
+    describe "#<=>" do
+      it "returns 0 if vectors are equal" do
+        v1 = Immutable::Vector.new([1, 2, 3])
+        v2 = Immutable::Vector.new([1, 2, 3])
+        (v1 <=> v2).should eq(0)
+      end
+
+      it "returns -1 if the first mismatched element is smaller than the other" do
+        v1 = Immutable::Vector.new([4, 1, 5])
+        v2 = Immutable::Vector.new([4, 2, 3, 7])
+        (v1 <=> v2).should eq(-1)
+      end
+
+      it "returns 1 if the first mismatched element bigger than the other" do
+        v1 = Immutable::Vector.new([4, 3, 2])
+        v2 = Immutable::Vector.new([4, 2, 3, 7])
+        (v1 <=> v2).should eq(1)
+      end
+
+      describe "when equal up to the shorter Vector" do
+        it "returns -1 if shorter than the other" do
+          v1 = Immutable::Vector.new([4, 2, 3])
+          v2 = Immutable::Vector.new([4, 2, 3, 7])
+          (v1 <=> v2).should eq(-1)
+        end
+
+        it "returns 1 if longer than the other" do
+          v1 = Immutable::Vector.new([4, 2, 3, 7])
+          v2 = Immutable::Vector.new([4, 2, 3])
+          (v1 <=> v2).should eq(1)
+        end
+      end
+    end
+
+    describe "#==" do
+      it "returns false for different types" do
+        (vector == 1).should eq(false)
+      end
+
+      it "returns true for equal vectors" do
+        v1 = Immutable::Vector.new([4, 2, 3])
+        v2 = Immutable::Vector.new([4, 2, 3])
+        (v1 == v2).should eq(true)
+      end
+    end
   end
 end

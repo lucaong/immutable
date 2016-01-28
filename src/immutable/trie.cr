@@ -22,16 +22,16 @@ module Immutable
       @children = [] of Trie(T)
     end
 
-    def at(index : Int32)
+    def at(index : Int)
       return yield if index < 0 || index >= size
       lookup(index)
     end
 
-    def get(index : Int32)
+    def get(index : Int)
       at(index) { raise IndexError.new }
     end
 
-    def update(index : Int32, value : T) : Trie(T)
+    def update(index : Int, value : T) : Trie(T)
       raise IndexError.new if index < 0 || index >= size
       set(index, value)
     end
@@ -94,19 +94,19 @@ module Immutable
       trie
     end
 
-    protected def set(index : Int32, value : T) : Trie(T)
+    protected def set(index : Int, value : T) : Trie(T)
       child_idx = child_index(index)
       return Trie.new(update_values(@values, child_idx, value)) if leaf?
       Trie.new(update_children(@children, child_idx, value, index), @levels)
     end
 
-    protected def lookup(index : Int32)
+    protected def lookup(index : Int)
       child_idx = child_index(index)
       return @values[child_idx] if leaf?
       @children[child_idx].lookup(index)
     end
 
-    protected def leaf_for(index : Int32)
+    protected def leaf_for(index : Int)
       return self if leaf?
       @children[child_index(index)].leaf_for(index)
     end
@@ -126,7 +126,7 @@ module Immutable
       end
     end
 
-    private def update_values(values : Array(T), index : Int32, value : T) : Array(T)
+    private def update_values(values : Array(T), index : Int, value : T) : Array(T)
       @values.dup.tap do |vs|
         if vs.size == index
           vs << value

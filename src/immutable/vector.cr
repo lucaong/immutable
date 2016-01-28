@@ -1,5 +1,9 @@
 module Immutable
   class Vector(T)
+    include Enumerable(T)
+    include Iterable
+    include Comparable(Vector)
+
     @trie : Trie(T)
     @tail : Array(T)
 
@@ -74,6 +78,30 @@ module Immutable
 
     def last
       self[-1]
+    end
+
+    def equals?(other : Vector)
+      return false if size != other.size
+      each.zip(other.each).all? do |tuple|
+        yield(tuple.first, tuple.last)
+      end
+    end
+
+    def ==(other : Vector)
+      equals?(other) { |x, y| x == y }
+    end
+
+    def ==(other)
+      false
+    end
+
+    def <=>(other : Vector)
+      min_size = Math.min(size, other.size)
+      each.zip(other.each).each do |tuple|
+        n = tuple.first <=> tuple.last
+        return n if n != 0
+      end
+      size <=> other.size
     end
 
     private def in_tail?(index)
