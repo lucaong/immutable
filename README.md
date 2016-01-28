@@ -12,7 +12,7 @@ and at the same time fast.
 
 At the moment, `Immutable` implements the following persistent data structures:
 
-  - `Vector` - Efficient append, update and lookup
+  - `Vector` - efficient appends, updates and lookups
 
 
 ## Acknowledgement
