@@ -16,9 +16,13 @@ module Immutable
     end
 
     def each
-      each_index do |i|
-        yield self[i]
-      end
+      @trie.each { |elem| yield elem }
+      @tail.each { |elem| yield elem }
+      self
+    end
+
+    def each
+      ItemIterator.new(self)
     end
 
     def each_index
@@ -39,15 +43,51 @@ module Immutable
       end
     end
 
-    private def [](i : Int)
-      raise IndexError.new if i == size || i.abs > size
-      i = size - i if i < 0
-      return tail[i - @trie.size] if in_tail?(i)
+    def <<(elem : T)
+      push(elem)
+    end
+
+    def [](i : Int)
+      at(i)
+    end
+
+    def at(i : Int)
+      at(i) { raise IndexError.new }
+    end
+
+    def at(i : Int)
+      i = size + i if i < 0
+      return yield if i < 0 || i >= size
+      return @tail[i - @trie.size] if in_tail?(i)
       @trie.get(i)
+    end
+
+    def first
+      self[0]
+    end
+
+    def last
+      self[-1]
     end
 
     private def in_tail?(index)
       index >= @trie.size && index < size
+    end
+
+    class ItemIterator(T)
+      include Iterator(Int32)
+
+      @vector : Vector(T)
+      @index : Int32
+
+      def initialize(@vector : Vector(T), @index = 0)
+      end
+
+      def next
+        value = @vector.at(@index) { stop }
+        @index += 1
+        value
+      end
     end
   end
 end

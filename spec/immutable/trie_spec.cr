@@ -92,6 +92,16 @@ describe Immutable do
         end
       end
     end
+
+    describe "#each" do
+      it "iterates through each element" do
+        array = [] of Int32
+        trie.each do |elem|
+          array << elem
+        end
+        array.should eq((0...trie.size).to_a)
+      end
+    end
   end
 end
 

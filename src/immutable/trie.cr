@@ -22,9 +22,13 @@ module Immutable
       @children = [] of Trie(T)
     end
 
-    def get(index : Int32)
-      raise IndexError.new if index < 0 || index >= size
+    def at(index : Int32)
+      return yield if index < 0 || index >= size
       lookup(index)
+    end
+
+    def get(index : Int32)
+      at(index) { raise IndexError.new }
     end
 
     def update(index : Int32, value : T) : Trie(T)
@@ -38,6 +42,18 @@ module Immutable
       else
         set(@size, value)
       end
+    end
+
+    def each
+      i = 0
+      while i < size
+        leaf_values = leaf_for(i).values
+        leaf_values.each do |value|
+          yield value
+          i += 1
+        end
+      end
+      self
     end
 
     def push_leaf(leaf : Array(T)) : Trie(T)
@@ -85,6 +101,15 @@ module Immutable
       child_idx = child_index(index)
       return @values[child_idx] if leaf?
       @children[child_idx].lookup(index)
+    end
+
+    protected def leaf_for(index : Int32)
+      return self if leaf?
+      @children[child_index(index)].leaf_for(index)
+    end
+
+    protected def values
+      @values
     end
 
     private def child_index(index)
