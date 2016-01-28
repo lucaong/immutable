@@ -1,9 +1,29 @@
-# immutable
+# Immutable
 
-TODO: Write a description here
+Efficient, thread-safe immutable collections for Crystal.
+
+Whenever you modify an `Immutable` collection, the original remains unchanged
+and a modified copy is returned. However, the copy is efficient due to
+structural sharing. This makes `Immutable` collections inherently thread-safe
+and at the same time fast.
+
+
+## Project status
+
+At the moment, `Immutable` implements the following persistent data structures:
+
+  - `Vector` - Efficient append, update and lookup
+
+
+## Acknowledgement
+
+Although not a port, this project takes inspiration from similar libraries and
+implementations like [Clojure persistent
+collections](http://clojure.org/reference/data_structures) and the [hamster gem
+for Ruby](https://github.com/hamstergem/hamster)
+
 
 ## Installation
-
 
 Add this to your application's `shard.yml`:
 
@@ -16,17 +36,13 @@ dependencies:
 
 ## Usage
 
-
 ```crystal
 require "immutable"
+
+vector = Immutable::Vector.from([1, 2, 3, 4, 5])
+other  = vector.push(42)
 ```
 
-
-TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
 
 ## Contributing
 
