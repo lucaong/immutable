@@ -87,7 +87,7 @@ describe Immutable do
 
       it "returns self" do
         v = vector.each do |elem|; end
-        v.should be(vector)
+        v.should eq(vector)
       end
 
       it "returns an iterator if called with no arguments" do

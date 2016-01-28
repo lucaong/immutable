@@ -28,7 +28,7 @@
 # operations take no more than 6 steps.
 #
 module Immutable
-  class Vector(T)
+  struct Vector(T)
     include Enumerable(T)
     include Iterable
     include Comparable(Vector)

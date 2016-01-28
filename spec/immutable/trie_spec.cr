@@ -34,7 +34,6 @@ describe Immutable do
       it "returns a modified copy of the trie" do
         t = trie.update(0, -1)
         t.get(0).should eq(-1)
-        t.should_not be(trie)
       end
 
       it "does not modify the original" do
@@ -58,7 +57,6 @@ describe Immutable do
         t = empty_trie.push(1)
         t.get(0).should eq(1)
         t.size.should eq(1)
-        t.should_not be(empty_trie)
       end
 
       it "does not modify the original" do

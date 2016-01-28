@@ -1,5 +1,5 @@
 module Immutable
-  class Trie(T)
+  struct Trie(T)
     BITS_PER_LEVEL = 5_u32
     BLOCK_SIZE = (2 ** BITS_PER_LEVEL).to_u32
     INDEX_MASK = BLOCK_SIZE - 1
