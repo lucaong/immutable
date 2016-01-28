@@ -76,6 +76,22 @@ describe Immutable do
       end
     end
 
+    describe "#[]?" do
+      it "returns the element at the given index" do
+        vector[10]?.should eq(10)
+      end
+
+      it "works with negative indexes" do
+        vector[-1]?.should eq(vector[vector.size - 1])
+        vector[-1 * vector.size]?.should eq(vector[0])
+      end
+
+      it "returns nil if accessing indexes out of range" do
+        vector[vector.size]?.should eq(nil)
+        vector[-1 * (vector.size + 1)]?.should eq(nil)
+      end
+    end
+
     describe "#each" do
       it "iterates through each element" do
         array = [] of Int32

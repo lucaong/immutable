@@ -157,6 +157,25 @@ module Immutable
       at(i)
     end
 
+    # Returns the element at the given index.
+    #
+    # Negative indices can be used to start counting from the end of the vector.
+    # Returns `nil` if trying to access an element outside the vector's range.
+    #
+    # ```
+    # vec = Immutable::Vector.new(['a', 'b', 'c'])
+    # vec[0]?  # => 'a'
+    # vec[2]?  # => 'c'
+    # vec[-1]? # => 'c'
+    # vec[-2]? # => 'b'
+    #
+    # vec[3]?  # nil
+    # vec[-4]? # nil
+    # ```
+    def []?(i : Int)
+      at(i) { nil }
+    end
+
     # Returns the element at the given index, if in bounds,
     # otherwise raises `IndexError`
     #
