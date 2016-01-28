@@ -2,6 +2,7 @@
 /libs/
 /.crystal/
 /.shards/
+.DS_Store
 
 
 # Libraries don't need dependency lock
