@@ -12,7 +12,7 @@ thread-safe, garbage collector friendly and performant.
 At the moment, `Immutable` implements the following persistent data structures:
 
   - `Vector`: array-like ordered, integer-indexed collection implementing
-    efficient appends, updates and lookups
+  efficient appends, updates and lookups
 
 TODO:
 
