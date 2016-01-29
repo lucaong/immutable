@@ -28,7 +28,6 @@
 # equivalent to O(1): in a vector of 1 billion elements these operations take no
 # more than 6 steps. Due to tail optimization, appends are O(1) 31 times out of
 # 32, and O(Log32) 1/32 of times.
-#
 require "./vector/trie"
 
 module Immutable
