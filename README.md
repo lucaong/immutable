@@ -11,13 +11,13 @@ thread-safe, garbage collector friendly and performant.
 
 At the moment, `Immutable` implements the following persistent data structures:
 
-  - `Vector`: array-like ordered, integer-indexed collection implementing
-  efficient appends, updates and lookups
+  - `Immutable::Vector`: array-like ordered, integer-indexed collection
+  implementing efficient appends, updates and lookups
 
 TODO:
 
-  - `Map`: hash-like key-value collection
-  - `Set`: unordered collection without duplicates
+  - `Immutable::Map`: hash-like key-value collection
+  - `Immutable::Set`: unordered collection without duplicates
 
 
 ## Installation
@@ -49,10 +49,10 @@ vector                                          # => Vector [1, 2, 3, 4, 5]
 
 ## Implementation
 
-`Vector` is implemented as a bit-partitioned vector trie with a block size of 32
-bits, that guarantees O(log32) lookups and updates, which is effectively
-constant time for practical purposes. Due to tail optimization, appends are O(1)
-31 times out of 32, and O(log32) 1/32 of the times.
+`Immutable::Vector` is implemented as a bit-partitioned vector trie with a block
+size of 32 bits, that guarantees O(log32) lookups and updates, which is
+effectively constant time for practical purposes. Due to tail optimization,
+appends are O(1) 31 times out of 32, and O(log32) 1/32 of the times.
 
 
 ## Contributing
