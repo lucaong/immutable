@@ -18,15 +18,16 @@
 #
 # ```
 # vector = Immutable::Vector.new([1, 2, 3]) # => Vector [1, 2, 3]
-# vector.push(4) # => Vector [1, 2, 3, 4]
-# vector         # => Vector [1, 2, 3]
+# vector.push(4)                            # => Vector [1, 2, 3, 4]
+# vector                                    # => Vector [1, 2, 3]
 # ```
 #
 # Vector is implemented as a "persistent bit-partitioned vector trie" with a
-# ranching factor of 32. This means that updates, appends and lookups are
-# performed have a complexity of O(Log32), which for practical purposes is
-# effectively equivalent to O(1): in a vector of 1 billion elements these
-# operations take no more than 6 steps.
+# ranching factor of 32. This means that updates and lookups are performed have
+# a complexity of O(Log32), which for practical purposes is effectively
+# equivalent to O(1): in a vector of 1 billion elements these operations take no
+# more than 6 steps. Due to tail optimization, appends are O(1) 31 times out of
+# 32, and O(Log32) 1/32 of times.
 #
 require "./vector/trie"
 
@@ -305,7 +306,7 @@ module Immutable
     #
     # ```
     # Immutable::Vector.new([8]) <=> Immutable::Vector.new([1, 2, 3]) # => 1
-    # Immutable::VEctor.new([2]) <=> Immutable::Vector.new([4, 2, 3]) # => -1
+    # Immutable::Vector.new([2]) <=> Immutable::Vector.new([4, 2, 3]) # => -1
     # Immutable::Vector.new([1, 2]) <=> Immutable::Vector.new([1, 2]) # => 0
     # ```
     def <=>(other : Vector)
