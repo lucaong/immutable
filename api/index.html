@@ -61,7 +61,7 @@
 
 <p>Efficient, thread-safe immutable data structures for Crystal.</p>
 
-<p>Whenever you modify an <code><a href="Immutable.html">Immutable</a></code> data structure, the original remains
+<p>Whenever an <code><a href="Immutable.html">Immutable</a></code> data structure is "modified", the original remains
 unchanged and a modified copy is returned. However, the copy is efficient due to
 structural sharing. This makes <code><a href="Immutable.html">Immutable</a></code> data structures inherently
 thread-safe, garbage collector friendly and performant.</p>
@@ -96,6 +96,13 @@ other[<span class="n">2</span>]                                        <span cla
 
 <span class="c"># The original vector is unchanged</span>
 vector                                          <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span></code></pre>
+
+<h2>Implementation</h2>
+
+<p><code>Vector</code> is implemented as a bit-partitioned vector trie with a block size of 32
+bits, that guarantees O(log32) lookups and updates, which is effectively
+constant time for practical purposes. Due to tail optimization, appends are O(1)
+31 times out of 32, and O(log32) 1/32 of the times.</p>
 
 <h2>Contributing</h2>
 
