@@ -7,20 +7,17 @@ Efficient, thread-safe immutable data structures for Crystal.
 Whenever you modify an `Immutable` data structure, the original remains
 unchanged and a modified copy is returned. However, the copy is efficient due to
 structural sharing. This makes `Immutable` data structures inherently
-thread-safe and at the same time fast.
-
-
-## Project status
+thread-safe, garbage collector friendly and performant.
 
 At the moment, `Immutable` implements the following persistent data structures:
 
-  - `Vector`: Array-like ordered, integer-indexed collection implementing
+  - `Vector`: array-like ordered, integer-indexed collection implementing
     efficient appends, updates and lookups
 
 TODO:
 
-  - `Map` - Hash-like key-value collection
-  - `Set` - Unordered collection without duplicates
+  - `Map`: hash-like key-value collection
+  - `Set`: unordered collection without duplicates
 
 
 ## Installation
@@ -67,7 +64,7 @@ vector                                          # => Vector [1, 2, 3, 4, 5]
 ## Acknowledgement
 
 Although not a port, this project takes inspiration from similar libraries and
-implementations like:
+persistent data structure implementations like:
 
   - [Clojure persistent collections](http://clojure.org/reference/data_structures)
   - [The Hamster gem for Ruby](https://github.com/hamstergem/hamster)
