@@ -59,27 +59,24 @@
 
 <h1>Immutable</h1>
 
-<p>Efficient, thread-safe immutable collections for Crystal.</p>
+<p>Efficient, thread-safe immutable data structures for Crystal.</p>
 
-<p>Whenever you modify an <code><a href="Immutable.html">Immutable</a></code> collection, the original remains unchanged
-and a modified copy is returned. However, the copy is efficient due to
-structural sharing. This makes <code><a href="Immutable.html">Immutable</a></code> collections inherently thread-safe
-and at the same time fast.</p>
+<p>Whenever you modify an <code><a href="Immutable.html">Immutable</a></code> data structure, the original remains
+unchanged and a modified copy is returned. However, the copy is efficient due to
+structural sharing. This makes <code><a href="Immutable.html">Immutable</a></code> data structures inherently
+thread-safe and at the same time fast.</p>
 
 <h2>Project status</h2>
 
 <p>At the moment, <code><a href="Immutable.html">Immutable</a></code> implements the following persistent data structures:</p>
 
-<ul><li><code>Vector</code> - efficient appends, updates and lookups</li></ul>
+<ul><li><code>Vector</code>: Array-like ordered, integer-indexed collection implementing</li></ul>
 
-<p>More data structures are in the planning (like <code>Map</code> and <code>Set</code>).</p>
+<pre><code>efficient appends, updates and lookups</code></pre>
 
-<h2>Acknowledgement</h2>
+<p>TODO:</p>
 
-<p>Although not a port, this project takes inspiration from similar libraries and
-implementations like:</p>
-
-<ul><li><a href="http://clojure.org/reference/data_structures" target="_blank">Clojure persistent collections</a></li><li><a href="https://github.com/hamstergem/hamster" target="_blank">The hamster gem for Ruby</a></li></ul>
+<ul><li><code>Map</code> - Hash-like key-value collection</li><li><code>Set</code> - Unordered collection without duplicates</li></ul>
 
 <h2>Installation</h2>
 
@@ -109,6 +106,13 @@ vector                                          <span class="c"># =&gt; Vector [
 <h2>Contributors</h2>
 
 <ul><li><a href="https://github.com/lucaong" target="_blank">lucaong</a> Luca Ongaro - creator, maintainer</li></ul>
+
+<h2>Acknowledgement</h2>
+
+<p>Although not a port, this project takes inspiration from similar libraries and
+implementations like:</p>
+
+<ul><li><a href="http://clojure.org/reference/data_structures" target="_blank">Clojure persistent collections</a></li><li><a href="https://github.com/hamstergem/hamster" target="_blank">The Hamster gem for Ruby</a></li></ul>
 </div>
 </body>
 </html>
