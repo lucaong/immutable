@@ -68,13 +68,13 @@ thread-safe, garbage collector friendly and performant.</p>
 
 <p>At the moment, <code><a href="Immutable.html">Immutable</a></code> implements the following persistent data structures:</p>
 
-<ul><li><code>Vector</code>: array-like ordered, integer-indexed collection implementing</li></ul>
+<ul><li><code><a href="Immutable/Vector.html">Immutable::Vector</a></code>: array-like ordered, integer-indexed collection</li></ul>
 
-<p>efficient appends, updates and lookups</p>
+<p>implementing efficient appends, updates and lookups</p>
 
 <p>TODO:</p>
 
-<ul><li><code>Map</code>: hash-like key-value collection</li><li><code>Set</code>: unordered collection without duplicates</li></ul>
+<ul><li><code>Immutable::Map</code>: hash-like key-value collection</li><li><code>Immutable::Set</code>: unordered collection without duplicates</li></ul>
 
 <h2>Installation</h2>
 
@@ -99,10 +99,10 @@ vector                                          <span class="c"># =&gt; Vector [
 
 <h2>Implementation</h2>
 
-<p><code>Vector</code> is implemented as a bit-partitioned vector trie with a block size of 32
-bits, that guarantees O(log32) lookups and updates, which is effectively
-constant time for practical purposes. Due to tail optimization, appends are O(1)
-31 times out of 32, and O(log32) 1/32 of the times.</p>
+<p><code><a href="Immutable/Vector.html">Immutable::Vector</a></code> is implemented as a bit-partitioned vector trie with a block
+size of 32 bits, that guarantees O(log32) lookups and updates, which is
+effectively constant time for practical purposes. Due to tail optimization,
+appends are O(1) 31 times out of 32, and O(log32) 1/32 of the times.</p>
 
 <h2>Contributing</h2>
 
