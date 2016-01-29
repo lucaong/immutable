@@ -22,9 +22,10 @@ More data structures are in the planning (like `Map` and `Set`).
 ## Acknowledgement
 
 Although not a port, this project takes inspiration from similar libraries and
-implementations like [Clojure persistent
-collections](http://clojure.org/reference/data_structures) and the [hamster gem
-for Ruby](https://github.com/hamstergem/hamster)
+implementations like:
+
+  - [Clojure persistent collections](http://clojure.org/reference/data_structures)
+  - [The hamster gem for Ruby](https://github.com/hamstergem/hamster)
 
 
 ## Installation
@@ -40,7 +41,7 @@ dependencies:
 
 ## Usage
 
-API documentation is available here: http://lucaong.github.io/immutable/api/
+For a list of all classes and methods refer to the [API documentation](http://lucaong.github.io/immutable/api/)
 
 ```crystal
 require "immutable"
