@@ -40,6 +40,8 @@ dependencies:
 
 ## Usage
 
+API documentation is available here: http://lucaong.github.io/immutable/api/
+
 ```crystal
 require "immutable"
 
