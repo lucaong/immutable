@@ -24,6 +24,15 @@ describe Immutable do
       end
     end
 
+    describe ".of" do
+      it "returns a Vector of the arguments" do
+        vec = Immutable::Vector.of(1, 2, 3)
+        vec.size.should eq(3)
+        vec.first.should eq(1)
+        vec.last.should eq(3)
+      end
+    end
+
     describe "#size" do
       it "returns the correct size" do
         empty_vector.size.should eq(0)
@@ -92,6 +101,28 @@ describe Immutable do
       end
     end
 
+    describe "#[]" do
+      it "returns a copy with the value set at given index" do
+        v = vector.set(10, -1)
+        v[10].should eq(-1)
+        vector[10].should eq(10)
+      end
+
+      it "works with negative indexes" do
+        v = vector.set(-1, -1)
+        v[-1].should eq(-1)
+        vector[-1].should eq(999)
+        v = vector.set(-1 * vector.size, -1)
+        v[0].should eq(-1)
+        vector[0].should eq(0)
+      end
+
+      it "raises IndexError if accessing indexes out of range" do
+        expect_raises(IndexError) { vector[vector.size] }
+        expect_raises(IndexError) { vector[-1 * (vector.size + 1)] }
+      end
+    end
+
     describe "#each" do
       it "iterates through each element" do
         array = [] of Int32
@@ -156,6 +187,14 @@ describe Immutable do
         v1 = Immutable::Vector.new([4, 2, 3])
         v2 = Immutable::Vector.new([4, 2, 3])
         (v1 == v2).should eq(true)
+      end
+    end
+
+    describe "#inspect and #to_s" do
+      it "return a human-readable string representation" do
+        vec = Immutable::Vector.of(1, 2, 3)
+        vec.inspect.should eq("Vector [1, 2, 3]")
+        vec.to_s.should eq("Vector [1, 2, 3]")
       end
     end
   end

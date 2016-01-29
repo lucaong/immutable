@@ -7,8 +7,9 @@
 # A vector can be constructed from an array of its elements:
 #
 # ```
-# Immutable::Vector(Int32).new           # => Vector []
-# Immutable::Vector.from([1, 42, 5, 46]) # => Vector [1, 42, 5, 46]
+# Immutable::Vector(Int32).new          # => Vector []
+# Immutable::Vector.new([1, 42, 5, 46]) # => Vector [1, 42, 5, 46]
+# Immutable::Vector.of(1, 2, 3)         # => Vector [1, 2, 3]
 # ```
 #
 # When a vector is modified, the original remans unchanged and a modified copy
@@ -27,6 +28,8 @@
 # effectively equivalent to O(1): in a vector of 1 billion elements these
 # operations take no more than 6 steps.
 #
+require "./vector/trie"
+
 module Immutable
   struct Vector(T)
     include Enumerable(T)
@@ -35,6 +38,11 @@ module Immutable
 
     @trie : Trie(T)
     @tail : Array(T)
+
+    # Creates a new vector from the given arguments
+    def self.of(*elems : T)
+      new(elems.to_a)
+    end
 
     # Creates a new empty vector
     def initialize
@@ -126,7 +134,7 @@ module Immutable
     # ```
     def push(elem : T)
       new_tail = @tail + [elem]
-      if new_tail.size == Immutable::Trie::BLOCK_SIZE
+      if new_tail.size == Trie::BLOCK_SIZE
         Vector.new(@trie.push_leaf(new_tail), [] of T)
       else
         Vector.new(@trie, new_tail)
@@ -203,6 +211,29 @@ module Immutable
       @trie.get(i)
     end
 
+    # Returns a modified copy of the vector with the element at the given index
+    # set to the given value.
+    #
+    # Negative indices can be used to start counting from the end of the vector.
+    # Raises `IndexError` if trying to set an element outside the vector's range.
+    #
+    # ```
+    # vec = Immutable::Vector.new([1, 2, 3])
+    # vec.set(0, 5) # Vector [5, 2, 3]
+    # vec           # Vector [1, 2, 3]
+    #
+    # vec.set(3, 5) # => IndexError
+    # ```
+    def set(i : Int, value : T)
+      i = size + i if i < 0
+      raise IndexError.new if i < 0 || i >= size
+      if in_tail?(i)
+        new_tail = @tail.dup.tap { |t| t[i - @trie.size] = value }
+        return Vector.new(@trie, new_tail)
+      end
+      Vector.new(@trie.update(i, value), @tail)
+    end
+
     # Returns the first element in the vector, if not empty, else raises
     # `IndexError`
     def first
@@ -275,6 +306,18 @@ module Immutable
         return n if n != 0
       end
       size <=> other.size
+    end
+
+    # Appends a String representation of this vector
+    # to the given IO object.
+    def to_s(io : IO)
+      io << "Vector "
+      to_a.to_s(io)
+    end
+
+    # Returns a `String` representation of this object.
+    def inspect(io : IO)
+      to_s(io)
     end
 
     private def in_tail?(index)

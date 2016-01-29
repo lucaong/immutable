@@ -43,8 +43,12 @@ dependencies:
 ```crystal
 require "immutable"
 
-vector = Immutable::Vector.from([1, 2, 3, 4, 5])
-other  = vector.push(42)
+vector = Immutable::Vector.new([1, 2, 3, 4, 5]) # => Vector [1, 2, 3, 4, 5]
+other  = vector.set(2, 0).push(42)              # => Vector [1, 2, 0, 4, 5, 42]
+other[2]                                        # => 0
+
+# The original vector is unchanged
+vector                                          # => Vector [1, 2, 3, 4, 5]
 ```
 
 
