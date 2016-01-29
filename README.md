@@ -2,30 +2,25 @@
 
 # Immutable
 
-Efficient, thread-safe immutable collections for Crystal.
+Efficient, thread-safe immutable data structures for Crystal.
 
-Whenever you modify an `Immutable` collection, the original remains unchanged
-and a modified copy is returned. However, the copy is efficient due to
-structural sharing. This makes `Immutable` collections inherently thread-safe
-and at the same time fast.
+Whenever you modify an `Immutable` data structure, the original remains
+unchanged and a modified copy is returned. However, the copy is efficient due to
+structural sharing. This makes `Immutable` data structures inherently
+thread-safe and at the same time fast.
 
 
 ## Project status
 
 At the moment, `Immutable` implements the following persistent data structures:
 
-  - `Vector` - efficient appends, updates and lookups
+  - `Vector`: Array-like ordered, integer-indexed collection implementing
+    efficient appends, updates and lookups
 
-More data structures are in the planning (like `Map` and `Set`).
+TODO:
 
-
-## Acknowledgement
-
-Although not a port, this project takes inspiration from similar libraries and
-implementations like:
-
-  - [Clojure persistent collections](http://clojure.org/reference/data_structures)
-  - [The hamster gem for Ruby](https://github.com/hamstergem/hamster)
+  - `Map` - Hash-like key-value collection
+  - `Set` - Unordered collection without duplicates
 
 
 ## Installation
@@ -63,6 +58,16 @@ vector                                          # => Vector [1, 2, 3, 4, 5]
 4. Push to the branch (git push origin my-new-feature)
 5. Create a new Pull Request
 
+
 ## Contributors
 
 - [lucaong](https://github.com/lucaong) Luca Ongaro - creator, maintainer
+
+
+## Acknowledgement
+
+Although not a port, this project takes inspiration from similar libraries and
+implementations like:
+
+  - [Clojure persistent collections](http://clojure.org/reference/data_structures)
+  - [The Hamster gem for Ruby](https://github.com/hamstergem/hamster)
