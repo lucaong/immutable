@@ -66,7 +66,7 @@ module Immutable
     # Creates a vector filled with the elements from the given array, in the
     # same position.
     def initialize(elems : Array(T))
-      leaves = elems.size / Trie::BLOCK_SIZE
+      leaves = elems.size - (elems.size % Trie::BLOCK_SIZE)
       @trie = Trie(T).from(elems[0...leaves])
       @tail = elems[leaves..-1]
     end
@@ -332,7 +332,6 @@ module Immutable
     # other.
     #
     # ```
-    # [1, 2] + ["a"]  # => [1,2,"a"] of (Int32 | String)
     # v1 = Immutable::Vector.new([1, 2])
     # v2 = Immutable::Vector.new([2, 3])
     # v3 = Immutable::Vector.new(["a"])
@@ -340,9 +339,14 @@ module Immutable
     # v1 + v3 # => Vector [1, 2, "a"]
     # ```
     def +(other : Vector(U))
-      other.reduce(self) do |vec, elem|
-        vec.push(elem)
+      trie = @trie as Trie(T | U)
+      tail = @tail as Array(T | U)
+      other.each_slice(Trie::BLOCK_SIZE) do |slice|
+        leaf_tail = (tail + slice)
+        trie = trie.push_leaf(leaf_tail.take(Trie::BLOCK_SIZE))
+        tail = leaf_tail.skip(Trie::BLOCK_SIZE)
       end
+      Vector.new(trie, tail)
     end
 
     # Set intersection: returns a new array containing elements common to the two
