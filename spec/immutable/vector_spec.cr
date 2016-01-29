@@ -190,6 +190,46 @@ describe Immutable do
       end
     end
 
+    describe "#+"do
+      it "concatenates vectors" do
+        v1 = Immutable::Vector.new((0..99).to_a)
+        v2 = Immutable::Vector.new((100..149).to_a)
+        v3 = v1 + v2
+        v3.size.should eq(150)
+        v3.to_a.should eq(v1.to_a + v2.to_a)
+      end
+    end
+
+    describe "#&" do
+      it "returns the intersection between vectors" do
+        v1 = Immutable::Vector.new([1, 2, 3, 2, 4, 0])
+        v2 = Immutable::Vector.new([0, 2, 1])
+        (v1 & v2).should eq(Immutable::Vector.of(1, 2, 0))
+      end
+
+      it "returns an empty vector if self or other is empty" do
+        v1 = Immutable::Vector(Int32).empty
+        v2 = Immutable::Vector.new([0, 2, 1])
+        (v1 & v2).should eq(Immutable::Vector(Int32).empty)
+        (v2 & v1).should eq(Immutable::Vector(Int32).empty)
+      end
+    end
+
+    describe "#|" do
+      it "returns the union between vectors" do
+        v1 = Immutable::Vector.new([1, 2, 3, 2, 4, 0])
+        v2 = Immutable::Vector.new([0, 2, 0, 7, 1])
+        (v1 | v2).should eq(Immutable::Vector.of(1, 2, 3, 4, 0, 7))
+      end
+    end
+
+    describe "#uniq" do
+      it "returns a vector of unique elements" do
+        v = Immutable::Vector.new([1, 2, 3, 2, 4, 1, 0])
+        v.uniq.should eq(Immutable::Vector.of(1, 2, 3, 4, 0))
+      end
+    end
+
     describe "#inspect and #to_s" do
       it "return a human-readable string representation" do
         vec = Immutable::Vector.of(1, 2, 3)

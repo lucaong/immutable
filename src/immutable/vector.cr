@@ -44,6 +44,15 @@ module Immutable
       new(elems.to_a)
     end
 
+    # Creates an empty vector
+    #
+    # ```
+    # Immutable::Vector(Int32).empty # => Vector []
+    # ```
+    def self.empty
+      new([] of T)
+    end
+
     # Creates a new empty vector
     def initialize
       @trie = Trie(T).empty
@@ -308,6 +317,94 @@ module Immutable
       size <=> other.size
     end
 
+    # Returns true if the vector is empty, else false
+    def empty?
+      size == 0
+    end
+
+    # Returns true if the vector contains at least one element, else false
+    def any?
+      size != 0
+    end
+
+    # Concatenation. Returns a new vector built by concatenating self with
+    # other. The type of the new vector is the union of the types of self and
+    # other.
+    #
+    # ```
+    # [1, 2] + ["a"]  # => [1,2,"a"] of (Int32 | String)
+    # v1 = Immutable::Vector.new([1, 2])
+    # v2 = Immutable::Vector.new([2, 3])
+    # v3 = Immutable::Vector.new(["a"])
+    # v1 + v2 # => Vector [1, 2, 2, 3]
+    # v1 + v3 # => Vector [1, 2, "a"]
+    # ```
+    def +(other : Vector(U))
+      other.reduce(self) do |vec, elem|
+        vec.push(elem)
+      end
+    end
+
+    # Set intersection: returns a new array containing elements common to the two
+    # vectors, excluding any duplicates. The order is preserved from the original
+    # vector.
+    #
+    # ```
+    # v1 = Immutable::Vector.new([1, 1, 3, 5])
+    # v2 = Immutable::Vector.new([1, 2, 3])
+    # v1 & v2 # => Vector [1, 3]
+    # ```
+    def &(other : Vector(U))
+      return Vector(T).new if empty? || other.empty?
+      set = other.to_lookup_set
+      intersection = select do |elem|
+        in_set = set.includes?(elem)
+        set.delete(elem)
+        in_set
+      end
+      Vector(T).new(intersection)
+    end
+
+    # Set union: returns a new vector by joining self with other, excluding
+    # any duplicates and preserving the order from the original vector.
+    #
+    # ```
+    # v1 = Immutable::Vector.new(["a", "b", "c"])
+    # v2 = Immutable::Vector.new(["c", "d", "a"])
+    # v1 | v2 # => Vector [1, 3] # => Vector ["a", "b", "c", "d"]
+    # ```
+    def |(other : Vector(U))
+      set = Set(T | U).new
+      union = reduce([] of T | U) do |union, elem|
+        union << elem unless set.includes?(elem)
+        set.add(elem)
+        union
+      end
+      union = other.reduce(union) do |union, elem|
+        union << elem unless set.includes?(elem)
+        set.add(elem)
+        union
+      end
+      Vector(T | U).new(union)
+    end
+
+    # Returns a new vector by removing duplicate values in self.
+    #
+    # ```
+    # v = Immutable::Vector.new(["a", "a", "b", "b", "c"])
+    # v.uniq # => Vector ["a", "b", "c"]
+    # v      # => Vector ["a", "a", "b", "b", "c"]
+    # ```
+    def uniq
+      hash = {} of T => Bool
+      elems = reject do |elem|
+        next true if in_hash = hash.has_key?(elem)
+        hash[elem] = true
+        in_hash
+      end
+      Vector(T).new(elems)
+    end
+
     # Appends a String representation of this vector
     # to the given IO object.
     def to_s(io : IO)
@@ -322,6 +419,12 @@ module Immutable
 
     private def in_tail?(index)
       index >= @trie.size && index < size
+    end
+
+    protected def to_lookup_set
+      reduce(Set(T).new) do |set, elem|
+        set.add(elem)
+      end
     end
 
     class ItemIterator(T)
