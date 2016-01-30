@@ -349,6 +349,23 @@ module Immutable
       Vector.new(trie, tail)
     end
 
+    # Difference. Returns a new vector that is a copy of the original, removing
+    # any items that appear in `other`. The order of the original vector is
+    # preserved.
+    #
+    # ```
+    # v1 = Immutable::Vector.new([1, 2, 3])
+    # v2 = Immutable::Vector.new([2, 1])
+    # v1 - v2 => Vector [3]
+    # ```
+    def -(other : Vector(U))
+      set = other.to_lookup_set
+      elems = reject do |elem|
+        set.includes?(elem)
+      end
+      Vector(T).new(elems)
+    end
+
     # Set intersection: returns a new array containing elements common to the two
     # vectors, excluding any duplicates. The order is preserved from the original
     # vector.

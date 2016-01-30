@@ -200,6 +200,15 @@ describe Immutable do
       end
     end
 
+    describe "#-"do
+      it "subtract the given vector from self" do
+        v1 = Immutable::Vector.new([1, 2, 3, 4])
+        v2 = Immutable::Vector.new([3, 2, 5])
+        v3 = v1 - v2
+        v3.to_a.should eq(v1.to_a - v2.to_a)
+      end
+    end
+
     describe "#&" do
       it "returns the intersection between vectors" do
         v1 = Immutable::Vector.new([1, 2, 3, 2, 4, 0])
