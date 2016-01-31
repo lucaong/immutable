@@ -48,11 +48,11 @@ describe Immutable do
 
       it "work properly across leaves and levels" do
         v = empty_vector
-        100.times do |i|
+        1100.times do |i|
           v = v.push(i)
         end
-        v.size.should eq(100)
-        v.to_a.should eq((0..99).to_a)
+        v.size.should eq(1100)
+        v.to_a.should eq((0..1099).to_a)
       end
     end
 
@@ -64,7 +64,7 @@ describe Immutable do
       end
 
       it "work properly across leaves and levels" do
-        v = vector
+        v = Immutable::Vector.new((0..1099).to_a)
         v.size.times do
           _, v = v.pop
         end

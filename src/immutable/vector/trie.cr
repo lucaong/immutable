@@ -71,12 +71,15 @@ module Immutable
       def push_leaf(leaf : Array(T)) : Trie(T)
         raise ArgumentError.new if leaf.size > BLOCK_SIZE || size % 32 != 0
         return Trie.new([self], @levels + 1).push_leaf(leaf) if full?
-        return Trie.new(leaf) if empty?
+        return Trie.new(leaf) if empty? && leaf?
         Trie.new(@children.dup.tap do |cs|
-          if @levels > 1
-            cs << Trie.new([] of Trie(T), @levels - 1).push_leaf(leaf)
-          else
+          if @levels == 1
             cs.push(Trie.new(leaf))
+          else
+            if cs.empty? || cs.last.full?
+              cs << Trie.new([] of Trie(T), @levels - 1)
+            end
+            cs[-1] = cs[-1].push_leaf(leaf)
           end
         end, @levels)
       end
@@ -152,7 +155,7 @@ module Immutable
         end
       end
 
-      private def full?
+      protected def full?
         return @values.size == BLOCK_SIZE if leaf?
         @size >> ((@levels + 1) * BITS_PER_LEVEL) > 0
       end
