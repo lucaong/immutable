@@ -74,7 +74,7 @@ module Immutable
         return Trie.new(leaf) if empty?
         Trie.new(@children.dup.tap do |cs|
           if @levels > 1
-            cs[cs.size - 1] = cs[cs.size - 1].push_leaf(leaf)
+            cs << Trie.new([] of Trie(T), @levels - 1).push_leaf(leaf)
           else
             cs.push(Trie.new(leaf))
           end
