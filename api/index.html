@@ -70,7 +70,7 @@ thread-safe, garbage collector friendly and performant.</p>
 
 <ul><li><code><a href="Immutable/Vector.html">Immutable::Vector</a></code>: array-like ordered, integer-indexed collection</li></ul>
 
-<p>implementing efficient appends, updates and lookups</p>
+<p>implementing efficient append, pop, update and lookup operations</p>
 
 <p>TODO:</p>
 
@@ -102,7 +102,7 @@ vector                                          <span class="c"># =&gt; Vector [
 <p><code><a href="Immutable/Vector.html">Immutable::Vector</a></code> is implemented as a bit-partitioned vector trie with a block
 size of 32 bits, that guarantees O(log32) lookups and updates, which is
 effectively constant time for practical purposes. Due to tail optimization,
-appends are O(1) 31 times out of 32, and O(log32) 1/32 of the times.</p>
+appends and pop are O(1) 31 times out of 32, and O(log32) 1/32 of the times.</p>
 
 <h2>Contributing</h2>
 
