@@ -287,5 +287,19 @@ describe Immutable do
         vec.to_s.should eq("Vector [1, 2, 3]")
       end
     end
+
+    describe "hash" do
+      it "returns the same value for identical vectors" do
+        v1 = Immutable::Vector.of(1, 2, 3)
+        v2 = Immutable::Vector.of(1, 2, 3)
+        v1.hash.should eq(v2.hash)
+      end
+
+      it "returns a different value for different vectors" do
+        v1 = Immutable::Vector.of(1, 2, 3)
+        v2 = Immutable::Vector.of(3, 2, 1)
+        v1.hash.should_not eq(v2.hash)
+      end
+    end
   end
 end

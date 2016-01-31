@@ -12,7 +12,7 @@ thread-safe, garbage collector friendly and performant.
 At the moment, `Immutable` implements the following persistent data structures:
 
   - `Immutable::Vector`: array-like ordered, integer-indexed collection
-  implementing efficient appends, updates and lookups
+  implementing efficient append, pop, update and lookup operations
 
 TODO:
 
@@ -52,7 +52,7 @@ vector                                          # => Vector [1, 2, 3, 4, 5]
 `Immutable::Vector` is implemented as a bit-partitioned vector trie with a block
 size of 32 bits, that guarantees O(log32) lookups and updates, which is
 effectively constant time for practical purposes. Due to tail optimization,
-appends are O(1) 31 times out of 32, and O(log32) 1/32 of the times.
+appends and pop are O(1) 31 times out of 32, and O(log32) 1/32 of the times.
 
 
 ## Contributing

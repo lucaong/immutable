@@ -461,6 +461,15 @@ module Immutable
       to_s(io)
     end
 
+    # Returns a hash code based on this vector's size and elements.
+    #
+    # See `Object#hash`.
+    def hash
+      reduce(41 * size) do |memo, elem|
+        41 * memo + elem.hash
+      end
+    end
+
     private def in_tail?(index)
       index >= @trie.size && index < size
     end
