@@ -44,15 +44,6 @@ module Immutable
       new(elems.to_a)
     end
 
-    # Creates an empty vector
-    #
-    # ```
-    # Immutable::Vector(Int32).empty # => Vector []
-    # ```
-    def self.empty
-      new([] of T)
-    end
-
     # Creates a new empty vector
     def initialize
       @trie = Trie(T).empty
