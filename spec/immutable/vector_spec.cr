@@ -1,4 +1,5 @@
 require "../spec_helper"
+require "json"
 
 describe Immutable do
   describe Immutable::Vector do
@@ -299,6 +300,13 @@ describe Immutable do
         v1 = Immutable::Vector.of(1, 2, 3)
         v2 = Immutable::Vector.of(3, 2, 1)
         v1.hash.should_not eq(v2.hash)
+      end
+    end
+
+    describe "to_json" do
+      it "serializes to JSON in the same way as array" do
+        empty_vector.to_json.should eq("[]")
+        vector.to_json.should eq(vector.to_a.to_json)
       end
     end
   end

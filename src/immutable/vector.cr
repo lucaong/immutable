@@ -456,6 +456,19 @@ module Immutable
       to_a.to_s(io)
     end
 
+    # Appends a JSON string representation of this vector to the given
+    # io object
+    def to_json(io : IO)
+      if empty?
+        io << "[]"
+        return
+      end
+
+      io.json_array do |array|
+        each { |elem| array << elem }
+      end
+    end
+
     # Returns a `String` representation of this object.
     def inspect(io : IO)
       to_s(io)
