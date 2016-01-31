@@ -258,10 +258,10 @@ describe Immutable do
       end
 
       it "returns an empty vector if self or other is empty" do
-        v1 = Immutable::Vector(Int32).empty
+        v1 = Immutable::Vector(Int32).new
         v2 = Immutable::Vector.new([0, 2, 1])
-        (v1 & v2).should eq(Immutable::Vector(Int32).empty)
-        (v2 & v1).should eq(Immutable::Vector(Int32).empty)
+        (v1 & v2).should eq(Immutable::Vector(Int32).new)
+        (v2 & v1).should eq(Immutable::Vector(Int32).new)
       end
     end
 
