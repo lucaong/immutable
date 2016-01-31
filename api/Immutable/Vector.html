@@ -94,12 +94,12 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector/trie.cr" target="_blank">immutable/vector/trie.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector/trie.cr" target="_blank">immutable/vector/trie.cr</a>
     
     <br/>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr" target="_blank">immutable/vector.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr" target="_blank">immutable/vector.cr</a>
     
     <br/>
   
@@ -224,16 +224,16 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#each-instance-method" class="signature"><strong>#each</strong></a>
+        <a href="#each%28%26block%29-instance-method" class="signature"><strong>#each</strong>(&block)</a>
         
-          <div class="summary"><p>Returns an <code>Iterator</code> for the elements of this vector.</p></div>
+          <div class="summary"><p>Calls the given block once for each element in this vector, passing that element as a parameter.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#each%28%26block%29-instance-method" class="signature"><strong>#each</strong>(&block)</a>
+        <a href="#each-instance-method" class="signature"><strong>#each</strong></a>
         
-          <div class="summary"><p>Calls the given block once for each element in this vector, passing that element as a parameter.</p></div>
+          <div class="summary"><p>Returns an <code>Iterator</code> for the elements of this vector.</p></div>
         
       </li>
     
@@ -261,7 +261,7 @@
       <li class="entry-summary">
         <a href="#first-instance-method" class="signature"><strong>#first</strong></a>
         
-          <div class="summary"><p>Returns the first element in the vector, if not empty, else raises <code>IndexError</code></p></div>
+          <div class="summary"><p>Returns the first element in the vector, if not empty, else nil</p></div>
         
       </li>
     
@@ -276,6 +276,27 @@
         <a href="#last-instance-method" class="signature"><strong>#last</strong></a>
         
           <div class="summary"><p>Returns the last element in the vector, if not empty, else raises <code>IndexError</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#last%3F-instance-method" class="signature"><strong>#last?</strong></a>
+        
+          <div class="summary"><p>Returns the last element in the vector, if not empty, else nil</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pop%3ATuple%28T%2CImmutable%3A%3AVector%28T%29%29-instance-method" class="signature"><strong>#pop</strong> : Tuple(T, Immutable::Vector(T))</a>
+        
+          <div class="summary"><p>Return a tuple of two things: the last element of the vector and a copy of the vector with the last element removed.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pop%3F%3ATuple%28T%7CNil%2CImmutable%3A%3AVector%28T%29%29-instance-method" class="signature"><strong>#pop?</strong> : Tuple(T | Nil, Immutable::Vector(T))</a>
+        
+          <div class="summary"><p>Like <code><a href="../Immutable/Vector.html#pop%3ATuple%28T%2CImmutable%3A%3AVector%28T%29%29-instance-method">#pop</a></code>, but returns a tuple of nil and empty vector if called on an empty vector</p></div>
         
       </li>
     
@@ -391,7 +412,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L52" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L52" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -409,7 +430,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -428,7 +449,7 @@ same position.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L68" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -446,7 +467,7 @@ same position.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L57" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L57" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -475,7 +496,7 @@ v1 <span class="o">&</span> v2 <span class="c"># =&gt; Vector [1, 3]</span></cod
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L378" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L410" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -501,7 +522,7 @@ v1 <span class="o">+</span> v3 <span class="c"># =&gt; Vector [1, 2, &quot;a&quo
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L341" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L373" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -525,7 +546,7 @@ v1 <span class="o">-</span> v2 => <span class="t">Vector</span> [<span class="n"
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L361" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L393" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -543,7 +564,7 @@ v1 <span class="o">-</span> v2 => <span class="t">Vector</span> [<span class="n"
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L154" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L176" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -574,7 +595,7 @@ vectors.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L311" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L343" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -597,7 +618,7 @@ vec <span class="o">==</span> <span class="t">Immutable</span><span class="t">::
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L286" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L318" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -627,7 +648,7 @@ vec[<span class="n">-4</span>] <span class="c"># raises IndexError</span></code>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L173" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L195" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -657,7 +678,7 @@ vec[<span class="n">-4</span>]? <span class="c"># nil</span></code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L192" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L214" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -675,7 +696,7 @@ vec[<span class="n">-4</span>]? <span class="c"># nil</span></code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L326" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L358" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -698,7 +719,7 @@ v.at(<span class="n">2</span>) { <span class="n">:baz</span> } <span class="c">#
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L216" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L238" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -721,30 +742,7 @@ v.at(<span class="n">2</span>) { <span class="n">:baz</span> } <span class="c">#
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L204" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="each-instance-method">
-      <div class="signature">
-        
-        def <strong>each</strong>
-
-        <a class="method-permalink" href="#each-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Returns an <code>Iterator</code> for the elements of this vector.</p>
-
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>])
-iter <span class="o">=</span> v.each
-iter.<span class="k">next</span> <span class="c"># =&gt; &quot;a&quot;</span>
-iter.<span class="k">next</span> <span class="c"># =&gt; &quot;b&quot;</span></code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L106" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L226" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -770,7 +768,30 @@ v.each { <span class="o">|</span>x<span class="o">|</span> print x, <span class=
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L92" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L92" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>
+
+        <a class="method-permalink" href="#each-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns an <code>Iterator</code> for the elements of this vector.</p>
+
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>])
+iter <span class="o">=</span> v.each
+iter.<span class="k">next</span> <span class="c"># =&gt; &quot;a&quot;</span>
+iter.<span class="k">next</span> <span class="c"># =&gt; &quot;b&quot;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L106" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -796,7 +817,7 @@ v.each_index { <span class="o">|</span>x<span class="o">|</span> print x, <span 
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L124" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L124" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -814,7 +835,7 @@ v.each_index { <span class="o">|</span>x<span class="o">|</span> print x, <span 
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L321" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L353" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -842,7 +863,7 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L271" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L303" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -855,13 +876,12 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
         <a class="method-permalink" href="#first-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Returns the first element in the vector, if not empty, else raises
-<code>IndexError</code></p></div>
+        <div class="doc"><p>Returns the first element in the vector, if not empty, else nil</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L248" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L275" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -879,7 +899,7 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L437" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L469" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -898,7 +918,69 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L281" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="last?-instance-method">
+      <div class="signature">
+        
+        def <strong>last?</strong>
+
+        <a class="method-permalink" href="#last%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the last element in the vector, if not empty, else nil</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L286" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pop:Tuple(T,Immutable::Vector(T))-instance-method">
+      <div class="signature">
+        
+        def <strong>pop</strong> : Tuple(T, <a href="../Immutable/Vector.html">Immutable::Vector</a>(T))
+
+        <a class="method-permalink" href="#pop%3ATuple%28T%2CImmutable%3A%3AVector%28T%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Return a tuple of two things: the last element of the vector and a copy of
+the vector with the last element removed. Raises <code>IndexError</code> if the
+vector is empty.</p>
+
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>])
+last, v2 <span class="o">=</span> v.pop
+last <span class="c"># =&gt; 4</span>
+v2   <span class="c"># =&gt; Vector [1, 2, 3]</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L163" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pop?:Tuple(T|Nil,Immutable::Vector(T))-instance-method">
+      <div class="signature">
+        
+        def <strong>pop?</strong> : Tuple(T | Nil, <a href="../Immutable/Vector.html">Immutable::Vector</a>(T))
+
+        <a class="method-permalink" href="#pop%3F%3ATuple%28T%7CNil%2CImmutable%3A%3AVector%28T%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Like <code><a href="../Immutable/Vector.html#pop%3ATuple%28T%2CImmutable%3A%3AVector%28T%29%29-instance-method">#pop</a></code>, but returns a tuple of nil and empty vector if called on an
+empty vector</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L170" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -924,7 +1006,7 @@ v           <span class="c"># =&gt; Vector [&quot;a&quot;, &quot;b&quot;]</span>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L144" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L144" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -952,7 +1034,7 @@ vec.set(<span class="n">3</span>, <span class="n">5</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L236" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L258" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -970,7 +1052,7 @@ vec.set(<span class="n">3</span>, <span class="n">5</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L75" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -989,7 +1071,7 @@ to the given IO object.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L431" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L463" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1011,7 +1093,7 @@ v      <span class="c"># =&gt; Vector [&quot;a&quot;, &quot;a&quot;, &quot;b&quo
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L419" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L451" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1034,7 +1116,7 @@ v1 <span class="o">|</span> v2 <span class="c"># =&gt; Vector [1, 3] # =&gt; Vec
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/d89175236796db65f2ff3c240d9120ec0ad922a3/src/immutable/vector.cr#L397" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/0a4e22c5377cd5fb22c9359286ed12d9f9ef7a11/src/immutable/vector.cr#L429" target="_blank">View source</a>]
         
       </div>
     </div>
