@@ -150,6 +150,28 @@ module Immutable
       end
     end
 
+    # Return a tuple of two things: the last element of the vector and a copy of
+    # the vector with the last element removed. Raises `IndexError` if the
+    # vector is empty.
+    #
+    # ```
+    # v = Immutable::Vector.new([1, 2, 3, 4])
+    # last, v2 = v.pop
+    # last # => 4
+    # v2   # => Vector [1, 2, 3]
+    # ```
+    def pop : Tuple(T, Vector(T))
+      vec = drop_last { raise IndexError.new("cannot pop empty vector") }
+      { last, vec }
+    end
+
+    # Like `pop`, but returns a tuple of nil and empty vector if called on an
+    # empty vector
+    def pop? : Tuple(T?, Vector(T))
+      vec = drop_last { self }
+      { last?, vec }
+    end
+
     # Alias for `push`
     def <<(elem : T)
       push(elem)
@@ -249,10 +271,20 @@ module Immutable
       self[0]
     end
 
+    # Returns the first element in the vector, if not empty, else nil
+    def first
+      self[0]?
+    end
+
     # Returns the last element in the vector, if not empty, else raises
     # `IndexError`
     def last
       self[-1]
+    end
+
+    # Returns the last element in the vector, if not empty, else nil
+    def last?
+      self[-1]?
     end
 
     # Determines if this vector equals *other* according to a comparison
@@ -440,6 +472,12 @@ module Immutable
 
     private def in_tail?(index)
       index >= @trie.size && index < size
+    end
+
+    private def drop_last
+      return yield if empty?
+      return Vector.new(@trie.pop, [] of T) if @tail.empty?
+      Vector.new(@trie, @tail[0...-1])
     end
 
     protected def to_lookup_set

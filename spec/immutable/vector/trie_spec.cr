@@ -2,7 +2,7 @@ require "../../spec_helper"
 
 describe Immutable::Vector::Trie do
   empty_trie = Immutable::Vector::Trie(Int32).empty
-  trie       = Immutable::Vector::Trie.from((0...50).to_a)
+  trie       = Immutable::Vector::Trie.from((0..49).to_a)
 
   describe "#size" do
     it "returns the number of elements in the trie" do
@@ -59,17 +59,45 @@ describe Immutable::Vector::Trie do
     end
 
     it "does not modify the original" do
-      t = empty_trie.push(1)
+      empty_trie.push(1)
       empty_trie.size.should eq(0)
     end
 
-    it "works properly with bigger tries" do
+    it "works properly across leaves and levels" do
       t = (0..99).reduce(empty_trie) do |t, elem|
         t.push(elem)
       end
       t.size.should eq(100)
       t.get(0).should eq(0)
       t.get(99).should eq(99)
+    end
+  end
+
+  describe "#pop" do
+    it "return a copy of the trie with the last value removed" do
+      t = trie.pop
+      t.last.should eq(48)
+      t.size.should eq(trie.size - 1)
+    end
+
+    it "raises IndexError if trie is empty" do
+      expect_raises(IndexError) do
+        empty_trie.pop
+      end
+    end
+
+    it "does not modify the original" do
+      original_size = trie.size
+      trie.pop
+      trie.size.should eq(original_size)
+    end
+
+    it "works properly across leaves and levels" do
+      t = trie
+      t.size.times do
+        t = t.pop
+      end
+      t.size.should eq(0)
     end
   end
 

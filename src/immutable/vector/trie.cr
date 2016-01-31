@@ -45,6 +45,17 @@ module Immutable
         end
       end
 
+      def pop
+        raise IndexError.new if size == 0
+        return Trie.new(@values[0...-1]) if leaf?
+        child = @children.last.pop
+        if child.empty?
+          return @children.first if @children.size == 2
+          return Trie.new(@children[0...-1], @levels)
+        end
+        Trie.new(@children[0...-1].push(child), @levels)
+      end
+
       def each
         i = 0
         while i < size
@@ -68,6 +79,10 @@ module Immutable
             cs.push(Trie.new(leaf))
           end
         end, @levels)
+      end
+
+      def last
+        get(size - 1)
       end
 
       def empty?

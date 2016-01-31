@@ -3,9 +3,7 @@ require "../spec_helper"
 describe Immutable do
   describe Immutable::Vector do
     empty_vector = Immutable::Vector(Int32).new
-    vector = (0..999).reduce(empty_vector) do |vec, i|
-      vec.push(i)
-    end
+    vector = Immutable::Vector.new((0..99).to_a)
 
     describe ".new" do
       describe "without arguments" do
@@ -36,7 +34,7 @@ describe Immutable do
     describe "#size" do
       it "returns the correct size" do
         empty_vector.size.should eq(0)
-        vector.size.should eq(1000)
+        vector.size.should eq(100)
       end
     end
 
@@ -45,6 +43,49 @@ describe Immutable do
         v = empty_vector.push(5)
         v.size.should eq(1)
         empty_vector.size.should eq(0)
+      end
+
+      it "work properly across leaves and levels" do
+        v = empty_vector
+        100.times do |i|
+          v = v.push(i)
+        end
+        v.size.should eq(100)
+        v.to_a.should eq((0..99).to_a)
+      end
+    end
+
+    describe "#pop" do
+      it "returns a tuple of last element and vector but last element" do
+        l, v = vector.pop
+        v.to_a.should eq(vector.to_a[0...-1])
+        l.should eq(vector.last)
+      end
+
+      it "work properly across leaves and levels" do
+        v = vector
+        v.size.times do
+          _, v = v.pop
+        end
+        v.size.should eq(0)
+      end
+
+      it "raises IndexError if called on empty vector" do
+        expect_raises(IndexError) do
+          empty_vector.pop
+        end
+      end
+    end
+
+    describe "#pop?" do
+      it "behaves like `pop` if called on non-empty vector" do
+        vector.pop?.should eq(vector.pop)
+      end
+
+      it "returns { nil, self } if called on empty vector" do
+        l, v = empty_vector.pop?
+        l.should eq(nil)
+        v.should eq(empty_vector)
       end
     end
 
@@ -111,7 +152,7 @@ describe Immutable do
       it "works with negative indexes" do
         v = vector.set(-1, -1)
         v[-1].should eq(-1)
-        vector[-1].should eq(999)
+        vector[-1].should eq(vector[vector.size - 1])
         v = vector.set(-1 * vector.size, -1)
         v[0].should eq(-1)
         vector[0].should eq(0)
