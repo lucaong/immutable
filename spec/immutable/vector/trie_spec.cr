@@ -93,7 +93,7 @@ describe Immutable::Vector::Trie do
     end
 
     it "works properly across leaves and levels" do
-      t = trie
+      t = (0..1099).reduce(empty_trie) { |t, i| t.push(i) }
       t.size.times do
         t = t.pop
       end
@@ -109,6 +109,14 @@ describe Immutable::Vector::Trie do
       t.get(31).should eq(31)
       t.size.should eq(32)
       original.size.should eq(0)
+    end
+
+    it "works across multiple levels" do
+      t = Immutable::Vector::Trie(Int32).empty
+      (0..1099).each_slice(Immutable::Vector::Trie::BLOCK_SIZE) do |leaf|
+        t = t.push_leaf(leaf)
+      end
+      t.to_a.should eq((0..1099).to_a)
     end
 
     it "raises if the tree is partial" do

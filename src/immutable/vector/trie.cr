@@ -5,6 +5,8 @@ module Immutable
       BLOCK_SIZE = (2 ** BITS_PER_LEVEL).to_u32
       INDEX_MASK = BLOCK_SIZE - 1
 
+      include Enumerable(T)
+
       getter :size, :levels
 
       @children : Array(Trie(T))
