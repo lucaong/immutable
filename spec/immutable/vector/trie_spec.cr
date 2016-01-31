@@ -132,6 +132,35 @@ describe Immutable::Vector::Trie do
     end
   end
 
+  describe "#pop_leaf" do
+    it "return a copy of the trie with the given values appended" do
+      t = empty_trie
+      block_size = Immutable::Vector::Trie::BLOCK_SIZE
+      (0...block_size*5).each_slice(block_size) do |leaf|
+        t = t.push_leaf(leaf)
+      end
+      t.pop_leaf.to_a.should eq(t.to_a[0...-1*block_size])
+    end
+
+    it "works across multiple levels" do
+      t = empty_trie
+      block_size = Immutable::Vector::Trie::BLOCK_SIZE
+      (0...block_size*(block_size + 1)).each_slice(block_size) do |leaf|
+        t = t.push_leaf(leaf)
+      end
+      (block_size + 1).times do
+        t = t.pop_leaf
+      end
+      t.size.should eq(0)
+    end
+
+    it "raises if the tree is partial" do
+      expect_raises(ArgumentError) do
+        trie.pop_leaf
+      end
+    end
+  end
+
   describe "#each" do
     it "iterates through each element" do
       array = [] of Int32

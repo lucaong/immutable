@@ -86,8 +86,23 @@ module Immutable
         end, @levels)
       end
 
+      def pop_leaf : Trie(T)
+        raise ArgumentError.new if empty? || size % 32 != 0
+        return Trie.new([] of T) if leaf?
+        child = @children.last.pop_leaf
+        if child.empty?
+          return @children.first if @children.size == 2
+          return Trie.new(@children[0...-1], @levels)
+        end
+        Trie.new(@children[0...-1].push(child), @levels)
+      end
+
       def last
         get(size - 1)
+      end
+
+      def last_leaf
+        leaf_for(@size - 1).values
       end
 
       def empty?

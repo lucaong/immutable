@@ -489,7 +489,7 @@ module Immutable
 
     private def drop_last
       return yield if empty?
-      return Vector.new(@trie.pop, [] of T) if @tail.empty?
+      return Vector.new(@trie.pop_leaf, @trie.last_leaf) if @tail.size == 1 && size > 1
       Vector.new(@trie, @tail[0...-1])
     end
 
