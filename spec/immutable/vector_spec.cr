@@ -143,7 +143,7 @@ describe Immutable do
       end
     end
 
-    describe "#[]" do
+    describe "#set" do
       it "returns a copy with the value set at given index" do
         v = vector.set(10, -1)
         v[10].should eq(-1)
