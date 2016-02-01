@@ -19,24 +19,32 @@ module Immutable
       end
 
       def initialize(@values : Array(::Hash(K, V)), @bitmap : UInt32)
-        @size     = @values.size
+        @size     = @values.reduce(0) { |size, h| size + h.size }
         @levels   = 0
         @children = [] of Trie(K, V)
       end
 
       def self.empty
-        new([] of ::Hash(K, V), 0_u32)
+        new([] of Trie(K, V), 0_u32, 6)
       end
 
       def get(key : K)
-        lookup(key.hash, key) { raise KeyError.new }
+        lookup(key.hash) { |hash| hash[key] }
+      end
+
+      def fetch(key : K, &block : K -> U)
+        lookup(key.hash) { |hash| hash.fetch(key, &block) }
+      end
+
+      def has_key?(key : K)
+        lookup(key.hash) { |hash| hash.has_key?(key) }
       end
 
       def set(key : K, value : V) : Trie(K, V)
-        set(key.hash, key, value)
+        set_at_index(key.hash, key, value)
       end
 
-      def set(index : Int32, key : K, value : V) : Trie(K, V)
+      protected def set_at_index(index : Int32, key : K, value : V) : Trie(K, V)
         if leaf?
           set_leaf(index, key, value)
         else
@@ -48,18 +56,18 @@ module Immutable
         @levels == 0
       end
 
-      protected def lookup(index : Int32, key : K)
-        return yield unless i = index_for(child_index(index))
+      protected def lookup(index : Int32, &block : ::Hash(K, V) -> U)
+        return yield({} of K => V) unless i = child_index(bit_index(index))
         if leaf?
-          @values[i].fetch(key) { |_| yield }
+          yield @values[i]
         else
-          @children[i].lookup(index, key) { yield }
+          @children[i].lookup(index, &block)
         end
       end
 
       private def set_leaf(index : Int32, key : K, value : V) : Trie(K, V)
-        i = child_index(index)
-        if idx = index_for(i)
+        i = bit_index(index)
+        if idx = child_index(i)
           values = @values.dup.tap do |vs|
             vs[idx] = vs[idx].dup
             vs[idx][key] = value
@@ -73,10 +81,10 @@ module Immutable
       end
 
       private def set_branch(index : Int32, key : K, value : V) : Trie(K, V)
-        i = child_index(index)
-        if idx = index_for(i)
+        i = bit_index(index)
+        if idx = child_index(i)
           children = @children.dup.tap do |cs|
-            cs[idx] = cs[idx].set(index, key, value)
+            cs[idx] = cs[idx].set_at_index(index, key, value)
           end
           Trie.new(children, @bitmap, @levels)
         else
@@ -85,6 +93,7 @@ module Immutable
           else
             child = Trie.new([] of ::Hash(K, V), 0_u32)
           end
+          child = child.set_at_index(index, key, value)
           Trie.new(@children.dup.push(child), @bitmap | bitpos(i), @levels)
         end
       end
@@ -93,19 +102,19 @@ module Immutable
         1_u32 << i
       end
 
-      private def index_for(i : Int32)
+      private def child_index(i : Int32)
         pos = bitpos(i)
-        return nil unless pos & @bitmap == pos
+        return nil unless (pos & @bitmap) == pos
         popcount(@bitmap & (pos - 1))
       end
 
       private def popcount(x : UInt32)
-        x = x - ((x >> 1) & 0x5555555555555555_u64)
-        x = (x & 0x3333333333333333_u64) + ((x >> 2) & 0x3333333333333333_u64)
-        (((x + (x >> 4)) & 0x0F0F0F0F0F0F0F0F_u64) * 0x0101010101010101_u64) >> 56
+        x = x - ((x >> 1) & 0x55555555_u32)
+        x = (x & 0x33333333_u32) + ((x >> 2) & 0x33333333_u32)
+        (((x + (x >> 4)) & 0x0F0F0F0F_u32) * 0x01010101_u32) >> 24
       end
 
-      private def child_index(index : Int32)
+      private def bit_index(index : Int32)
         (index >> (@levels * BITS_PER_LEVEL)) & INDEX_MASK
       end
     end
