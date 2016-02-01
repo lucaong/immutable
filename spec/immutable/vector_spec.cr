@@ -157,8 +157,8 @@ describe Immutable do
 
     describe "#first?,#last?" do
       it "returns the first/last element of the vector" do
-        vector.first.should eq(0)
-        vector.last.should eq(99)
+        vector.first?.should eq(0)
+        vector.last?.should eq(99)
       end
 
       it "returns nil if the list is empty" do
