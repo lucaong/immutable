@@ -1,5 +1,5 @@
 module Immutable
-  struct Hash(K, V)
+  struct Map(K, V)
     struct Trie(K, V)
       BITS_PER_LEVEL = 5_u32
       BLOCK_SIZE = (2 ** BITS_PER_LEVEL).to_u32

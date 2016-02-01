@@ -1,7 +1,7 @@
 require "../../spec_helper"
 
-describe Immutable::Hash::Trie do
-  empty_trie = Immutable::Hash::Trie(Symbol, Int32).empty
+describe Immutable::Map::Trie do
+  empty_trie = Immutable::Map::Trie(Symbol, Int32).empty
   trie = empty_trie.set(:foo, 42)
 
   describe "#set" do

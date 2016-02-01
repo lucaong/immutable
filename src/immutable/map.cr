@@ -1,24 +1,27 @@
-# An `Immutable::Hash` is an immutable mapping of keys to values.
+# A map is an immutable mapping of keys (of type K) to values (of type V).
 #
-# An `Immutableble::Hash` can be constructed from a Crystal hash:
+# Similarly to a hash, a map can use any type as keys, as long as it implements
+# a valid `#hash` method.
+#
+# A map can be constructed from a hash:
 #
 # ```
-# Immutable::Hash(Symbol, Int32).new      # => Hash {}
-# Immutable::Hash.new({ foo: 1, bar: 2 }) # => Hash {:foo => 1, :bar => 2}
+# Immutable::Map(Symbol, Int32).new      # => Map {}
+# Immutable::Map.new({ foo: 1, bar: 2 }) # => Map {:foo => 1, :bar => 2}
 # ```
 #
-# `Immutable::Hash` works similarly to a standard Crystal hash, except it never
-# mutates in place, but rather return modified copies. However, this copies are
-# using structural sharing, ensuring performant operations and memory
-# efficiency. Under the hood, `Immutable::Hash` uses a bit-partitioned hash
-# trie, ensuring lookups and updates with a complexity of O(Log32), which for
-# practical purposes is equivalent to O(1): for hashes of viable sizes (even up
-# to billions of elements) the complexity is bound by a small constant.
+# `Immutable::Map` works similarly to a regular hash, except it never mutates in
+# place, but rather return modified copies. However, this copies are using
+# structural sharing, ensuring performant operations and memory efficiency.
+# Under the hood, `Immutable::Map` uses a bit-partitioned hash trie, ensuring
+# lookups and updates with a complexity of O(Log32), which for practical
+# purposes is equivalent to O(1): for maps of viable sizes (even up to billions
+# of elements) the complexity is bound by a small constant.
 #
-require "./hash/trie"
+require "./map/trie"
 
 module Immutable
-  struct Hash(K, V)
+  struct Map(K, V)
     @trie  : Trie(K, V)
     @block : (K -> V)?
 
@@ -35,7 +38,7 @@ module Immutable
     def initialize(@trie : Trie(K, V), @block = nil : (K -> V)?)
     end
 
-    # Returns the number of key-value pairs in the hash
+    # Returns the number of key-value pairs in the map
     def size
       @trie.size
     end
@@ -47,7 +50,7 @@ module Immutable
         if b = @block
           next b.call(key)
         end
-        raise KeyError.new("Missing hash key: #{key.inspect}")
+        raise KeyError.new("Missing map key: #{key.inspect}")
       end
     end
 
@@ -74,15 +77,15 @@ module Immutable
       fetch(key, nil)
     end
 
-    # Returns a modified copy of the hash where key is associated to value
+    # Returns a modified copy of the map where key is associated to value
     #
     # ```
-    # h  = Immutable::Hash.new({ foo: 123 })
-    # h2 = h.set(:bar, 321) # => Hash {:foo => 123, :bar => 321}
-    # h                     # => Hash {:foo => 123}
+    # m  = Immutable::Map.new({ foo: 123 })
+    # m2 = h.set(:bar, 321) # => Map {:foo => 123, :bar => 321}
+    # m                     # => Map {:foo => 123}
     # ```
     def set(key : K, value : V)
-      Hash.new(@trie.set(key, value), @block)
+      Map.new(@trie.set(key, value), @block)
     end
   end
 end
