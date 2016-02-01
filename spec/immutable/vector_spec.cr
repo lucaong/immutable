@@ -205,7 +205,6 @@ describe Immutable do
 
       it "returns an iterator if called with no arguments" do
         iter = vector.each
-        iter.should be_a(Immutable::Vector::ItemIterator(Int32))
         iter.to_a.should eq((0...vector.size).to_a)
       end
     end

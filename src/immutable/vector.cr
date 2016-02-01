@@ -95,7 +95,7 @@ module Immutable
     # iter.next # => "b"
     # ```
     def each
-      ItemIterator.new(self)
+      @trie.each.chain(@tail.each)
     end
 
 
@@ -496,22 +496,6 @@ module Immutable
     protected def to_lookup_set
       reduce(Set(T).new) do |set, elem|
         set.add(elem)
-      end
-    end
-
-    class ItemIterator(T)
-      include Iterator(T)
-
-      @vector : Vector(T)
-      @index : Int32
-
-      def initialize(@vector : Vector(T), @index = 0)
-      end
-
-      def next
-        value = @vector.at(@index) { stop }
-        @index += 1
-        value
       end
     end
   end

@@ -70,6 +70,12 @@ module Immutable
         self
       end
 
+      def each
+        (0...size).step(BLOCK_SIZE).map do |i|
+          leaf_for(i).values.each
+        end.flatten
+      end
+
       def push_leaf(leaf : Array(T)) : Trie(T)
         raise ArgumentError.new if leaf.size > BLOCK_SIZE || size % 32 != 0
         return Trie.new([self], @levels + 1).push_leaf(leaf) if full?

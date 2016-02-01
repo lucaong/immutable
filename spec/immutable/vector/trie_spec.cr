@@ -169,6 +169,12 @@ describe Immutable::Vector::Trie do
       end
       array.should eq((0...trie.size).to_a)
     end
+
+    it "return an iterator if called with no arguments" do
+      t = Immutable::Vector::Trie.from((0..100).to_a)
+      iter = t.each
+      iter.to_a.should eq(t.to_a)
+    end
   end
 
   describe ".empty" do
