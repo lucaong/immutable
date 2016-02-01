@@ -47,6 +47,7 @@ module Immutable
         @children.each do |child|
           child.each(&block)
         end
+        self
       end
 
       protected def set_at_index(index : Int32, key : K, value : V) : Trie(K, V)
