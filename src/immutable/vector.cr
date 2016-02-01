@@ -500,7 +500,7 @@ module Immutable
     end
 
     class ItemIterator(T)
-      include Iterator(Int32)
+      include Iterator(T)
 
       @vector : Vector(T)
       @index : Int32
