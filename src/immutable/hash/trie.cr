@@ -9,23 +9,21 @@ module Immutable
 
       @children : Array(Trie(K, V))
       @bitmap   : UInt32
-      @values   : Array(::Hash(K, V))
+      @values   : ::Hash(K, V)
       @size     : Int32
       @levels   : Int32
 
-      def initialize(@children : Array(Trie(K, V)), @bitmap, @levels : Int32)
-        @size   = @children.reduce(0) { |size, child| size + child.size }
-        @values = [] of ::Hash(K, V)
-      end
-
-      def initialize(@values : Array(::Hash(K, V)), @bitmap : UInt32)
-        @size     = @values.reduce(0) { |size, h| size + h.size }
-        @levels   = 0
-        @children = [] of Trie(K, V)
+      def initialize(
+        @children : Array(Trie(K, V)),
+        @values : ::Hash(K, V),
+        @bitmap : UInt32,
+        @levels : Int32)
+        children_size = @children.reduce(0) { |size, child| size + child.size }
+        @size         = children_size + @values.size
       end
 
       def self.empty
-        new([] of Trie(K, V), 0_u32, 6)
+        new([] of Trie(K, V), {} of K => V, 0_u32, 0)
       end
 
       def get(key : K) : V
@@ -45,7 +43,7 @@ module Immutable
       end
 
       protected def set_at_index(index : Int32, key : K, value : V) : Trie(K, V)
-        if leaf?
+        if leaf_of?(index)
           set_leaf(index, key, value)
         else
           set_branch(index, key, value)
@@ -53,31 +51,24 @@ module Immutable
       end
 
       protected def lookup(index : Int32, &block : ::Hash(K, V) -> U)
-        return yield({} of K => V) unless i = child_index(bit_index(index))
-        if leaf?
-          yield @values[i]
+        if leaf_of?(index)
+          yield @values
         else
+          return yield({} of K => V) unless i = child_index(bit_index(index))
           @children[i].lookup(index, &block)
         end
       end
 
-      private def leaf?
-        @levels == 0
+      private def leaf_of?(index)
+        (index.to_u32 >> (@levels * BITS_PER_LEVEL)) == 0
       end
 
       private def set_leaf(index : Int32, key : K, value : V) : Trie(K, V)
         i = bit_index(index)
-        if idx = child_index(i)
-          values = @values.dup.tap do |vs|
-            vs[idx] = vs[idx].dup
-            vs[idx][key] = value
-          end
-          Trie.new(values, @bitmap)
-        else
-          bucket = {} of K => V
-          bucket[key] = value
-          Trie.new(@values.dup.push(bucket), @bitmap | bitpos(i))
+        values = @values.dup.tap do |vs|
+          vs[key] = value
         end
+        Trie.new(@children, values, @bitmap, @levels)
       end
 
       private def set_branch(index : Int32, key : K, value : V) : Trie(K, V)
@@ -86,15 +77,11 @@ module Immutable
           children = @children.dup.tap do |cs|
             cs[idx] = cs[idx].set_at_index(index, key, value)
           end
-          Trie.new(children, @bitmap, @levels)
+          Trie.new(children, @values, @bitmap, @levels)
         else
-          if @levels > 1
-            child = Trie.new([] of Trie(K, V), 0_u32, @levels - 1)
-          else
-            child = Trie.new([] of ::Hash(K, V), 0_u32)
-          end
-          child = child.set_at_index(index, key, value)
-          Trie.new(@children.dup.push(child), @bitmap | bitpos(i), @levels)
+          child = Trie.new([] of Trie(K, V), {} of K => V, 0_u32, @levels + 1)
+            .set_at_index(index, key, value)
+          Trie.new(@children.dup.push(child), @values, @bitmap | bitpos(i), @levels)
         end
       end
 
