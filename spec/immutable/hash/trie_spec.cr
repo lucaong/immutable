@@ -42,4 +42,15 @@ describe Immutable::Hash::Trie do
       trie.has_key?(:baz).should eq(false)
     end
   end
+
+  describe "#each" do
+    it "iterates through values" do
+      t = empty_trie.set(:foo, 1).set(:bar, 2).set(:baz, 3)
+      keyvals = [] of { Symbol, Int32 }
+      t.each do |k, v|
+        keyvals << { k, v }
+      end
+      keyvals.sort.should eq([{:bar, 2}, {:baz, 3}, {:foo, 1}])
+    end
+  end
 end

@@ -42,6 +42,13 @@ module Immutable
         set_at_index(key.hash, key, value)
       end
 
+      def each(&block : K, V ->)
+        @values.each(&block)
+        @children.each do |child|
+          child.each(&block)
+        end
+      end
+
       protected def set_at_index(index : Int32, key : K, value : V) : Trie(K, V)
         if leaf_of?(index)
           set_leaf(index, key, value)
