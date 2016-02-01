@@ -9,13 +9,13 @@ module Immutable
 
       @children : Array(Trie(K, V))
       @bitmap   : UInt32
-      @values   : ::Hash(K, V)
+      @values   : Hash(K, V)
       @size     : Int32
       @levels   : Int32
 
       def initialize(
         @children : Array(Trie(K, V)),
-        @values : ::Hash(K, V),
+        @values : Hash(K, V),
         @bitmap : UInt32,
         @levels : Int32)
         children_size = @children.reduce(0) { |size, child| size + child.size }
@@ -57,7 +57,7 @@ module Immutable
         end
       end
 
-      protected def lookup(index : Int32, &block : ::Hash(K, V) -> U)
+      protected def lookup(index : Int32, &block : Hash(K, V) -> U)
         if leaf_of?(index)
           yield @values
         else

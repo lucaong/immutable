@@ -25,12 +25,12 @@ module Immutable
     @trie  : Trie(K, V)
     @block : (K -> V)?
 
-    def initialize(hash = {} of K => V : ::Hash(K, V))
+    def initialize(hash = {} of K => V : Hash(K, V))
       @trie  = hash.reduce(Trie(K, V).empty) { |h, k, v| h.set(k, v) }
       @block = nil
     end
 
-    def initialize(hash = {} of K => V : ::Hash(K, V), &block : K -> V)
+    def initialize(hash = {} of K => V : Hash(K, V), &block : K -> V)
       @trie  = hash.reduce(Trie(K, V).empty) { |h, k, v| h.set(k, v) }
       @block = block
     end
