@@ -263,7 +263,7 @@ module Immutable
     end
 
     # Returns the first element in the vector, if not empty, else nil
-    def first
+    def first?
       self[0]?
     end
 

@@ -143,7 +143,31 @@ describe Immutable do
       end
     end
 
-    describe "#[]" do
+    describe "#first,#last" do
+      it "returns the first/last element of the vector" do
+        vector.first.should eq(0)
+        vector.last.should eq(99)
+      end
+
+      it "raises IndexError if the list is empty" do
+        expect_raises(IndexError) { empty_vector.first }
+        expect_raises(IndexError) { empty_vector.last }
+      end
+    end
+
+    describe "#first?,#last?" do
+      it "returns the first/last element of the vector" do
+        vector.first?.should eq(0)
+        vector.last?.should eq(99)
+      end
+
+      it "returns nil if the list is empty" do
+        empty_vector.first?.should eq(nil)
+        empty_vector.last?.should eq(nil)
+      end
+    end
+
+    describe "#set" do
       it "returns a copy with the value set at given index" do
         v = vector.set(10, -1)
         v[10].should eq(-1)
