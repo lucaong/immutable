@@ -28,7 +28,7 @@ module Immutable
         new([] of Trie(K, V), 0_u32, 6)
       end
 
-      def get(key : K)
+      def get(key : K) : V
         lookup(key.hash) { |hash| hash[key] }
       end
 
@@ -36,7 +36,7 @@ module Immutable
         lookup(key.hash) { |hash| hash.fetch(key, &block) }
       end
 
-      def has_key?(key : K)
+      def has_key?(key : K) : Bool
         lookup(key.hash) { |hash| hash.has_key?(key) }
       end
 
@@ -52,10 +52,6 @@ module Immutable
         end
       end
 
-      private def leaf?
-        @levels == 0
-      end
-
       protected def lookup(index : Int32, &block : ::Hash(K, V) -> U)
         return yield({} of K => V) unless i = child_index(bit_index(index))
         if leaf?
@@ -63,6 +59,10 @@ module Immutable
         else
           @children[i].lookup(index, &block)
         end
+      end
+
+      private def leaf?
+        @levels == 0
       end
 
       private def set_leaf(index : Int32, key : K, value : V) : Trie(K, V)
@@ -98,12 +98,12 @@ module Immutable
         end
       end
 
-      private def bitpos(i : Int32)
+      private def bitpos(i : UInt32) : UInt32
         1_u32 << i
       end
 
-      private def child_index(i : Int32)
-        pos = bitpos(i)
+      private def child_index(bidx : UInt32) : UInt32?
+        pos = bitpos(bidx)
         return nil unless (pos & @bitmap) == pos
         popcount(@bitmap & (pos - 1))
       end
@@ -114,8 +114,8 @@ module Immutable
         (((x + (x >> 4)) & 0x0F0F0F0F_u32) * 0x01010101_u32) >> 24
       end
 
-      private def bit_index(index : Int32)
-        (index >> (@levels * BITS_PER_LEVEL)) & INDEX_MASK
+      private def bit_index(index : Int32) : UInt32
+        (index.to_u32 >> (@levels * BITS_PER_LEVEL)) & INDEX_MASK
       end
     end
   end
