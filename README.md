@@ -57,7 +57,7 @@ map = Immutable.map({ foo: 1, bar: 2 })    # => Map {foo: 1, bar: 2}
 map.set(:baz, 3)                           # => Map {foo: 1, bar: 2, baz: 3}
 
 # a Map behaves mostly like a hash
-map[:baz]                                  # => 3
+map[:bar]                                  # => 2
 
 # The original map in unchanged:
 map                                        # => Map {foo: 1, bar: 2}
