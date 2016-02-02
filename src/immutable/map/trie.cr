@@ -57,18 +57,14 @@ module Immutable
       end
 
       def each
-        each_flat.each_slice(2).map { |kv| {kv[0], kv[1]} }
+        children_iter = @children.map do |child|
+          child.each as ShallowFlatIterator(Tuple(K, V))
+        end.each
+        ShallowFlatIterator(Tuple(K, V)).new(@values.each.chain(children_iter))
       end
 
       def empty?
         size == 0
-      end
-
-      protected def each_flat : Iterator::Flatten(K | V)
-        children_iter = @children.map do |child|
-          child.each_flat as Iterator::Flatten(K | V)
-        end.each
-        @values.each.chain(children_iter).flatten
       end
 
       protected def set_at_index(index : Int32, key : K, value : V) : Trie(K, V)
@@ -166,6 +162,40 @@ module Immutable
 
       private def bit_index(index : Int32) : UInt32
         (index.to_u32 >> (@levels * BITS_PER_LEVEL)) & INDEX_MASK
+      end
+
+      class ShallowFlatIterator(T)
+        include Iterator(T)
+
+        @top : Bool
+
+        def initialize(@iterator)
+          @generator = @iterator
+          @top = true
+        end
+
+        def next
+          value = @generator.next
+          if value.is_a?(Stop)
+            return stop if @top
+            @generator = @iterator
+            @top = true
+            self.next
+          else
+            flatten(value)
+          end
+        end
+
+        private def flatten(value)
+          case value
+          when Iterator
+            @generator = value
+            @top       = false
+            self.next
+          else
+            value
+          end
+        end
       end
     end
   end

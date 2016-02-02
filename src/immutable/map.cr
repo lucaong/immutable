@@ -112,5 +112,38 @@ module Immutable
     def delete(key : K)
       Map.new(@trie.delete(key), @block)
     end
+
+    # Calls the given block for each key-value and passes in a tuple of key and value.
+    #
+    # ```
+    # m = Immutable::Map.new({"foo" => "bar"})
+    # m.each do |keyval|
+    #   keyval[0] # => "foo"
+    #   keyval[1] # => "bar"
+    # end
+    # ```
+    def each(&block : Tuple(K, V) ->)
+      @trie.each(&block)
+      self
+    end
+
+    # Returns an iterator over the map entries, returning a `Tuple` of the key
+    # and value.
+    #
+    # ```
+    # map = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # iterator = map.each
+    #
+    # entry = iterator.next
+    # entry[0] # => "foo"
+    # entry[1] # => "bar"
+    #
+    # entry = iterator.next
+    # entry[0] # => "baz"
+    # entry[1] # => "qux"
+    # ```
+    def each
+      @trie.each
+    end
   end
 end
