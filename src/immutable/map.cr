@@ -113,7 +113,8 @@ module Immutable
       Map.new(@trie.delete(key), @block)
     end
 
-    # Calls the given block for each key-value and passes in a tuple of key and value.
+    # Calls the given block for each key-value and passes in a tuple of key and
+    # value. The order of iteration is not specified.
     #
     # ```
     # m = Immutable::Map.new({"foo" => "bar"})
@@ -128,7 +129,7 @@ module Immutable
     end
 
     # Returns an iterator over the map entries, returning a `Tuple` of the key
-    # and value.
+    # and value. The order of iteration is not specified.
     #
     # ```
     # map = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
@@ -144,6 +145,98 @@ module Immutable
     # ```
     def each
       @trie.each
+    end
+
+    # Calls the given block for each key-value pair and passes in the key.
+    #
+    # ```
+    # m = Immutable::Map.new({"foo" => "bar"})
+    # m.each_key do |key|
+    #   key # => "foo"
+    # end
+    # ```
+    def each_key(&block : K ->)
+      each do |keyval|
+        block.call(keyval.first)
+      end
+    end
+
+    # Returns an iterator over the map keys. The order is not guaranteed.
+    #
+    # ```
+    # map = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # iterator = map.each_key
+    #
+    # key = iterator.next
+    # key # => "foo"
+    #
+    # key = iterator.next
+    # key # => "baz"
+    # ```
+    def each_key
+      each.map { |keyval| keyval.first }
+    end
+
+
+    # Calls the given block for each key-value pair and passes in the value.
+    #
+    # ```
+    # m = Immutable::Map.new({"foo" => "bar"})
+    # m.each_value do |val|
+    #   val # => "bar"
+    # end
+    # ```
+    def each_value(&block : V ->)
+      each do |keyval|
+        block.call(keyval.last)
+      end
+    end
+
+    # Returns an iterator over the map values. The order is not specified.
+    #
+    # ```
+    # map = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # iterator = map.each_value
+    #
+    # val = iterator.next
+    # val # => "bar"
+    #
+    # val = iterator.next
+    # val # => "qux"
+    # ```
+    def each_value
+      each.map { |keyval| keyval.last }
+    end
+
+    # Returns only the keys as an `Array`. The order is not specified.
+    #
+    # ```
+    # m = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # m.keys # => ["foo", "bar"]
+    # ```
+    def keys
+      each_key.to_a
+    end
+
+    # Returns only the values as an `Array`. The order is not specified.
+    #
+    # ```
+    # m = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # m.values # => ["bar", "qux"]
+    # ```
+    def values
+      each_value.to_a
+    end
+
+    # Returns a new `Array` of tuples populated with each key-value pair. The
+    # order is not specified.
+    #
+    # ```
+    # m = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # m.to_a # => [{"foo", "bar"}, {"baz", "qux"}]
+    # ```
+    def to_a
+      each.to_a
     end
   end
 end

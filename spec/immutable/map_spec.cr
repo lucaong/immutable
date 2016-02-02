@@ -91,7 +91,7 @@ describe Immutable do
       end
     end
 
-    describe "each" do
+    describe "#each" do
       it "calls the block for each entry in the map" do
         entries = [] of Tuple(String, Int32)
         map.each do |entry|
@@ -102,6 +102,46 @@ describe Immutable do
 
       it "returns an iterator if called with no block" do
         map.each.to_a.sort.should eq([{"bar", 2}, {"baz", 3}, {"foo", 1}])
+      end
+    end
+
+    describe "#each_key" do
+      it "calls the block for each key in the map" do
+        keys = [] of String
+        map.each_key do |key|
+          keys << key
+        end
+        keys.sort.should eq(["bar", "baz", "foo"])
+      end
+
+      it "returns an iterator if called with no block" do
+        map.each_key.to_a.sort.should eq(["bar", "baz", "foo"])
+      end
+    end
+
+    describe "#each_value" do
+      it "calls the block for each value in the map" do
+        vals = [] of Int32
+        map.each_value do |val|
+          vals << val
+        end
+        vals.sort.should eq([1, 2, 3])
+      end
+
+      it "returns an iterator if called with no block" do
+        map.each_value.to_a.sort.should eq([1, 2, 3])
+      end
+    end
+
+    describe "#keys" do
+      it "returs an array of all the keys" do
+        map.keys.sort.should eq(["bar", "baz", "foo"])
+      end
+    end
+
+    describe "#values" do
+      it "returs an array of all the values" do
+        map.values.sort.should eq([1, 2, 3])
       end
     end
   end
