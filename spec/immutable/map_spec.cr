@@ -144,5 +144,17 @@ describe Immutable do
         map.values.sort.should eq([1, 2, 3])
       end
     end
+
+    describe "#==" do
+      it "returns false for different types" do
+        (map == 1).should eq(false)
+      end
+
+      it "returns true for equal maps" do
+        m1 = Immutable::Map.new({ foo: 123 })
+        m2 = Immutable::Map.new({ foo: 123 })
+        (m1 == m2).should eq(true)
+      end
+    end
   end
 end
