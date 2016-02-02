@@ -469,7 +469,7 @@ module Immutable
       end
     end
 
-    # Returns a `String` representation of this object.
+    # Appends a `String` representation of this object to the given IO object.
     def inspect(io : IO)
       to_s(io)
     end

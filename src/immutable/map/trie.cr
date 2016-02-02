@@ -48,11 +48,8 @@ module Immutable
         delete_at_index(key.hash, key)
       end
 
-      def each(&block : Tuple(K, V) ->)
-        @values.each { |k, v| yield({k, v}) }
-        @children.each do |child|
-          child.each(&block)
-        end
+      def each
+        each.each { |entry| yield entry }
         self
       end
 

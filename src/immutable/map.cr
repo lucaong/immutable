@@ -25,6 +25,8 @@ module Immutable
     @trie  : Trie(K, V)
     @block : (K -> V)?
 
+    include Enumerable(Tuple(K, V))
+
     # Creates a map with the given key-values
     #
     # ```
@@ -123,8 +125,8 @@ module Immutable
     #   keyval[1] # => "bar"
     # end
     # ```
-    def each(&block : Tuple(K, V) ->)
-      @trie.each(&block)
+    def each
+      @trie.each { |keyval| yield keyval }
       self
     end
 
@@ -228,15 +230,29 @@ module Immutable
       each_value.to_a
     end
 
-    # Returns a new `Array` of tuples populated with each key-value pair. The
-    # order is not specified.
+    # Appends a `String` representation of this object to the given IO object.
+    def inspect(io : IO)
+      to_s(io)
+    end
+
+    # Appends a String representation of this map
+    # to the given IO object.
+    def to_s(io : IO)
+      io << "Map "
+      to_h.to_s(io)
+    end
+
+    # See `Object#hash`.
     #
     # ```
-    # m = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
-    # m.to_a # => [{"foo", "bar"}, {"baz", "qux"}]
+    # map = Immutable::Map.new({"foo" => "bar"})
+    # map.hash # => 63502
     # ```
-    def to_a
-      each.to_a
+    def hash
+      reduce(size * 43) do |memo, keyval|
+        key, value = keyval.first, keyval.last
+        43 * memo + (key.hash ^ value.hash)
+      end
     end
   end
 end

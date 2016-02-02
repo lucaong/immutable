@@ -40,23 +40,23 @@ For a list of all classes and methods refer to the [API documentation](http://lu
 require "immutable"
 
 # Vector
-vector = Immutable::Vector.new([1, 2, 3, 4, 5]) # => Vector [1, 2, 3, 4, 5]
-other  = vector.set(2, 0).push(42)              # => Vector [1, 2, 0, 4, 5, 42]
-other[2]                                        # => 0
+vector = Immutable.vector([1, 2, 3, 4, 5]) # => Vector [1, 2, 3, 4, 5]
+other  = vector.set(2, 0).push(42)         # => Vector [1, 2, 0, 4, 5, 42]
+other[2]                                   # => 0
 
 other.each do |elem|
   puts elem
 end
 
 # The original vector is unchanged:
-vector                                          # => Vector [1, 2, 3, 4, 5]
+vector                                     # => Vector [1, 2, 3, 4, 5]
 
 # Map
-map = Immutable::Map.new({ foo: 1, bar: 2 }) # => Map {foo: 1, bar: 2}
-map.set(:baz, 3)                             # => Map {foo: 1, bar: 2, baz: 3}
+map = Immutable.map({ foo: 1, bar: 2 }) # => Map {foo: 1, bar: 2}
+map.set(:baz, 3)                        # => Map {foo: 1, bar: 2, baz: 3}
 
 # The original map in unchanged:
-map                                          # => Map {foo: 1, bar: 2}
+map                                     # => Map {foo: 1, bar: 2}
 ```
 
 

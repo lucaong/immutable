@@ -156,5 +156,40 @@ describe Immutable do
         (m1 == m2).should eq(true)
       end
     end
+
+    describe "#inspect" do
+      it "returns a string representation of the map" do
+        m = Immutable::Map.new({ foo: 123, bar: 321 })
+        m.inspect.should eq("Map {:foo => 123, :bar => 321}")
+      end
+    end
+
+    describe "#to_a" do
+      it "returns an array of entries" do
+        m = Immutable::Map.new({ foo: 123, bar: 321 })
+        m.to_a.should eq([{:foo, 123}, {:bar, 321}])
+      end
+    end
+
+    describe "#to_h" do
+      it "returns a hash of the same entries" do
+        m = Immutable::Map.new({ foo: 123, bar: 321 })
+        m.to_h.should eq({ foo: 123, bar: 321 })
+      end
+    end
+
+    describe "#hash" do
+      it "returns a different hash code for different maps" do
+        m1 = Immutable::Map.new({"foo" => "bar"})
+        m2 = Immutable::Map.new({"baz" => "qux"})
+        m1.hash.should_not eq(m2.hash)
+      end
+
+      it "returns the same hash code for equal maps" do
+        m1 = Immutable::Map.new({"foo" => "bar"})
+        m2 = Immutable::Map.new({"foo" => "bar"})
+        m1.hash.should eq(m2.hash)
+      end
+    end
   end
 end
