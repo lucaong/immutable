@@ -66,5 +66,29 @@ describe Immutable do
         map["xxx"]?.should eq(nil)
       end
     end
+
+    describe "#set" do
+      it "returns a modified copy with the given key-value association" do
+        m = map.set("abc", 1234)
+        m["abc"].should eq(1234)
+        m = map.set("abc", 4321)
+        m["abc"].should eq(4321)
+        map["abc"]?.should eq(nil)
+      end
+    end
+
+    describe "#delete" do
+      it "returns a modified copy with the key-value association removed" do
+        m = map.delete("foo")
+        m["foo"]?.should eq(nil)
+        map["foo"].should eq(1)
+      end
+
+      it "raises KeyError if the key does not exist" do
+        expect_raises(KeyError) do
+          map.delete("abc")
+        end
+      end
+    end
   end
 end

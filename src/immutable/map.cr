@@ -81,11 +81,24 @@ module Immutable
     #
     # ```
     # m  = Immutable::Map.new({ foo: 123 })
-    # m2 = h.set(:bar, 321) # => Map {:foo => 123, :bar => 321}
+    # m2 = m.set(:bar, 321) # => Map {:foo => 123, :bar => 321}
     # m                     # => Map {:foo => 123}
     # ```
     def set(key : K, value : V)
       Map.new(@trie.set(key, value), @block)
+    end
+
+
+    # Returns a modified copy of the map with the key-value pair removed. If the
+    # key is not existing, it raises `KeyError`
+    #
+    # ```
+    # m  = Immutable::Map.new({ foo: 123, bar: 321 })
+    # m2 = m.delete(:bar) # => Map {:foo => 123}
+    # m                   # => Map {:foo => 123, bar: 321}
+    # ```
+    def delete(key : K)
+      Map.new(@trie.delete(key), @block)
     end
   end
 end
