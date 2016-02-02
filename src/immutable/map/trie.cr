@@ -91,7 +91,7 @@ module Immutable
         if leaf_of?(index)
           yield @values
         else
-          return yield({} of K => V) unless i = child_index(bit_index(index))
+          return yield({} of K => V) unless i = child_index?(bit_index(index))
           @children[i].lookup(index, &block)
         end
       end
@@ -109,7 +109,7 @@ module Immutable
 
       private def set_branch(index : Int32, key : K, value : V) : Trie(K, V)
         i = bit_index(index)
-        if idx = child_index(i)
+        if idx = child_index?(i)
           children = @children.dup.tap do |cs|
             cs[idx] = cs[idx].set_at_index(index, key, value)
           end
@@ -117,7 +117,8 @@ module Immutable
         else
           child = Trie.new([] of Trie(K, V), {} of K => V, 0_u32, @levels + 1)
             .set_at_index(index, key, value)
-          Trie.new(@children.dup.push(child), @values, @bitmap | bitpos(i), @levels)
+          bitmap = @bitmap | bitpos(i)
+          Trie.new(@children.dup.insert(child_index(i, bitmap), child), @values, bitmap, @levels)
         end
       end
 
@@ -130,7 +131,7 @@ module Immutable
 
       private def delete_in_branch(index : Int32, key : K)
         i = bit_index(index)
-        raise KeyError.new unless idx = child_index(i)
+        raise KeyError.new("key #{key.inspect} not found") unless idx = child_index?(i)
         child = @children[idx].delete_at_index(index, key)
         if child.empty?
           children = @children.dup.tap { |cs| cs.delete_at(idx) }
@@ -146,10 +147,15 @@ module Immutable
         1_u32 << i
       end
 
-      private def child_index(bidx : UInt32) : UInt32?
+      private def child_index?(bidx : UInt32) : UInt32?
         pos = bitpos(bidx)
         return nil unless (pos & @bitmap) == pos
         popcount(@bitmap & (pos - 1))
+      end
+
+      private def child_index(bidx : UInt32, bitmap : UInt32) : UInt32
+        pos = bitpos(bidx)
+        popcount(bitmap & (pos - 1))
       end
 
       private def popcount(x : UInt32)
