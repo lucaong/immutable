@@ -52,11 +52,11 @@ end
 vector                                     # => Vector [1, 2, 3, 4, 5]
 
 # Map
-map = Immutable.map({ foo: 1, bar: 2 }) # => Map {foo: 1, bar: 2}
-map.set(:baz, 3)                        # => Map {foo: 1, bar: 2, baz: 3}
+map = Immutable.map({ foo: 1, bar: 2 })    # => Map {foo: 1, bar: 2}
+map.set(:baz, 3)                           # => Map {foo: 1, bar: 2, baz: 3}
 
 # The original map in unchanged:
-map                                     # => Map {foo: 1, bar: 2}
+map                                        # => Map {foo: 1, bar: 2}
 ```
 
 
