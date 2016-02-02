@@ -57,10 +57,10 @@ module Immutable
       end
 
       def each
-        children_iter = @children.map do |child|
-          child.each as ShallowFlatIterator(Tuple(K, V))
-        end.each
-        ShallowFlatIterator(Tuple(K, V)).new(@values.each.chain(children_iter))
+        children_iter = @children.each.map do |child|
+          child.each as Iterator::Chain(Hash::EntryIterator(K, V), EntryIterator(K, V), {K, V}, {K, V})
+        end
+        @values.each.chain(EntryIterator(K, V).new(children_iter))
       end
 
       def empty?
@@ -164,8 +164,13 @@ module Immutable
         (index.to_u32 >> (@levels * BITS_PER_LEVEL)) & INDEX_MASK
       end
 
-      class ShallowFlatIterator(T)
-        include Iterator(T)
+      class EntryIterator(K, V)
+        include Iterator(Tuple(K, V))
+
+        @iterator  : Map(Array::ItemIterator(Trie(K, V)), Trie(K, V), Chain(Hash::EntryIterator(K, V), Trie::EntryIterator(K, V), {K, V}, {K, V}))
+
+        @generator : Chain(Hash::EntryIterator(K, V), Trie::EntryIterator(K, V), {K, V}, {K, V}) |
+                     Map(Array::ItemIterator(Trie(K, V)), Trie(K, V), Chain(Hash::EntryIterator(K, V), Trie::EntryIterator(K, V), {K, V}, {K, V}))
 
         @top : Bool
 
@@ -174,7 +179,7 @@ module Immutable
           @top = true
         end
 
-        def next
+        def next : Tuple(K, V) | Stop
           value = @generator.next
           if value.is_a?(Stop)
             return stop if @top
@@ -186,9 +191,8 @@ module Immutable
           end
         end
 
-        private def flatten(value)
-          case value
-          when Iterator
+        private def flatten(value) : Tuple(K, V) | Stop
+          if value.is_a? Iterator
             @generator = value
             @top       = false
             self.next
