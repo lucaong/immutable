@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/lucaong/immutable">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Immutable::Map(K, V) - github.com/lucaong/immutable</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/lucaong/immutable/Immutable" data-name="immutable">
+      <a href="../Immutable.html">Immutable</a>
+      
+        <ul>
+  
+  <li class="parent current" data-id="github.com/lucaong/immutable/Immutable/Map" data-name="immutable::map(k, v)">
+      <a href="../Immutable/Map.html">Map</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map/Trie" data-name="immutable::map::trie(k, v)">
+      <a href="../Immutable/Map/Trie.html">Trie</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
+      <a href="../Immutable/Map/Trie/EntryIterator.html">EntryIterator</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Vector" data-name="immutable::vector(t)">
+      <a href="../Immutable/Vector.html">Vector</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Trie" data-name="immutable::vector::trie(t)">
+      <a href="../Immutable/Vector/Trie.html">Trie</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> Immutable::Map(K, V)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Immutable/Map.html">Immutable::Map(K, V)</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+  <h2>Included Modules</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type">Enumerable(Tuple(K, V))</li>
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map/trie.cr" target="_blank">immutable/map/trie.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr" target="_blank">immutable/map.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%29-class-method" class="signature"><strong>.new</strong>(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V))</a>
+        
+          <div class="summary"><p>Creates a map with the given key-values</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%2C%26block%3AK-%3EV%29-class-method" class="signature"><strong>.new</strong>(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V), &block : K -> V)</a>
+        
+          <div class="summary"><p>Creates a map with the given key-values.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28trie%3AImmutable%3A%3AMap%3A%3ATrie%28K%2CV%29%2Cblock%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AK-%3EV%7CNil%29-class-method" class="signature"><strong>.new</strong>(trie : Immutable::Map::Trie(K, V), block = <span class="n">nil</span> : K -> V | Nil)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%28key%3AK%29-instance-method" class="signature"><strong>#[]</strong>(key : K)</a>
+        
+          <div class="summary"><p>Returns the value associated with the given key, if existing, else raises <code>KeyError</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3F%28key%3AK%29-instance-method" class="signature"><strong>#[]?</strong>(key : K)</a>
+        
+          <div class="summary"><p>Returns the value associated with the given key, if existing, else nil</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete%28key%3AK%29-instance-method" class="signature"><strong>#delete</strong>(key : K)</a>
+        
+          <div class="summary"><p>Returns a modified copy of the map with the key-value pair removed.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each-instance-method" class="signature"><strong>#each</strong></a>
+        
+          <div class="summary"><p>Returns an iterator over the map entries, returning a <code>Tuple</code> of the key and value.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each%28%26block%29-instance-method" class="signature"><strong>#each</strong>(&block)</a>
+        
+          <div class="summary"><p>Calls the given block for each key-value and passes in a tuple of key and value.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_key-instance-method" class="signature"><strong>#each_key</strong></a>
+        
+          <div class="summary"><p>Returns an iterator over the map keys.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_key%28%26block%3AK-%3E%29-instance-method" class="signature"><strong>#each_key</strong>(&block : K -> )</a>
+        
+          <div class="summary"><p>Calls the given block for each key-value pair and passes in the key.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_value-instance-method" class="signature"><strong>#each_value</strong></a>
+        
+          <div class="summary"><p>Returns an iterator over the map values.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_value%28%26block%3AV-%3E%29-instance-method" class="signature"><strong>#each_value</strong>(&block : V -> )</a>
+        
+          <div class="summary"><p>Calls the given block for each key-value pair and passes in the value.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fetch%28key%3AK%29-instance-method" class="signature"><strong>#fetch</strong>(key : K)</a>
+        
+          <div class="summary"><p>Returns the value associated with the given key, if existing, else raises <code>KeyError</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fetch%28key%3AK%2C%26block%3AK-%3EU%29-instance-method" class="signature"><strong>#fetch</strong>(key : K, &block : K -> U)</a>
+        
+          <div class="summary"><p>Returns the value associated with the given key, if existing, else executes the given block and returns its value</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fetch%28key%3AK%2Cdefault%29-instance-method" class="signature"><strong>#fetch</strong>(key : K, default)</a>
+        
+          <div class="summary"><p>Returns the value associated with the given key, if existing, else it returns the provided default value</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#hash-instance-method" class="signature"><strong>#hash</strong></a>
+        
+          <div class="summary"><p>See <code>Object#hash</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#inspect%28io%3AIO%29-instance-method" class="signature"><strong>#inspect</strong>(io : IO)</a>
+        
+          <div class="summary"><p>Appends a <code>String</code> representation of this object to the given IO object.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#keys-instance-method" class="signature"><strong>#keys</strong></a>
+        
+          <div class="summary"><p>Returns only the keys as an <code>Array</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set%28key%3AK%2Cvalue%3AV%29-instance-method" class="signature"><strong>#set</strong>(key : K, value : V)</a>
+        
+          <div class="summary"><p>Returns a modified copy of the map where key is associated to value</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#size-instance-method" class="signature"><strong>#size</strong></a>
+        
+          <div class="summary"><p>Returns the number of key-value pairs in the map</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_s%28io%3AIO%29-instance-method" class="signature"><strong>#to_s</strong>(io : IO)</a>
+        
+          <div class="summary"><p>Appends a String representation of this map to the given IO object.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#values-instance-method" class="signature"><strong>#values</strong></a>
+        
+          <div class="summary"><p>Returns only the values as an <code>Array</code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="new(hash={}&lt;spanclass=&quot;k&quot;&gt;of&lt;/span&gt;&lt;spanclass=&quot;t&quot;&gt;K&lt;/span&gt;=&gt;&lt;spanclass=&quot;t&quot;&gt;V&lt;/span&gt;:Hash(K,V))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V))
+
+        <a class="method-permalink" href="#new%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Creates a map with the given key-values</p>
+
+<pre><code>m <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({ foo: <span class="n">123</span>, bar: <span class="n">321</span> }) <span class="c"># Map {foo: 123, bar: 321}</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(hash={}&lt;spanclass=&quot;k&quot;&gt;of&lt;/span&gt;&lt;spanclass=&quot;t&quot;&gt;K&lt;/span&gt;=&gt;&lt;spanclass=&quot;t&quot;&gt;V&lt;/span&gt;:Hash(K,V),&amp;block:K-&gt;V)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V), &block : K -> V)
+
+        <a class="method-permalink" href="#new%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%2C%26block%3AK-%3EV%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Creates a map with the given key-values. When getting a key-value that is
+not in the map, the given block is executed passing the key, and the
+return value is returned.</p>
+
+<pre><code>m <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({ foo: <span class="n">123</span>, bar: <span class="n">321</span> }) <span class="c"># Map {foo: 123, bar: 321}</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L47" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(trie:Immutable::Map::Trie(K,V),block=&lt;spanclass=&quot;n&quot;&gt;nil&lt;/span&gt;:K-&gt;V|Nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(trie : <a href="../Immutable/Map/Trie.html">Immutable::Map::Trie</a>(K, V), block = <span class="n">nil</span> : K -> V | Nil)
+
+        <a class="method-permalink" href="#new%28trie%3AImmutable%3A%3AMap%3A%3ATrie%28K%2CV%29%2Cblock%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AK-%3EV%7CNil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L52" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="[](key:K)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]</strong>(key : K)
+
+        <a class="method-permalink" href="#%5B%5D%28key%3AK%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the value associated with the given key, if existing, else raises
+<code>KeyError</code>. See also <code><a href="../Immutable/Map.html#fetch%28key%3AK%29-instance-method">#fetch</a></code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L85" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]?(key:K)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]?</strong>(key : K)
+
+        <a class="method-permalink" href="#%5B%5D%3F%28key%3AK%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the value associated with the given key, if existing, else nil</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L90" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete(key:K)-instance-method">
+      <div class="signature">
+        
+        def <strong>delete</strong>(key : K)
+
+        <a class="method-permalink" href="#delete%28key%3AK%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns a modified copy of the map with the key-value pair removed. If the
+key is not existing, it raises <code>KeyError</code></p>
+
+<pre><code>m  <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({ foo: <span class="n">123</span>, bar: <span class="n">321</span> })
+m2 <span class="o">=</span> m.delete(<span class="n">:bar</span>) <span class="c"># =&gt; Map {:foo =&gt; 123}</span>
+m                   <span class="c"># =&gt; Map {:foo =&gt; 123, bar: 321}</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L114" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>
+
+        <a class="method-permalink" href="#each-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns an iterator over the map entries, returning a <code>Tuple</code> of the key
+and value. The order of iteration is not specified.</p>
+
+<pre><code>map <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>, <span class="s">&quot;baz&quot;</span> => <span class="s">&quot;qux&quot;</span>})
+iterator <span class="o">=</span> map.each
+
+entry <span class="o">=</span> iterator.<span class="k">next</span>
+entry[<span class="n">0</span>] <span class="c"># =&gt; &quot;foo&quot;</span>
+entry[<span class="n">1</span>] <span class="c"># =&gt; &quot;bar&quot;</span>
+
+entry <span class="o">=</span> iterator.<span class="k">next</span>
+entry[<span class="n">0</span>] <span class="c"># =&gt; &quot;baz&quot;</span>
+entry[<span class="n">1</span>] <span class="c"># =&gt; &quot;qux&quot;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L148" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each(&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>(&block)
+
+        <a class="method-permalink" href="#each%28%26block%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Calls the given block for each key-value and passes in a tuple of key and
+value. The order of iteration is not specified.</p>
+
+<pre><code>m <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>})
+m.each <span class="k">do</span> <span class="o">|</span>keyval<span class="o">|</span>
+  keyval[<span class="n">0</span>] <span class="c"># =&gt; &quot;foo&quot;</span>
+  keyval[<span class="n">1</span>] <span class="c"># =&gt; &quot;bar&quot;</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L128" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_key-instance-method">
+      <div class="signature">
+        
+        def <strong>each_key</strong>
+
+        <a class="method-permalink" href="#each_key-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns an iterator over the map keys. The order is not guaranteed.</p>
+
+<pre><code>map <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>, <span class="s">&quot;baz&quot;</span> => <span class="s">&quot;qux&quot;</span>})
+iterator <span class="o">=</span> map.each_key
+
+key <span class="o">=</span> iterator.<span class="k">next</span>
+key <span class="c"># =&gt; &quot;foo&quot;</span>
+
+key <span class="o">=</span> iterator.<span class="k">next</span>
+key <span class="c"># =&gt; &quot;baz&quot;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L178" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_key(&amp;block:K-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each_key</strong>(&block : K -> )
+
+        <a class="method-permalink" href="#each_key%28%26block%3AK-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Calls the given block for each key-value pair and passes in the key.</p>
+
+<pre><code>m <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>})
+m.each_key <span class="k">do</span> <span class="o">|</span>key<span class="o">|</span>
+  key <span class="c"># =&gt; &quot;foo&quot;</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L160" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_value-instance-method">
+      <div class="signature">
+        
+        def <strong>each_value</strong>
+
+        <a class="method-permalink" href="#each_value-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns an iterator over the map values. The order is not specified.</p>
+
+<pre><code>map <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>, <span class="s">&quot;baz&quot;</span> => <span class="s">&quot;qux&quot;</span>})
+iterator <span class="o">=</span> map.each_value
+
+val <span class="o">=</span> iterator.<span class="k">next</span>
+val <span class="c"># =&gt; &quot;bar&quot;</span>
+
+val <span class="o">=</span> iterator.<span class="k">next</span>
+val <span class="c"># =&gt; &quot;qux&quot;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L209" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_value(&amp;block:V-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each_value</strong>(&block : V -> )
+
+        <a class="method-permalink" href="#each_value%28%26block%3AV-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Calls the given block for each key-value pair and passes in the value.</p>
+
+<pre><code>m <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>})
+m.each_value <span class="k">do</span> <span class="o">|</span>val<span class="o">|</span>
+  val <span class="c"># =&gt; &quot;bar&quot;</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L191" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fetch(key:K)-instance-method">
+      <div class="signature">
+        
+        def <strong>fetch</strong>(key : K)
+
+        <a class="method-permalink" href="#fetch%28key%3AK%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the value associated with the given key, if existing, else raises
+<code>KeyError</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L62" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fetch(key:K,&amp;block:K-&gt;U)-instance-method">
+      <div class="signature">
+        
+        def <strong>fetch</strong>(key : K, &block : K -> U)
+
+        <a class="method-permalink" href="#fetch%28key%3AK%2C%26block%3AK-%3EU%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the value associated with the given key, if existing, else
+executes the given block and returns its value</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L73" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fetch(key:K,default)-instance-method">
+      <div class="signature">
+        
+        def <strong>fetch</strong>(key : K, default)
+
+        <a class="method-permalink" href="#fetch%28key%3AK%2Cdefault%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the value associated with the given key, if existing, else
+it returns the provided default value</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="hash-instance-method">
+      <div class="signature">
+        
+        def <strong>hash</strong>
+
+        <a class="method-permalink" href="#hash-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>See <code>Object#hash</code>.</p>
+
+<pre><code>map <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>})
+map.hash <span class="c"># =&gt; 63502</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L251" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="inspect(io:IO)-instance-method">
+      <div class="signature">
+        
+        def <strong>inspect</strong>(io : IO)
+
+        <a class="method-permalink" href="#inspect%28io%3AIO%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends a <code>String</code> representation of this object to the given IO object.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L234" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="keys-instance-method">
+      <div class="signature">
+        
+        def <strong>keys</strong>
+
+        <a class="method-permalink" href="#keys-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns only the keys as an <code>Array</code>. The order is not specified.</p>
+
+<pre><code>m <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>, <span class="s">&quot;baz&quot;</span> => <span class="s">&quot;qux&quot;</span>})
+m.keys <span class="c"># =&gt; [&quot;foo&quot;, &quot;bar&quot;]</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L219" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set(key:K,value:V)-instance-method">
+      <div class="signature">
+        
+        def <strong>set</strong>(key : K, value : V)
+
+        <a class="method-permalink" href="#set%28key%3AK%2Cvalue%3AV%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns a modified copy of the map where key is associated to value</p>
+
+<pre><code>m  <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({ foo: <span class="n">123</span> })
+m2 <span class="o">=</span> m.set(<span class="n">:bar</span>, <span class="n">321</span>) <span class="c"># =&gt; Map {:foo =&gt; 123, :bar =&gt; 321}</span>
+m                     <span class="c"># =&gt; Map {:foo =&gt; 123}</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L101" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="size-instance-method">
+      <div class="signature">
+        
+        def <strong>size</strong>
+
+        <a class="method-permalink" href="#size-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the number of key-value pairs in the map</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_s(io:IO)-instance-method">
+      <div class="signature">
+        
+        def <strong>to_s</strong>(io : IO)
+
+        <a class="method-permalink" href="#to_s%28io%3AIO%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends a String representation of this map
+to the given IO object.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L240" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="values-instance-method">
+      <div class="signature">
+        
+        def <strong>values</strong>
+
+        <a class="method-permalink" href="#values-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns only the values as an <code>Array</code>. The order is not specified.</p>
+
+<pre><code>m <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>.<span class="k">new</span>({<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>, <span class="s">&quot;baz&quot;</span> => <span class="s">&quot;qux&quot;</span>})
+m.values <span class="c"># =&gt; [&quot;bar&quot;, &quot;qux&quot;]</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr#L229" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

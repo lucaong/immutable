@@ -25,15 +25,35 @@
       
         <ul>
   
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map" data-name="immutable::map(k, v)">
+      <a href="Immutable/Map.html">Map</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map/Trie" data-name="immutable::map::trie(k, v)">
+      <a href="Immutable/Map/Trie.html">Trie</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
+      <a href="Immutable/Map/Trie/EntryIterator.html">EntryIterator</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
   <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Vector" data-name="immutable::vector(t)">
       <a href="Immutable/Vector.html">Vector</a>
       
         <ul>
-  
-  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/ItemIterator" data-name="immutable::vector::itemiterator(t)">
-      <a href="Immutable/Vector/ItemIterator.html">ItemIterator</a>
-      
-    </li>
   
   <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Trie" data-name="immutable::vector::trie(t)">
       <a href="Immutable/Vector/Trie.html">Trie</a>
@@ -72,9 +92,13 @@ thread-safe, garbage collector friendly and performant.</p>
 
 <p>implementing efficient append, pop, update and lookup operations</p>
 
+<ul><li><code><a href="Immutable/Map.html">Immutable::Map</a></code>: hash-like unordered key-value collection implementing</li></ul>
+
+<p>efficient lookup and update operations</p>
+
 <p>TODO:</p>
 
-<ul><li><code>Immutable::Map</code>: hash-like key-value collection</li><li><code>Immutable::Set</code>: unordered collection without duplicates</li></ul>
+<ul><li><code>Immutable::Set</code>: unordered collection without duplicates</li></ul>
 
 <h2>Installation</h2>
 
@@ -90,19 +114,34 @@ thread-safe, garbage collector friendly and performant.</p>
 
 <pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;immutable&quot;</span>
 
-vector <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>]) <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span>
-other  <span class="o">=</span> vector.set(<span class="n">2</span>, <span class="n">0</span>).push(<span class="n">42</span>)              <span class="c"># =&gt; Vector [1, 2, 0, 4, 5, 42]</span>
-other[<span class="n">2</span>]                                        <span class="c"># =&gt; 0</span>
+<span class="c"># Vector</span>
+vector <span class="o">=</span> <span class="t">Immutable</span>.vector([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>]) <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span>
+other  <span class="o">=</span> vector.set(<span class="n">2</span>, <span class="n">0</span>).push(<span class="n">42</span>)         <span class="c"># =&gt; Vector [1, 2, 0, 4, 5, 42]</span>
+other[<span class="n">2</span>]                                   <span class="c"># =&gt; 0</span>
 
-<span class="c"># The original vector is unchanged</span>
-vector                                          <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span></code></pre>
+other.each <span class="k">do</span> <span class="o">|</span>elem<span class="o">|</span>
+  puts elem
+<span class="k">end</span>
+
+<span class="c"># The original vector is unchanged:</span>
+vector                                     <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span>
+
+<span class="c"># Map</span>
+map <span class="o">=</span> <span class="t">Immutable</span>.map({ foo: <span class="n">1</span>, bar: <span class="n">2</span> }) <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
+map.set(<span class="n">:baz</span>, <span class="n">3</span>)                        <span class="c"># =&gt; Map {foo: 1, bar: 2, baz: 3}</span>
+
+<span class="c"># The original map in unchanged:</span>
+map                                     <span class="c"># =&gt; Map {foo: 1, bar: 2}</span></code></pre>
 
 <h2>Implementation</h2>
 
 <p><code><a href="Immutable/Vector.html">Immutable::Vector</a></code> is implemented as a bit-partitioned vector trie with a block
-size of 32 bits, that guarantees O(log32) lookups and updates, which is
+size of 32 bits, that guarantees O(Log32) lookups and updates, which is
 effectively constant time for practical purposes. Due to tail optimization,
-appends and pop are O(1) 31 times out of 32, and O(log32) 1/32 of the times.</p>
+appends and pop are O(1) 31 times out of 32, and O(Log32) 1/32 of the times.</p>
+
+<p><code><a href="Immutable/Map.html">Immutable::Map</a></code> uses a bit-partitioned hash trie with a block size of 32 bits,
+that also guarantees O(Log32) lookups and updates.</p>
 
 <h2>Contributing</h2>
 

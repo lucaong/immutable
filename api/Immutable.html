@@ -25,15 +25,35 @@
       
         <ul>
   
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map" data-name="immutable::map(k, v)">
+      <a href="Immutable/Map.html">Map</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map/Trie" data-name="immutable::map::trie(k, v)">
+      <a href="Immutable/Map/Trie.html">Trie</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
+      <a href="Immutable/Map/Trie/EntryIterator.html">EntryIterator</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
   <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Vector" data-name="immutable::vector(t)">
       <a href="Immutable/Vector.html">Vector</a>
       
         <ul>
-  
-  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/ItemIterator" data-name="immutable::vector::itemiterator(t)">
-      <a href="Immutable/Vector/ItemIterator.html">ItemIterator</a>
-      
-    </li>
   
   <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Trie" data-name="immutable::vector::trie(t)">
       <a href="Immutable/Vector/Trie.html">Trie</a>
@@ -81,22 +101,32 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/c4e6d5a7c4a4fe9631f2821068c87b57817bb566/src/immutable/vector/trie.cr" target="_blank">immutable/vector/trie.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map/trie.cr" target="_blank">immutable/map/trie.cr</a>
     
     <br/>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/c4e6d5a7c4a4fe9631f2821068c87b57817bb566/src/immutable/vector.cr" target="_blank">immutable/vector.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/map.cr" target="_blank">immutable/map.cr</a>
     
     <br/>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/c4e6d5a7c4a4fe9631f2821068c87b57817bb566/src/immutable/version.cr" target="_blank">immutable/version.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/vector/trie.cr" target="_blank">immutable/vector/trie.cr</a>
     
     <br/>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/c4e6d5a7c4a4fe9631f2821068c87b57817bb566/src/immutable.cr" target="_blank">immutable.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/vector.cr" target="_blank">immutable/vector.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable/version.cr" target="_blank">immutable/version.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable.cr" target="_blank">immutable.cr</a>
     
     <br/>
   
@@ -117,6 +147,25 @@
 
 
 
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#map%28keyvals%3AHash%28K%2CV%29%29-class-method" class="signature"><strong>.map</strong>(keyvals : Hash(K, V))</a>
+        
+          <div class="summary"><p>Construct an <code><a href="Immutable/Map.html">Immutable::Map</a></code> of the given key-values</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#vector%28elements%3AArray%28T%29%29-class-method" class="signature"><strong>.vector</strong>(elements : Array(T))</a>
+        
+          <div class="summary"><p>Construct an <code><a href="Immutable/Vector.html">Immutable::Vector</a></code> of the given elements</p></div>
+        
+      </li>
+    
+  </ul>
+
 
 
 
@@ -127,6 +176,45 @@
   
 </div>
 
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="map(keyvals:Hash(K,V))-class-method">
+      <div class="signature">
+        
+        def self.<strong>map</strong>(keyvals : Hash(K, V))
+
+        <a class="method-permalink" href="#map%28keyvals%3AHash%28K%2CV%29%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Construct an <code><a href="Immutable/Map.html">Immutable::Map</a></code> of the given key-values</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="vector(elements:Array(T))-class-method">
+      <div class="signature">
+        
+        def self.<strong>vector</strong>(elements : Array(T))
+
+        <a class="method-permalink" href="#vector%28elements%3AArray%28T%29%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Construct an <code><a href="Immutable/Vector.html">Immutable::Vector</a></code> of the given elements</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/1c1189ab47e315ca89f11715d5d5001bb4442500/src/immutable.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
