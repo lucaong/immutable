@@ -25,11 +25,23 @@ module Immutable
     @trie  : Trie(K, V)
     @block : (K -> V)?
 
+    # Creates a map with the given key-values
+    #
+    # ```
+    # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
+    # ```
     def initialize(hash = {} of K => V : Hash(K, V))
       @trie  = hash.reduce(Trie(K, V).empty) { |h, k, v| h.set(k, v) }
       @block = nil
     end
 
+    # Creates a map with the given key-values. When getting a key-value that is
+    # not in the map, the given block is executed passing the key, and the
+    # return value is returned.
+    #
+    # ```
+    # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
+    # ```
     def initialize(hash = {} of K => V : Hash(K, V), &block : K -> V)
       @trie  = hash.reduce(Trie(K, V).empty) { |h, k, v| h.set(k, v) }
       @block = block
