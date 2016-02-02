@@ -5,6 +5,8 @@ module Immutable
       BLOCK_SIZE = (2 ** BITS_PER_LEVEL).to_u32
       INDEX_MASK = BLOCK_SIZE - 1
 
+      include Enumerable(Tuple(K, V))
+
       getter :size, :levels
 
       @children : Array(Trie(K, V))
@@ -42,12 +44,23 @@ module Immutable
         set_at_index(key.hash, key, value)
       end
 
-      def each(&block : K, V ->)
-        @values.each(&block)
+      def each(&block : Tuple(K, V) ->)
+        @values.each { |k, v| yield({k, v}) }
         @children.each do |child|
           child.each(&block)
         end
         self
+      end
+
+      def each
+        each_flat.each_slice(2).map { |kv| {kv[0], kv[1]} }
+      end
+
+      protected def each_flat : Iterator::Flatten(K | V)
+        children_iter = @children.map do |child|
+          child.each_flat as Iterator::Flatten(K | V)
+        end.each
+        @values.each.chain(children_iter).flatten
       end
 
       protected def set_at_index(index : Int32, key : K, value : V) : Trie(K, V)

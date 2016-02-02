@@ -44,13 +44,18 @@ describe Immutable::Map::Trie do
   end
 
   describe "#each" do
-    it "iterates through values" do
+    it "iterates through tuples of key and value" do
       t = empty_trie.set(:foo, 1).set(:bar, 2).set(:baz, 3)
       keyvals = [] of { Symbol, Int32 }
-      t.each do |k, v|
-        keyvals << { k, v }
+      t.each do |kv|
+        keyvals << kv
       end
       keyvals.sort.should eq([{:bar, 2}, {:baz, 3}, {:foo, 1}])
+    end
+
+    it "returns an iterator if called without block" do
+      t = empty_trie.set(:foo, 1).set(:bar, 2).set(:baz, 3)
+      t.each.to_a.should eq(t.to_a)
     end
   end
 end
