@@ -42,8 +42,9 @@ require "immutable"
 # Vector
 vector = Immutable.vector([1, 2, 3, 4, 5]) # => Vector [1, 2, 3, 4, 5]
 other  = vector.set(2, 0).push(42)         # => Vector [1, 2, 0, 4, 5, 42]
-other[2]                                   # => 0
 
+# a Vector behaves mostly like an array
+other[2]                                   # => 0
 other.each do |elem|
   puts elem
 end
@@ -55,8 +56,17 @@ vector                                     # => Vector [1, 2, 3, 4, 5]
 map = Immutable.map({ foo: 1, bar: 2 })    # => Map {foo: 1, bar: 2}
 map.set(:baz, 3)                           # => Map {foo: 1, bar: 2, baz: 3}
 
+# a Map behaves mostly like a hash
+map[:baz]                                  # => 3
+
 # The original map in unchanged:
 map                                        # => Map {foo: 1, bar: 2}
+
+# Nested arrays/hashes can be turned into immutable versions with the `.from`
+# method:
+
+nested = Immutable.from({ name: "Ada", colors: [:blue, :green, :red] })
+nested # => Map {:name => "Ada", :colors => Vector [:blue, :green, :red]}
 ```
 
 

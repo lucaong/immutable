@@ -10,4 +10,17 @@ module Immutable
   def self.map(keyvals : Hash(K, V))
     Map.new(keyvals)
   end
+
+  # Recursively traverses the given object and turns hashes into
+  # `Immutable::Map` and arrays into `Immutable::Vector`
+  def self.from(object)
+    case object
+    when Array
+      Vector.new(object.map { |elem| from(elem) })
+    when Hash
+      Map.new(object.map { |k, v| { k, from(v) } })
+    else
+      object
+    end
+  end
 end

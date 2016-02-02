@@ -49,7 +49,19 @@ module Immutable
       @block = block
     end
 
+    # :nodoc:
     def initialize(@trie : Trie(K, V), @block = nil : (K -> V)?)
+    end
+
+    # Creates a map with the given key-values.
+    #
+    # ```
+    # m = Immutable::Map.new([{:foo, 123}, {:bar, 321}]) # Map {foo: 123, bar: 321}
+    # ```
+    def self.new(e : Enumerable(Enumerable(U)))
+      e.reduce(Map(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
+        m.set(kv[0], kv[1])
+      end
     end
 
     # Returns the number of key-value pairs in the map

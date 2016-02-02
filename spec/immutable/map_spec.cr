@@ -28,6 +28,11 @@ describe Immutable do
         m[:foo].should eq(123)
         m[:xxx].should eq(42)
       end
+
+      it "with an enumerable, it creates and initialize an immutable map" do
+        m = Immutable::Map.new([{:foo, 1}, {:bar, 2}])
+        m[:bar].should eq(2)
+      end
     end
 
     describe "#fetch" do
