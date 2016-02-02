@@ -44,6 +44,10 @@ module Immutable
         set_at_index(key.hash, key, value)
       end
 
+      def delete(key : K) : Trie(K, V)
+        delete_at_index(key.hash, key)
+      end
+
       def each(&block : Tuple(K, V) ->)
         @values.each { |k, v| yield({k, v}) }
         @children.each do |child|
@@ -54,6 +58,10 @@ module Immutable
 
       def each
         each_flat.each_slice(2).map { |kv| {kv[0], kv[1]} }
+      end
+
+      def empty?
+        size == 0
       end
 
       protected def each_flat : Iterator::Flatten(K | V)
@@ -71,6 +79,14 @@ module Immutable
         end
       end
 
+      protected def delete_at_index(index : Int32, key : K) : Trie(K, V)
+        if leaf_of?(index)
+          delete_in_leaf(index, key)
+        else
+          delete_in_branch(index, key)
+        end
+      end
+
       protected def lookup(index : Int32, &block : Hash(K, V) -> U)
         if leaf_of?(index)
           yield @values
@@ -85,7 +101,6 @@ module Immutable
       end
 
       private def set_leaf(index : Int32, key : K, value : V) : Trie(K, V)
-        i = bit_index(index)
         values = @values.dup.tap do |vs|
           vs[key] = value
         end
@@ -104,6 +119,27 @@ module Immutable
             .set_at_index(index, key, value)
           Trie.new(@children.dup.push(child), @values, @bitmap | bitpos(i), @levels)
         end
+      end
+
+      private def delete_in_leaf(index : Int32, key : K)
+        values = @values.dup.tap do |vs|
+          vs.delete(key)
+        end
+        Trie.new(@children, values, @bitmap, @levels)
+      end
+
+      private def delete_in_branch(index : Int32, key : K)
+        i = bit_index(index)
+        raise KeyError.new unless idx = child_index(i)
+        child = @children[idx].delete_at_index(index, key)
+        if child.empty?
+          children = @children.dup.tap { |cs| cs.delete_at(idx) }
+          bitmap   = @bitmap & (i ^ INDEX_MASK)
+        else
+          children = @children.dup.tap { |cs| cs[idx] = child }
+          bitmap   = @bitmap
+        end
+        Trie.new(children, @values, bitmap, @levels)
       end
 
       private def bitpos(i : UInt32) : UInt32
