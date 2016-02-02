@@ -13,10 +13,11 @@ At the moment, `Immutable` implements the following persistent data structures:
 
   - `Immutable::Vector`: array-like ordered, integer-indexed collection
   implementing efficient append, pop, update and lookup operations
+  - `Immutable::Map`: hash-like unordered key-value collection implementing
+  efficient lookup and update operations
 
 TODO:
 
-  - `Immutable::Map`: hash-like key-value collection
   - `Immutable::Set`: unordered collection without duplicates
 
 
@@ -38,21 +39,36 @@ For a list of all classes and methods refer to the [API documentation](http://lu
 ```crystal
 require "immutable"
 
+# Vector
 vector = Immutable::Vector.new([1, 2, 3, 4, 5]) # => Vector [1, 2, 3, 4, 5]
 other  = vector.set(2, 0).push(42)              # => Vector [1, 2, 0, 4, 5, 42]
 other[2]                                        # => 0
 
-# The original vector is unchanged
+other.each do |elem|
+  puts elem
+end
+
+# The original vector is unchanged:
 vector                                          # => Vector [1, 2, 3, 4, 5]
+
+# Map
+map = Immutable::Map.new({ foo: 1, bar: 2 }) # => Map {foo: 1, bar: 2}
+map.set(:baz, 3)                             # => Map {foo: 1, bar: 2, baz: 3}
+
+# The original map in unchanged:
+map                                          # => Map {foo: 1, bar: 2}
 ```
 
 
 ## Implementation
 
 `Immutable::Vector` is implemented as a bit-partitioned vector trie with a block
-size of 32 bits, that guarantees O(log32) lookups and updates, which is
+size of 32 bits, that guarantees O(Log32) lookups and updates, which is
 effectively constant time for practical purposes. Due to tail optimization,
-appends and pop are O(1) 31 times out of 32, and O(log32) 1/32 of the times.
+appends and pop are O(1) 31 times out of 32, and O(Log32) 1/32 of the times.
+
+`Immutable::Map` uses a bit-partitioned hash trie with a block size of 32 bits,
+that also guarantees O(Log32) lookups and updates.
 
 
 ## Contributing
