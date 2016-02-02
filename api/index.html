@@ -117,8 +117,9 @@ thread-safe, garbage collector friendly and performant.</p>
 <span class="c"># Vector</span>
 vector <span class="o">=</span> <span class="t">Immutable</span>.vector([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>]) <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span>
 other  <span class="o">=</span> vector.set(<span class="n">2</span>, <span class="n">0</span>).push(<span class="n">42</span>)         <span class="c"># =&gt; Vector [1, 2, 0, 4, 5, 42]</span>
-other[<span class="n">2</span>]                                   <span class="c"># =&gt; 0</span>
 
+<span class="c"># a Vector behaves mostly like an array</span>
+other[<span class="n">2</span>]                                   <span class="c"># =&gt; 0</span>
 other.each <span class="k">do</span> <span class="o">|</span>elem<span class="o">|</span>
   puts elem
 <span class="k">end</span>
@@ -130,8 +131,17 @@ vector                                     <span class="c"># =&gt; Vector [1, 2,
 map <span class="o">=</span> <span class="t">Immutable</span>.map({ foo: <span class="n">1</span>, bar: <span class="n">2</span> })    <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
 map.set(<span class="n">:baz</span>, <span class="n">3</span>)                           <span class="c"># =&gt; Map {foo: 1, bar: 2, baz: 3}</span>
 
+<span class="c"># a Map behaves mostly like a hash</span>
+map[<span class="n">:baz</span>]                                  <span class="c"># =&gt; 3</span>
+
 <span class="c"># The original map in unchanged:</span>
-map                                        <span class="c"># =&gt; Map {foo: 1, bar: 2}</span></code></pre>
+map                                        <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
+
+<span class="c"># Nested arrays/hashes can be turned into immutable versions with the `.from`</span>
+<span class="c"># method:</span>
+
+nested <span class="o">=</span> <span class="t">Immutable</span>.from({ name: <span class="s">&quot;Ada&quot;</span>, colors: [<span class="n">:blue</span>, <span class="n">:green</span>, <span class="n">:red</span>] })
+nested <span class="c"># =&gt; Map {:name =&gt; &quot;Ada&quot;, :colors =&gt; Vector [:blue, :green, :red]}</span></code></pre>
 
 <h2>Implementation</h2>
 
