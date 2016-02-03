@@ -127,6 +127,48 @@ module Immutable
       Map.new(@trie.delete(key), @block)
     end
 
+    # Returns a new map with the keys and values of this map and the given hash
+    # combined.
+    # A value in the given hash takes precedence over the one in this map.
+    #
+    # ```
+    # map = Immutable::Map.new({"foo" => "bar"})
+    # merged = map.merge({"baz": "qux"})
+    # merged # => Map {"foo" => "bar", "baz" => "qux"}
+    # map    # => Map {"foo" => "bar"}
+    # ```
+    def merge(hash : Hash(K, V))
+      trie = hash.reduce(@trie) do |trie, key, value|
+        trie.set(key, value)
+      end
+      Map.new(trie, @block)
+    end
+
+    # Returns a new map with the keys and values of this map and the given map
+    # combined.
+    # A value in the given map takes precedence over the one in this map.
+    #
+    # ```
+    # map = Immutable::Map.new({"foo" => "bar"})
+    # merged = map.merge(Immutable::Map.new({"baz": "qux"}))
+    # merged # => Map {"foo" => "bar", "baz" => "qux"}
+    # map    # => Map {"foo" => "bar"}
+    # ```
+    def merge(map : Map(K, V))
+      trie = map.reduce(@trie) do |trie, keyval|
+        trie.set(keyval[0], keyval[1])
+      end
+      Map.new(trie, @block)
+    end
+
+    def merge(hash : Hash(L, W))
+      Map(K | L, V | W).new.merge(self).merge(hash)
+    end
+
+    def merge(map : Map(L, W))
+      Map(K | L, V | W).new.merge(self).merge(map)
+    end
+
     # Calls the given block for each key-value and passes in a tuple of key and
     # value. The order of iteration is not specified.
     #

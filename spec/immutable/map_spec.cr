@@ -96,6 +96,32 @@ describe Immutable do
       end
     end
 
+    describe "#merge" do
+      it "returns a copy merged with the given hash" do
+        m = map.merge({ "foo" => 100, "qux" => true })
+        m.should eq(Immutable::Map.new({
+          "foo" => 100,
+          "bar" => 2,
+          "baz" => 3,
+          "qux" => true
+        }))
+        map["foo"].should eq(1)
+        map["qux"]?.should eq(nil)
+      end
+
+      it "returns a copy merged with the given map" do
+        m = map.merge(Immutable::Map.new({ "foo" => 100, "qux" => true }))
+        m.should eq(Immutable::Map.new({
+          "foo" => 100,
+          "bar" => 2,
+          "baz" => 3,
+          "qux" => true
+        }))
+        map["foo"].should eq(1)
+        map["qux"]?.should eq(nil)
+      end
+    end
+
     describe "#each" do
       it "calls the block for each entry in the map" do
         entries = [] of Tuple(String, Int32)
