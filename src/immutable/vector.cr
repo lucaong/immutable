@@ -41,7 +41,11 @@ module Immutable
 
     # Creates a new vector from the given arguments
     def self.of(*elems : T)
-      new(elems.to_a)
+      if (elems.size <= Trie::BLOCK_SIZE)
+        new(Trie(T).empty, elems.to_a)
+      else
+        new(elems.to_a)
+      end
     end
 
     # Creates a new empty vector
