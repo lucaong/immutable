@@ -194,4 +194,21 @@ describe Immutable::Vector::Trie do
       t.get(999).should eq(999)
     end
   end
+
+  describe "in-place modifications" do
+    describe "#update!" do
+      it "modifies in place if from matches owner" do
+        t = Immutable::Vector::Trie.new([1, 2, 3], 42_u64)
+        t.update!(1, 0, 42_u64)
+        t.get(1).should eq(0)
+      end
+
+      it "returns a modified copy if from does not matches owner" do
+        t = Immutable::Vector::Trie.new([1, 2, 3], 123_u64)
+        t2 = t.update!(1, 0, 42_u64)
+        t2.get(1).should eq(0)
+        t.get(1).should eq(2)
+      end
+    end
+  end
 end
