@@ -197,7 +197,7 @@ describe Immutable::Vector::Trie do
 
   describe "in-place modifications" do
     describe "when modified by the owner" do
-      it "modify in place (most of the times)" do
+      it "#push! #update! and #pop! modify in place" do
         # push!
         t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
         not_in_place = 0
@@ -219,6 +219,29 @@ describe Immutable::Vector::Trie do
         end
         not_in_place.should eq(1)
         t.size.should eq(10)
+      end
+
+      it "#push_leaf! and #pop_leaf! modify in place" do
+        block_size = Immutable::Vector::Trie::BLOCK_SIZE
+        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
+        not_in_place = 0
+        # push_leaf!
+        (block_size.to_i + 1).times do |i|
+          x = t.push_leaf!((i*block_size...i * block_size + block_size).to_a, 42_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(3)
+        t.size.should eq(block_size * (block_size + 1))
+        # pop_leaf!
+        not_in_place = 0
+        block_size.times do |i|
+          x = t.pop_leaf!(42_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(2)
+        t.size.should eq(block_size)
       end
     end
 

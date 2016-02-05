@@ -124,6 +124,23 @@ module Immutable
         end, @levels)
       end
 
+      def push_leaf!(leaf : Array(T), from : UInt64) : Trie(T)
+        raise ArgumentError.new if leaf.size > BLOCK_SIZE || size % 32 != 0
+        return push_leaf(leaf) unless from == @owner
+        return Trie.new([self], @levels + 1, from).push_leaf!(leaf, from) if full?
+        return Trie.new(leaf, @owner) if empty? && leaf?
+        if @levels == 1
+          @children.push(Trie.new(leaf, from))
+        else
+          if @children.empty? || @children.last.full?
+            @children << Trie.new([] of Trie(T), @levels - 1, from)
+          end
+          @children[-1] = @children[-1].push_leaf!(leaf, from)
+        end
+        @size = calculate_size
+        self
+      end
+
       def pop_leaf : Trie(T)
         raise ArgumentError.new if empty? || size % 32 != 0
         return Trie.new([] of T) if leaf?
@@ -133,6 +150,19 @@ module Immutable
           return Trie.new(@children[0...-1], @levels)
         end
         Trie.new(@children[0...-1].push(child), @levels)
+      end
+
+      def pop_leaf!(from : UInt64) : Trie(T)
+        raise ArgumentError.new if empty? || size % 32 != 0
+        return pop_leaf unless from == @owner
+        return Trie.new([] of T, from) if leaf?
+        @children[-1] = @children[-1].pop_leaf!(from)
+        if @children[-1].empty?
+          return @children.first if @children.size == 2
+          @children.pop
+        end
+        @size = calculate_size
+        self
       end
 
       def last
