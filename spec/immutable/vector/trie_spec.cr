@@ -196,18 +196,59 @@ describe Immutable::Vector::Trie do
   end
 
   describe "in-place modifications" do
-    describe "#update!" do
-      it "modifies in place if from matches owner" do
-        t = Immutable::Vector::Trie.new([1, 2, 3], 42_u64)
-        t.update!(1, 0, 42_u64)
-        t.get(1).should eq(0)
+    describe "when modified by the owner" do
+      it "modify in place (most of the times)" do
+        # push!
+        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
+        not_in_place = 0
+        100.times do |i|
+          x = t.push!(i, 42_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(1)
+        # update!
+        t.update!(50, 0, 42_u64)
+        t.get(50).should eq(0)
+        # pop!
+        not_in_place = 0
+        90.times do |i|
+          x = t.pop!(42_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(1)
+        t.size.should eq(10)
       end
+    end
 
-      it "returns a modified copy if from does not matches owner" do
-        t = Immutable::Vector::Trie.new([1, 2, 3], 123_u64)
-        t2 = t.update!(1, 0, 42_u64)
-        t2.get(1).should eq(0)
-        t.get(1).should eq(2)
+    describe "when modified by an object who's not the owner" do
+      it "returns a modified copy" do
+        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
+        t2 = t
+        not_in_place = 0
+        # push!
+        100.times do |i|
+          x = t.push!(i, 1_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(Immutable::Vector::Trie::BLOCK_SIZE + 1)
+        t2.size.should eq(0)
+        # update!
+        t.update!(50, 0, 2_u64)
+        t.get(50).should eq(50)
+        # pop!
+        not_in_place = 0
+        t2 = t
+        90.times do |i|
+          x = t.pop!(3_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(90)
+        t.size.should eq(10)
+        t2.size.should eq(100)
       end
     end
   end

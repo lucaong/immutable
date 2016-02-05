@@ -16,7 +16,7 @@ module Immutable
       @owner    : UInt64?
 
       def initialize(@children : Array(Trie(T)), @levels : Int32, @owner = nil : UInt64?)
-        @size   = @children.reduce(0) { |size, child| size + child.size }
+        @size   = @children.reduce(0) { |sum, child| sum + child.size }
         @values = [] of T
       end
 
@@ -55,7 +55,7 @@ module Immutable
 
       def push!(value : T, from : UInt64) : Trie(T)
         if full?
-          Trie.new([self], @levels + 1).push(value)
+          Trie.new([self], @levels + 1, from).push!(value, from)
         else
           set!(@size, value, from)
         end
@@ -77,14 +77,16 @@ module Immutable
         return pop unless from == @owner
         if leaf?
           @values.pop
-          return self
+        else
+          child = @children.last.pop!(from)
+          if child.empty?
+            return @children.first if @children.size == 2
+            @children.pop
+          else
+            @children[-1] = child
+          end
         end
-        child = @children.last.pop!
-        if child.empty?
-          return @children.first if @children.size == 2
-          @children.pop
-        end
-        @children[-1] = child
+        @size = calculate_size
         self
       end
 
@@ -180,7 +182,16 @@ module Immutable
         else
           update_children!(child_idx, value, index, from)
         end
+        @size = calculate_size
         self
+      end
+
+      private def calculate_size
+        if leaf?
+          @values.size
+        else
+          @children.reduce(0) { |sum, child| sum + child.size }
+        end
       end
 
       protected def lookup(index : Int)
@@ -210,7 +221,7 @@ module Immutable
       end
 
       private def update_children!(index : Int, value : T, idx : Int, from : UInt64)
-        @children << Trie(T).new([] of Trie(T), @levels - 1, @owner) if @children.size == index
+        @children << Trie(T).new([] of Trie(T), @levels - 1, from) if @children.size == index
         @children[index] = @children[index].set!(idx, value, from)
       end
 
