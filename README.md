@@ -102,3 +102,12 @@ persistent data structure implementations like:
 
   - [Clojure persistent collections](http://clojure.org/reference/data_structures)
   - [The Hamster gem for Ruby](https://github.com/hamstergem/hamster)
+
+When researching on the topic of persistent data structure implementation, these
+blog posts have been of great help:
+
+  - [Understanding Clojure's Persistent Vector](http://hypirion.com/musings/understanding-persistent-vector-pt-1) (also [Part 2](http://hypirion.com/musings/understanding-persistent-vector-pt-2), [Part 3](http://hypirion.com/musings/understanding-persistent-vector-pt-3) and [Understanding Clojure's Transients](http://hypirion.com/musings/understanding-clojure-transients))
+  - [Understanding Clojure's Persistent Hash Map](http://blog.higher-order.net/2009/09/08/understanding-clojures-persistenthashmap-deftwice.html)
+
+Big thanks to their authors for the great job explaining the internals of these
+data structures.
