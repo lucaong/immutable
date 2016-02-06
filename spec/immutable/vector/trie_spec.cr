@@ -273,6 +273,18 @@ describe Immutable::Vector::Trie do
         t.size.should eq(10)
         t2.size.should eq(100)
       end
+
+      it "#push_leaf! and #pop_leaf! return a modified copy" do
+        block_size = Immutable::Vector::Trie::BLOCK_SIZE
+        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
+        3.times do |i|
+          t = t.push_leaf!((0...block_size).to_a, 42_u64)
+        end
+        x = t.push_leaf!((0...block_size).to_a, 1_u64)
+        x.should_not eq(t)
+        x = t.pop_leaf!(1_u64)
+        x.should_not eq(t)
+      end
     end
   end
 end
