@@ -188,10 +188,11 @@ module Immutable
 
       def clear_owner!
         @owner = nil
+        self
       end
 
-      def self.empty
-        Trie.new([] of T)
+      def self.empty(from = nil : UInt64)
+        Trie.new([] of T, from)
       end
 
       def self.from(elems : Array(T))
@@ -200,6 +201,14 @@ module Immutable
           trie = trie.push_leaf(leaf)
         end
         trie
+      end
+
+      def self.from(elems : Array(T), from : UInt64)
+        trie = Trie(T).empty(from)
+        elems.each_slice(BLOCK_SIZE) do |leaf|
+          trie = trie.push_leaf!(leaf, from)
+        end
+        trie.clear_owner!
       end
 
       protected def set(index : Int, value : T) : Trie(T)
