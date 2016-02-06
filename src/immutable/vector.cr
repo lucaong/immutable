@@ -66,6 +66,22 @@ module Immutable
       @tail = elems[leaves..-1]
     end
 
+    # Executes the given block passing a transient version of the vector, then
+    # converts the transient vector back to an immutable one and returns it.
+    #
+    # This is useful to perform several updates on a vector in an efficient way:
+    # as the transient vector supports the same API of vector, but performs
+    # updates in place, avoiding unnecessary object allocations.
+    #
+    # ```
+    # vec = Immutable::Vector(Int32).new
+    # v2 = vec.transient do |v|
+    #   100.times { |i| v = v.push(i) }
+    # end
+    # v2.size # => 100
+    # ```
+    #
+    # Note that, as the transient is mutable, it is not thread-safe.
     def transient
       t = Transient.new(@trie, @tail.dup)
       yield t
