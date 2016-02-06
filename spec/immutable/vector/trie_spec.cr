@@ -246,7 +246,7 @@ describe Immutable::Vector::Trie do
     end
 
     describe "when modified by an object who's not the owner" do
-      it "returns a modified copy" do
+      it "#push!, #update and #pop! return a modified copy" do
         t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
         t2 = t
         not_in_place = 0

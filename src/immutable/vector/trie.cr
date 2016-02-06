@@ -1,6 +1,6 @@
 module Immutable
-  struct Vector(T)
-    struct Trie(T)
+  class Vector(T)
+    class Trie(T)
       BITS_PER_LEVEL = 5_u32
       BLOCK_SIZE = (2 ** BITS_PER_LEVEL).to_u32
       INDEX_MASK = BLOCK_SIZE - 1
@@ -184,6 +184,10 @@ module Immutable
       def inspect
         return @values.inspect if leaf?
         "[#{@children.map { |c| c.inspect }.join(", ")}]"
+      end
+
+      def clear_owner!
+        @owner = nil
       end
 
       def self.empty

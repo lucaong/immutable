@@ -31,7 +31,7 @@
 require "./vector/trie"
 
 module Immutable
-  struct Vector(T)
+  class Vector(T)
     include Enumerable(T)
     include Iterable
     include Comparable(Vector)
