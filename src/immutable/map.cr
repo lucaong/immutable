@@ -21,7 +21,7 @@
 require "./map/trie"
 
 module Immutable
-  struct Map(K, V)
+  class Map(K, V)
     @trie  : Trie(K, V)
     @block : (K -> V)?
 
@@ -33,7 +33,10 @@ module Immutable
     # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
     # ```
     def initialize(hash = {} of K => V : Hash(K, V))
-      @trie  = hash.reduce(Trie(K, V).empty) { |h, k, v| h.set(k, v) }
+      @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
+        trie.set!(k, v, object_id)
+      end
+      @trie.clear_owner!
       @block = nil
     end
 
@@ -45,7 +48,10 @@ module Immutable
     # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
     # ```
     def initialize(hash = {} of K => V : Hash(K, V), &block : K -> V)
-      @trie  = hash.reduce(Trie(K, V).empty) { |h, k, v| h.set(k, v) }
+      @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
+        trie.set!(k, v, object_id)
+      end
+      @trie.clear_owner!
       @block = block
     end
 
@@ -59,9 +65,32 @@ module Immutable
     # m = Immutable::Map.new([{:foo, 123}, {:bar, 321}]) # Map {foo: 123, bar: 321}
     # ```
     def self.new(e : Enumerable(Enumerable(U)))
-      e.reduce(Map(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
+      t = e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
         m.set(kv[0], kv[1])
       end
+      t.persist!
+    end
+
+    # Executes the given block passing a transient version of the map, then
+    # converts the transient map back to an immutable one and returns it.
+    #
+    # This is useful to perform several updates on a map in an efficient way: as
+    # the transient map supports the same API of map, but performs updates in
+    # place, avoiding unnecessary object allocations.
+    #
+    # ```
+    # map = Immutable::Map(Int32, Int32).new
+    # m2 = map.transient do |m|
+    #   100.times { |i| m = m.set(i, i * 2) }
+    # end
+    # m2.size # => 100
+    # ```
+    #
+    # Note that, as the transient is mutable, it is not thread-safe.
+    def transient
+      t = Transient.new(@trie, @block)
+      yield t
+      t.persist!
     end
 
     # Returns the number of key-value pairs in the map
@@ -162,11 +191,11 @@ module Immutable
     end
 
     def merge(hash : Hash(L, W))
-      Map(K | L, V | W).new.merge(self).merge(hash)
+      Transient(K | L, V | W).new.merge(self).merge(hash).persist!
     end
 
     def merge(map : Map(L, W))
-      Map(K | L, V | W).new.merge(self).merge(map)
+      Transient(K | L, V | W).new.merge(self).merge(map).persist!
     end
 
     # Calls the given block for each key-value and passes in a tuple of key and
@@ -306,6 +335,90 @@ module Immutable
       reduce(size * 43) do |memo, keyval|
         key, value = keyval.first, keyval.last
         43 * memo + (key.hash ^ value.hash)
+      end
+    end
+
+    def ==(other : Map(L, W))
+      return true if @trie.same?(other.trie)
+      return false unless size == other.size
+      all? do |kv|
+        entry = other.trie.find_entry(kv[0])
+        entry && entry.value == kv[1]
+      end
+    end
+
+    # :nodoc:
+    def ==(other)
+      false
+    end
+
+    protected def trie : Trie(K, V)
+      @trie
+    end
+
+    class Transient(K, V) < Map(K, V)
+      @trie  : Trie(K, V)
+      @block : (K -> V)?
+
+      def initialize(hash = {} of K => V : Hash(K, V))
+        @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, k, v|
+          h.set!(k, v, object_id)
+        end
+        @block = nil
+      end
+
+      def initialize(hash = {} of K => V : Hash(K, V), &block : K -> V)
+        @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, k, v|
+          h.set!(k, v, object_id)
+        end
+        @block = block
+      end
+
+      # :nodoc:
+      def initialize(@trie : Trie(K, V), @block = nil : (K -> V)?)
+      end
+
+      def self.new(e : Enumerable(Enumerable(U)))
+        e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
+          m.set!(kv[0], kv[1], object_id)
+        end
+      end
+
+      def persist!
+        @trie.clear_owner!
+        Map.new(@trie, @block)
+      end
+
+      def set(key : K, value : V)
+        @trie = @trie.set!(key, value, object_id)
+        self
+      end
+
+      def delete(key : K)
+        @trie = @trie.delete!(key, object_id)
+        self
+      end
+
+      def merge(hash : Hash(K, V))
+        @trie = hash.reduce(@trie) do |trie, key, value|
+          trie.set!(key, value, object_id)
+        end
+        self
+      end
+
+      def merge(map : Map(K, V))
+        @trie = map.reduce(@trie) do |trie, keyval|
+          trie.set!(keyval[0], keyval[1], object_id)
+        end
+        self
+      end
+
+      def merge(hash : Hash(L, W))
+        Transient(K | L, V | W).new.merge(self).merge(hash)
+      end
+
+      def merge(map : Map(L, W))
+        Transient(K | L, V | W).new.merge(self).merge(map)
       end
     end
   end

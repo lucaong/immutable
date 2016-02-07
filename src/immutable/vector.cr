@@ -31,7 +31,7 @@
 require "./vector/trie"
 
 module Immutable
-  struct Vector(T)
+  class Vector(T)
     include Enumerable(T)
     include Iterable
     include Comparable(Vector)
@@ -62,8 +62,30 @@ module Immutable
     # same position.
     def initialize(elems : Array(T))
       leaves = elems.size - (elems.size % Trie::BLOCK_SIZE)
-      @trie = Trie(T).from(elems[0...leaves])
+      @trie = Trie(T).from(elems[0...leaves], object_id)
       @tail = elems[leaves..-1]
+    end
+
+    # Executes the given block passing a transient version of the vector, then
+    # converts the transient vector back to an immutable one and returns it.
+    #
+    # This is useful to perform several updates on a vector in an efficient way:
+    # as the transient vector supports the same API of vector, but performs
+    # updates in place, avoiding unnecessary object allocations.
+    #
+    # ```
+    # vec = Immutable::Vector(Int32).new
+    # v2 = vec.transient do |v|
+    #   100.times { |i| v = v.push(i) }
+    # end
+    # v2.size # => 100
+    # ```
+    #
+    # Note that, as the transient is mutable, it is not thread-safe.
+    def transient
+      t = Transient.new(@trie, @tail.dup)
+      yield t
+      t.persist!
     end
 
     # Returns the number of elements in the vector
@@ -311,6 +333,7 @@ module Immutable
     # vec == Immutable::Vector.new([2, 3])    # => false
     # ```
     def ==(other : Vector)
+      return true if @trie.same?(other.trie) && @tail == other.tail
       equals?(other) { |x, y| x == y }
     end
 
@@ -500,6 +523,76 @@ module Immutable
     protected def to_lookup_set
       reduce(Set(T).new) do |set, elem|
         set.add(elem)
+      end
+    end
+
+    protected def trie
+      @trie
+    end
+
+    protected def tail
+      @tail
+    end
+
+    class Transient(T) < Vector(T)
+      @trie : Trie(T)
+      @tail : Array(T)
+
+      def initialize(@trie : Trie(T), @tail : Array(T))
+      end
+
+      def initialize
+        @trie = Trie(T).empty(object_id)
+        @tail = [] of T
+      end
+
+      def initialize(elems : Array(T))
+        super(elems)
+      end
+
+      def persist!
+        @trie.clear_owner!
+        Vector.new(@trie, @tail.dup)
+      end
+
+      def push(elem : T)
+        @tail << elem
+        if @tail.size == Trie::BLOCK_SIZE
+          @trie = @trie.push_leaf!(@tail, object_id)
+          @tail = [] of T
+        end
+        self
+      end
+
+      def pop : Tuple(T, Transient(T))
+        raise IndexError.new("cannot pop empty vector") if empty?
+        { last, drop_last { self } }
+      end
+
+      def pop? : Tuple(T?, Transient(T))
+        { last?, drop_last { self } }
+      end
+
+      def set(i : Int, value : T)
+        i = size + i if i < 0
+        raise IndexError.new if i < 0 || i >= size
+        if in_tail?(i)
+          @tail[i - @trie.size] = value
+        else
+          @trie = @trie.update!(i, value, object_id)
+        end
+        self
+      end
+
+      private def drop_last
+        return yield if empty?
+        if @tail.size == 1 && size > 1
+          @tail = @trie.last_leaf
+          @trie = @trie.pop_leaf!(object_id)
+        else
+          @tail.pop
+        end
+        self
       end
     end
   end

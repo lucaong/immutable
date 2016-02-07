@@ -78,4 +78,32 @@ describe Immutable::Map::Trie do
       t.each.to_a.should eq(t.to_a)
     end
   end
+
+  describe "in-place modifications" do
+    describe "when modified by the owner" do
+      it "#set! and #delete! modify in place" do
+        t = Immutable::Map::Trie(Symbol, Int32).empty(42_u64)
+        t.set!(:foo, 0, 42_u64)
+        t.set!(:bar, 1, 42_u64)
+        t.get(:foo).should eq(0)
+        t.get(:bar).should eq(1)
+        t.delete!(:foo, 42_u64)
+        t.has_key?(:foo).should eq(false)
+      end
+    end
+
+    describe "when modified by an object that is not the owner" do
+      it "#set! and #delete! return a modified copy" do
+        t = Immutable::Map::Trie(Symbol, Int32).empty(42_u64)
+        x = t.set!(:foo, 0, 0_u64)
+        t.has_key?(:foo).should eq(false)
+        x.get(:foo).should eq(0)
+        t.set!(:foo, 0, 42_u64)
+        x = t.delete!(:foo, 0_u64)
+        t.get(:foo).should eq(0)
+        t.has_key?(:foo).should eq(true)
+        x.has_key?(:foo).should eq(false)
+      end
+    end
+  end
 end

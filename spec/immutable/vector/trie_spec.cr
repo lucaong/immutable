@@ -194,4 +194,101 @@ describe Immutable::Vector::Trie do
       t.get(999).should eq(999)
     end
   end
+
+  describe "in-place modifications" do
+    describe "when modified by the owner" do
+      it "#push! #update! and #pop! modify in place" do
+        # push!
+        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
+        not_in_place = 0
+        100.times do |i|
+          x = t.push!(i, 42_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(1)
+        # update!
+        t.update!(50, 0, 42_u64)
+        t.update!(99, 0, 42_u64)
+        t.get(50).should eq(0)
+        t.get(99).should eq(0)
+        # pop!
+        not_in_place = 0
+        90.times do |i|
+          x = t.pop!(42_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(1)
+        t.size.should eq(10)
+      end
+
+      it "#push_leaf! and #pop_leaf! modify in place" do
+        block_size = Immutable::Vector::Trie::BLOCK_SIZE
+        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
+        not_in_place = 0
+        # push_leaf!
+        (block_size.to_i + 1).times do |i|
+          x = t.push_leaf!((i*block_size...i * block_size + block_size).to_a, 42_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(3)
+        t.size.should eq(block_size * (block_size + 1))
+        # pop_leaf!
+        not_in_place = 0
+        block_size.times do |i|
+          x = t.pop_leaf!(42_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(2)
+        t.size.should eq(block_size)
+      end
+    end
+
+    describe "when modified by an object who's not the owner" do
+      it "#push!, #update and #pop! return a modified copy" do
+        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
+        t2 = t
+        not_in_place = 0
+        # push!
+        100.times do |i|
+          x = t.push!(i, 1_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(Immutable::Vector::Trie::BLOCK_SIZE + 1)
+        t2.size.should eq(0)
+        # update!
+        t.update!(50, 0, 2_u64)
+        t.update!(99, 0, 2_u64)
+        t.get(50).should eq(50)
+        t.get(99).should eq(99)
+        # pop!
+        not_in_place = 0
+        t2 = t
+        90.times do |i|
+          x = t.pop!(3_u64)
+          not_in_place += 1 unless x == t
+          t = x
+        end
+        not_in_place.should eq(90)
+        t.size.should eq(10)
+        t2.size.should eq(100)
+      end
+
+      it "#push_leaf! and #pop_leaf! return a modified copy" do
+        block_size = Immutable::Vector::Trie::BLOCK_SIZE
+        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
+        3.times do |i|
+          t = t.push_leaf!((0...block_size).to_a, 42_u64)
+        end
+        x = t.push_leaf!((0...block_size).to_a, 1_u64)
+        x.should_not eq(t)
+        x = t.pop_leaf!(1_u64)
+        x.should_not eq(t)
+      end
+    end
+  end
 end
