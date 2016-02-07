@@ -1,6 +1,6 @@
 module Immutable
-  struct Map(K, V)
-    struct Trie(K, V)
+  class Map(K, V)
+    class Trie(K, V)
       BITS_PER_LEVEL = 5_u32
       BLOCK_SIZE = (2 ** BITS_PER_LEVEL).to_u32
       INDEX_MASK = BLOCK_SIZE - 1
@@ -14,18 +14,20 @@ module Immutable
       @values   : Hash(K, V)
       @size     : Int32
       @levels   : Int32
+      @owner    : UInt64?
 
       def initialize(
         @children : Array(Trie(K, V)),
         @values : Hash(K, V),
         @bitmap : UInt32,
-        @levels : Int32)
+        @levels : Int32,
+        @owner = nil : UInt64?)
         children_size = @children.reduce(0) { |size, child| size + child.size }
         @size         = children_size + @values.size
       end
 
-      def self.empty
-        new([] of Trie(K, V), {} of K => V, 0_u32, 0)
+      def self.empty(owner = nil : UInt64?)
+        new([] of Trie(K, V), {} of K => V, 0_u32, 0, owner)
       end
 
       def get(key : K) : V
@@ -44,8 +46,16 @@ module Immutable
         set_at_index(key.hash, key, value)
       end
 
+      def set!(key : K, value : V, from : UInt64) : Trie(K, V)
+        set_at_index!(key.hash, key, value, from)
+      end
+
       def delete(key : K) : Trie(K, V)
         delete_at_index(key.hash, key)
+      end
+
+      def delete!(key : K, from : UInt64) : Trie(K, V)
+        delete_at_index!(key.hash, key, from)
       end
 
       def each
@@ -72,12 +82,32 @@ module Immutable
         end
       end
 
+      protected def set_at_index!(index : Int32, key : K, value : V, from : UInt64) : Trie(K, V)
+        return set_at_index(index, key, value) unless from == @owner
+        if leaf_of?(index)
+          @values[key] = value
+        else
+          set_branch!(index, key, value, from)
+        end
+        self
+      end
+
       protected def delete_at_index(index : Int32, key : K) : Trie(K, V)
         if leaf_of?(index)
           delete_in_leaf(index, key)
         else
           delete_in_branch(index, key)
         end
+      end
+
+      protected def delete_at_index!(index : Int32, key : K, from : UInt64) : Trie(K, V)
+        return delete_at_index(index, key) unless from == @owner
+        if leaf_of?(index)
+          @values.delete(key)
+        else
+          delete_in_branch!(index, key, from)
+        end
+        self
       end
 
       protected def lookup(index : Int32, &block : Hash(K, V) -> U)
@@ -115,6 +145,18 @@ module Immutable
         end
       end
 
+      private def set_branch!(index : Int32, key : K, value : V, from : UInt64)
+        i = bit_index(index)
+        if idx = child_index?(i)
+          @children[idx] = @children[idx].set_at_index!(index, key, value, from)
+        else
+          child = Trie.new([] of Trie(K, V), {} of K => V, 0_u32, @levels + 1)
+            .set_at_index!(index, key, value, from)
+          @bitmap = @bitmap | bitpos(i)
+          @children.insert(child_index(i, @bitmap), child)
+        end
+      end
+
       private def delete_in_leaf(index : Int32, key : K)
         values = @values.dup.tap do |vs|
           vs.delete(key)
@@ -134,6 +176,18 @@ module Immutable
           bitmap   = @bitmap
         end
         Trie.new(children, @values, bitmap, @levels)
+      end
+
+      private def delete_in_branch!(index : Int32, key : K, from : UInt64)
+        i = bit_index(index)
+        raise KeyError.new("key #{key.inspect} not found") unless idx = child_index?(i)
+        child = @children[idx].delete_at_index!(index, key, from)
+        if child.empty?
+          @children.delete_at(idx)
+          @bitmap = @bitmap & (i ^ INDEX_MASK)
+        else
+          @children[idx] = child
+        end
       end
 
       private def bitpos(i : UInt32) : UInt32
