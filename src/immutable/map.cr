@@ -71,6 +71,22 @@ module Immutable
       t.persist!
     end
 
+    # Executes the given block passing a transient version of the map, then
+    # converts the transient map back to an immutable one and returns it.
+    #
+    # This is useful to perform several updates on a map in an efficient way: as
+    # the transient map supports the same API of map, but performs updates in
+    # place, avoiding unnecessary object allocations.
+    #
+    # ```
+    # map = Immutable::Map(Int32, Int32).new
+    # m2 = map.transient do |m|
+    #   100.times { |i| m = m.set(i, i * 2) }
+    # end
+    # m2.size # => 100
+    # ```
+    #
+    # Note that, as the transient is mutable, it is not thread-safe.
     def transient
       t = Transient.new(@trie, @block)
       yield t
