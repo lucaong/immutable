@@ -30,13 +30,28 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Transient" data-name="immutable::map::transient(k, v)">
+      <a href="../../Immutable/Map/Transient.html">Transient</a>
+      
+    </li>
+  
   <li class="parent current" data-id="github.com/lucaong/immutable/Immutable/Map/Trie" data-name="immutable::map::trie(k, v)">
       <a href="../../Immutable/Map/Trie.html">Trie</a>
       
         <ul>
   
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/Entry" data-name="immutable::map::trie::entry(k, v)">
+      <a href="../../Immutable/Map/Trie/Entry.html">Entry</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
       <a href="../../Immutable/Map/Trie/EntryIterator.html">EntryIterator</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/Values" data-name="immutable::map::trie::values(k, v)">
+      <a href="../../Immutable/Map/Trie/Values.html">Values</a>
       
     </li>
   
@@ -54,6 +69,11 @@
       <a href="../../Immutable/Vector.html">Vector</a>
       
         <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Transient" data-name="immutable::vector::transient(t)">
+      <a href="../../Immutable/Vector/Transient.html">Transient</a>
+      
+    </li>
   
   <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Trie" data-name="immutable::vector::trie(t)">
       <a href="../../Immutable/Vector/Trie.html">Trie</a>
@@ -77,12 +97,12 @@
 <div id="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> Immutable::Map::Trie(K, V)
+  <span class="kind">class</span> Immutable::Map::Trie(K, V)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Immutable/Map/Trie.html">Immutable::Map::Trie(K, V)</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Immutable/Map/Trie.html">Immutable::Map::Trie(K, V)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -110,7 +130,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr" target="_blank">immutable/map/trie.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr" target="_blank">immutable/map/trie.cr</a>
     
     <br/>
   
@@ -145,12 +165,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#empty-class-method" class="signature"><strong>.empty</strong></a>
+        <a href="#empty%28owner%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%7CNil%29-class-method" class="signature"><strong>.empty</strong>(owner = <span class="n">nil</span> : UInt64 | Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28children%3AArray%28Immutable%3A%3AMap%3A%3ATrie%28K%2CV%29%29%2Cvalues%3AHash%28K%2CV%29%2Cbitmap%3AUInt32%2Clevels%3AInt32%29-class-method" class="signature"><strong>.new</strong>(children : Array(Immutable::Map::Trie(K, V)), values : Hash(K, V), bitmap : UInt32, levels : Int32)</a>
+        <a href="#new%28children%3AArray%28Immutable%3A%3AMap%3A%3ATrie%28K%2CV%29%29%2Cvalues%3AImmutable%3A%3AMap%3A%3ATrie%3A%3AValues%28K%2CV%29%2Cbitmap%3AUInt32%2Clevels%3AInt32%2Cowner%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%7CNil%29-class-method" class="signature"><strong>.new</strong>(children : Array(Immutable::Map::Trie(K, V)), values : Immutable::Map::Trie::Values(K, V), bitmap : UInt32, levels : Int32, owner = <span class="n">nil</span> : UInt64 | Nil)</a>
         
       </li>
     
@@ -162,7 +182,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#clear_owner%21-instance-method" class="signature"><strong>#clear_owner!</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#delete%28key%3AK%29%3AImmutable%3A%3AMap%3A%3ATrie%28K%2CV%29-instance-method" class="signature"><strong>#delete</strong>(key : K) : Immutable::Map::Trie(K, V)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete%21%28key%3AK%2Cfrom%3AUInt64%29%3AImmutable%3A%3AMap%3A%3ATrie%28K%2CV%29-instance-method" class="signature"><strong>#delete!</strong>(key : K, from : UInt64) : Immutable::Map::Trie(K, V)</a>
         
       </li>
     
@@ -187,6 +217,11 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#find_entry%28key%3AK%29%3AImmutable%3A%3AMap%3A%3ATrie%3A%3AEntry%28K%2CV%29%7CNil-instance-method" class="signature"><strong>#find_entry</strong>(key : K) : Immutable::Map::Trie::Entry(K, V) | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#get%28key%3AK%29%3AV-instance-method" class="signature"><strong>#get</strong>(key : K) : V</a>
         
       </li>
@@ -203,6 +238,11 @@
     
       <li class="entry-summary">
         <a href="#set%28key%3AK%2Cvalue%3AV%29%3AImmutable%3A%3AMap%3A%3ATrie%28K%2CV%29-instance-method" class="signature"><strong>#set</strong>(key : K, value : V) : Immutable::Map::Trie(K, V)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set%21%28key%3AK%2Cvalue%3AV%2Cfrom%3AUInt64%29%3AImmutable%3A%3AMap%3A%3ATrie%28K%2CV%29-instance-method" class="signature"><strong>#set!</strong>(key : K, value : V, from : UInt64) : Immutable::Map::Trie(K, V)</a>
         
       </li>
     
@@ -240,46 +280,39 @@
 
 
   
-    
-
-
-    
-
-
-  
 </div>
 
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="empty-class-method">
+    <div class="entry-detail" id="empty(owner=&lt;spanclass=&quot;n&quot;&gt;nil&lt;/span&gt;:UInt64|Nil)-class-method">
       <div class="signature">
         
-        def self.<strong>empty</strong>
+        def self.<strong>empty</strong>(owner = <span class="n">nil</span> : UInt64 | Nil)
 
-        <a class="method-permalink" href="#empty-class-method">#</a>
+        <a class="method-permalink" href="#empty%28owner%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%7CNil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(children:Array(Immutable::Map::Trie(K,V)),values:Hash(K,V),bitmap:UInt32,levels:Int32)-class-method">
+    <div class="entry-detail" id="new(children:Array(Immutable::Map::Trie(K,V)),values:Immutable::Map::Trie::Values(K,V),bitmap:UInt32,levels:Int32,owner=&lt;spanclass=&quot;n&quot;&gt;nil&lt;/span&gt;:UInt64|Nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(children : Array(<a href="../../Immutable/Map/Trie.html">Immutable::Map::Trie</a>(K, V)), values : Hash(K, V), bitmap : UInt32, levels : Int32)
+        def self.<strong>new</strong>(children : Array(<a href="../../Immutable/Map/Trie.html">Immutable::Map::Trie</a>(K, V)), values : <a href="../../Immutable/Map/Trie/Values.html">Immutable::Map::Trie::Values</a>(K, V), bitmap : UInt32, levels : Int32, owner = <span class="n">nil</span> : UInt64 | Nil)
 
-        <a class="method-permalink" href="#new%28children%3AArray%28Immutable%3A%3AMap%3A%3ATrie%28K%2CV%29%29%2Cvalues%3AHash%28K%2CV%29%2Cbitmap%3AUInt32%2Clevels%3AInt32%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28children%3AArray%28Immutable%3A%3AMap%3A%3ATrie%28K%2CV%29%29%2Cvalues%3AImmutable%3A%3AMap%3A%3ATrie%3A%3AValues%28K%2CV%29%2Cbitmap%3AUInt32%2Clevels%3AInt32%2Cowner%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%7CNil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -288,6 +321,22 @@
 
 
   <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="clear_owner!-instance-method">
+      <div class="signature">
+        
+        def <strong>clear_owner!</strong>
+
+        <a class="method-permalink" href="#clear_owner%21-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L83" target="_blank">View source</a>]
+        
+      </div>
+    </div>
   
     <div class="entry-detail" id="delete(key:K):Immutable::Map::Trie(K,V)-instance-method">
       <div class="signature">
@@ -300,7 +349,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L59" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete!(key:K,from:UInt64):Immutable::Map::Trie(K,V)-instance-method">
+      <div class="signature">
+        
+        def <strong>delete!</strong>(key : K, from : UInt64) : <a href="../../Immutable/Map/Trie.html">Immutable::Map::Trie</a>(K, V)
+
+        <a class="method-permalink" href="#delete%21%28key%3AK%2Cfrom%3AUInt64%29%3AImmutable%3A%3AMap%3A%3ATrie%28K%2CV%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -316,7 +381,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -332,7 +397,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L67" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -348,7 +413,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L63" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -364,7 +429,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L39" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="find_entry(key:K):Immutable::Map::Trie::Entry(K,V)|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>find_entry</strong>(key : K) : <a href="../../Immutable/Map/Trie/Entry.html">Immutable::Map::Trie::Entry</a>(K, V) | Nil
+
+        <a class="method-permalink" href="#find_entry%28key%3AK%29%3AImmutable%3A%3AMap%3A%3ATrie%3A%3AEntry%28K%2CV%29%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -380,7 +461,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -396,7 +477,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -412,7 +493,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -428,7 +509,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set!(key:K,value:V,from:UInt64):Immutable::Map::Trie(K,V)-instance-method">
+      <div class="signature">
+        
+        def <strong>set!</strong>(key : K, value : V, from : UInt64) : <a href="../../Immutable/Map/Trie.html">Immutable::Map::Trie</a>(K, V)
+
+        <a class="method-permalink" href="#set%21%28key%3AK%2Cvalue%3AV%2Cfrom%3AUInt64%29%3AImmutable%3A%3AMap%3A%3ATrie%28K%2CV%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -444,7 +541,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/abc47a0954a568c49970229b1dc2dd4a686a04ab/src/immutable/map/trie.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>

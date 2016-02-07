@@ -5,7 +5,7 @@
   <meta id="repository-name" content="github.com/lucaong/immutable">
   <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="../../../js/doc.js"></script>
-  <title>Immutable::Map::Trie::EntryIterator(K, V) - github.com/lucaong/immutable</title>
+  <title>Immutable::Map::Trie::Entry(K, V) - github.com/lucaong/immutable</title>
 </head>
 <body>
 
@@ -40,12 +40,12 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/Entry" data-name="immutable::map::trie::entry(k, v)">
+  <li class=" current" data-id="github.com/lucaong/immutable/Immutable/Map/Trie/Entry" data-name="immutable::map::trie::entry(k, v)">
       <a href="../../../Immutable/Map/Trie/Entry.html">Entry</a>
       
     </li>
   
-  <li class=" current" data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
       <a href="../../../Immutable/Map/Trie/EntryIterator.html">EntryIterator</a>
       
     </li>
@@ -97,12 +97,12 @@
 <div id="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Immutable::Map::Trie::EntryIterator(K, V)
+  <span class="kind">struct</span> Immutable::Map::Trie::Entry(K, V)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Immutable/Map/Trie/EntryIterator.html">Immutable::Map::Trie::EntryIterator(K, V)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Immutable/Map/Trie/Entry.html">Immutable::Map::Trie::Entry(K, V)</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -110,13 +110,6 @@
 
 
 
-
-  <h2>Included Modules</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type">Iterator(Tuple(K, V))</li>
-  
-  </ul>
 
 
 
@@ -143,7 +136,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28iterator%29-class-method" class="signature"><strong>.new</strong>(iterator)</a>
+        <a href="#new%28key%3AK%2Cvalue%3AV%29-class-method" class="signature"><strong>.new</strong>(key : K, value : V)</a>
         
       </li>
     
@@ -155,7 +148,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#next%3ATuple%28K%2CV%29%7CStop-instance-method" class="signature"><strong>#next</strong> : Tuple(K, V) | Stop</a>
+        <a href="#key-instance-method" class="signature"><strong>#key</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value-instance-method" class="signature"><strong>#value</strong></a>
         
       </li>
     
@@ -188,30 +186,23 @@
 
 
   
-    
-
-
-    
-
-
-  
 </div>
 
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="new(iterator)-class-method">
+    <div class="entry-detail" id="new(key:K,value:V)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(iterator)
+        def self.<strong>new</strong>(key : K, value : V)
 
-        <a class="method-permalink" href="#new%28iterator%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28key%3AK%2Cvalue%3AV%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L331" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L242" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -221,18 +212,34 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="next:Tuple(K,V)|Stop-instance-method">
+    <div class="entry-detail" id="key-instance-method">
       <div class="signature">
         
-        def <strong>next</strong> : Tuple(K, V) | Stop
+        def <strong>key</strong>
 
-        <a class="method-permalink" href="#next%3ATuple%28K%2CV%29%7CStop-instance-method">#</a>
+        <a class="method-permalink" href="#key-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L336" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L240" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value-instance-method">
+      <div class="signature">
+        
+        def <strong>value</strong>
+
+        <a class="method-permalink" href="#value-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/map/trie.cr#L240" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/lucaong/immutable">
+  <link href="../../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../../js/doc.js"></script>
+  <title>Immutable::Vector::Transient(T) - github.com/lucaong/immutable</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/lucaong/immutable/Immutable" data-name="immutable">
+      <a href="../../Immutable.html">Immutable</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map" data-name="immutable::map(k, v)">
+      <a href="../../Immutable/Map.html">Map</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Transient" data-name="immutable::map::transient(k, v)">
+      <a href="../../Immutable/Map/Transient.html">Transient</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map/Trie" data-name="immutable::map::trie(k, v)">
+      <a href="../../Immutable/Map/Trie.html">Trie</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/Entry" data-name="immutable::map::trie::entry(k, v)">
+      <a href="../../Immutable/Map/Trie/Entry.html">Entry</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
+      <a href="../../Immutable/Map/Trie/EntryIterator.html">EntryIterator</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/Values" data-name="immutable::map::trie::values(k, v)">
+      <a href="../../Immutable/Map/Trie/Values.html">Values</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/lucaong/immutable/Immutable/Vector" data-name="immutable::vector(t)">
+      <a href="../../Immutable/Vector.html">Vector</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="github.com/lucaong/immutable/Immutable/Vector/Transient" data-name="immutable::vector::transient(t)">
+      <a href="../../Immutable/Vector/Transient.html">Transient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Trie" data-name="immutable::vector::trie(t)">
+      <a href="../../Immutable/Vector/Trie.html">Trie</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Immutable::Vector::Transient(T)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Immutable/Vector/Transient.html">Immutable::Vector::Transient(T)</a></li><li class="superclass"><a href="../../Immutable/Vector.html">Immutable::Vector(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr" target="_blank">immutable/vector.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28trie%3AImmutable%3A%3AVector%3A%3ATrie%28T%29%2Ctail%3AArray%28T%29%29-class-method" class="signature"><strong>.new</strong>(trie : Immutable::Vector::Trie(T), tail : Array(T))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28elems%3AArray%28T%29%29-class-method" class="signature"><strong>.new</strong>(elems : Array(T))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#persist%21-instance-method" class="signature"><strong>#persist!</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pop%3ATuple%28T%2CImmutable%3A%3AVector%3A%3ATransient%28T%29%29-instance-method" class="signature"><strong>#pop</strong> : Tuple(T, Immutable::Vector::Transient(T))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pop%3F%3ATuple%28T%7CNil%2CImmutable%3A%3AVector%3A%3ATransient%28T%29%29-instance-method" class="signature"><strong>#pop?</strong> : Tuple(T | Nil, Immutable::Vector::Transient(T))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#push%28elem%3AT%29-instance-method" class="signature"><strong>#push</strong>(elem : T)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set%28i%3AInt%2Cvalue%3AT%29-instance-method" class="signature"><strong>#set</strong>(i : Int, value : T)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../Immutable/Vector.html">Immutable::Vector(T)</a></code></h3>
+  
+    <a href="../../Immutable/Vector.html#%26%28other%3AImmutable%3A%3AVector%28U%29%29-instance-method" class="tooltip">
+      <span>&(other : Immutable::Vector(U))</span>
+    &</a>, 
+  
+    <a href="../../Immutable/Vector.html#%2B%28other%3AImmutable%3A%3AVector%28U%29%29-instance-method" class="tooltip">
+      <span>+(other : Immutable::Vector(U))</span>
+    +</a>, 
+  
+    <a href="../../Immutable/Vector.html#-%28other%3AImmutable%3A%3AVector%28U%29%29-instance-method" class="tooltip">
+      <span>-(other : Immutable::Vector(U))</span>
+    -</a>, 
+  
+    <a href="../../Immutable/Vector.html#%3C%3C%28elem%3AT%29-instance-method" class="tooltip">
+      <span><<(elem : T)</span>
+    <<</a>, 
+  
+    <a href="../../Immutable/Vector.html#%3C%3D%3E%28other%3AVector%29-instance-method" class="tooltip">
+      <span><=>(other : Vector)</span>
+    <=></a>, 
+  
+    <a href="../../Immutable/Vector.html#%3D%3D%28other%3AVector%29-instance-method" class="tooltip">
+      <span>==(other : Vector)</span>
+    ==</a>, 
+  
+    <a href="../../Immutable/Vector.html#%5B%5D%28i%3AInt%29-instance-method" class="tooltip">
+      <span>[](i : Int)</span>
+    []</a>, 
+  
+    <a href="../../Immutable/Vector.html#%5B%5D%3F%28i%3AInt%29-instance-method" class="tooltip">
+      <span>[]?(i : Int)</span>
+    []?</a>, 
+  
+    <a href="../../Immutable/Vector.html#any%3F-instance-method" class="tooltip">
+      <span>any?</span>
+    any?</a>, 
+  
+    <a href="../../Immutable/Vector.html#at%28i%3AInt%29-instance-method" class="tooltip">
+      <span>at(i : Int)<br/>at(i : Int, &block)</span>
+    at</a>, 
+  
+    <a href="../../Immutable/Vector.html#each-instance-method" class="tooltip">
+      <span>each<br/>each(&block)</span>
+    each</a>, 
+  
+    <a href="../../Immutable/Vector.html#each_index%28%26block%29-instance-method" class="tooltip">
+      <span>each_index(&block)</span>
+    each_index</a>, 
+  
+    <a href="../../Immutable/Vector.html#empty%3F-instance-method" class="tooltip">
+      <span>empty?</span>
+    empty?</a>, 
+  
+    <a href="../../Immutable/Vector.html#equals%3F%28other%3AVector%2C%26block%29-instance-method" class="tooltip">
+      <span>equals?(other : Vector, &block)</span>
+    equals?</a>, 
+  
+    <a href="../../Immutable/Vector.html#first-instance-method" class="tooltip">
+      <span>first</span>
+    first</a>, 
+  
+    <a href="../../Immutable/Vector.html#first%3F-instance-method" class="tooltip">
+      <span>first?</span>
+    first?</a>, 
+  
+    <a href="../../Immutable/Vector.html#hash-instance-method" class="tooltip">
+      <span>hash</span>
+    hash</a>, 
+  
+    <a href="../../Immutable/Vector.html#inspect%28io%3AIO%29-instance-method" class="tooltip">
+      <span>inspect(io : IO)</span>
+    inspect</a>, 
+  
+    <a href="../../Immutable/Vector.html#last-instance-method" class="tooltip">
+      <span>last</span>
+    last</a>, 
+  
+    <a href="../../Immutable/Vector.html#last%3F-instance-method" class="tooltip">
+      <span>last?</span>
+    last?</a>, 
+  
+    <a href="../../Immutable/Vector.html#pop%3ATuple%28T%2CImmutable%3A%3AVector%28T%29%29-instance-method" class="tooltip">
+      <span>pop : Tuple(T, Immutable::Vector(T))</span>
+    pop</a>, 
+  
+    <a href="../../Immutable/Vector.html#pop%3F%3ATuple%28T%7CNil%2CImmutable%3A%3AVector%28T%29%29-instance-method" class="tooltip">
+      <span>pop? : Tuple(T | Nil, Immutable::Vector(T))</span>
+    pop?</a>, 
+  
+    <a href="../../Immutable/Vector.html#push%28elem%3AT%29-instance-method" class="tooltip">
+      <span>push(elem : T)</span>
+    push</a>, 
+  
+    <a href="../../Immutable/Vector.html#set%28i%3AInt%2Cvalue%3AT%29-instance-method" class="tooltip">
+      <span>set(i : Int, value : T)</span>
+    set</a>, 
+  
+    <a href="../../Immutable/Vector.html#size-instance-method" class="tooltip">
+      <span>size</span>
+    size</a>, 
+  
+    <a href="../../Immutable/Vector.html#to_json%28io%3AIO%29-instance-method" class="tooltip">
+      <span>to_json(io : IO)</span>
+    to_json</a>, 
+  
+    <a href="../../Immutable/Vector.html#to_s%28io%3AIO%29-instance-method" class="tooltip">
+      <span>to_s(io : IO)</span>
+    to_s</a>, 
+  
+    <a href="../../Immutable/Vector.html#transient%28%26block%29-instance-method" class="tooltip">
+      <span>transient(&block)</span>
+    transient</a>, 
+  
+    <a href="../../Immutable/Vector.html#uniq-instance-method" class="tooltip">
+      <span>uniq</span>
+    uniq</a>, 
+  
+    <a href="../../Immutable/Vector.html#%7C%28other%3AImmutable%3A%3AVector%28U%29%29-instance-method" class="tooltip">
+      <span>|(other : Immutable::Vector(U))</span>
+    |</a>
+  
+
+
+    
+
+  <h3>Class methods inherited from class <code><a href="../../Immutable/Vector.html">Immutable::Vector(T)</a></code></h3>
+  
+    <a href="../../Immutable/Vector.html#of%28%2Aelems%3AT%29-class-method" class="tooltip">
+      <span>of(*elems : T)</span>
+    of</a>, 
+  
+    <a href="../../Immutable/Vector.html#new%28elems%3AArray%28T%29%29-class-method" class="tooltip">
+      <span>new(elems : Array(T))<br/>new</span>
+    new</a>
+  
+
+
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="new(trie:Immutable::Vector::Trie(T),tail:Array(T))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(trie : <a href="../../Immutable/Vector/Trie.html">Immutable::Vector::Trie</a>(T), tail : Array(T))
+
+        <a class="method-permalink" href="#new%28trie%3AImmutable%3A%3AVector%3A%3ATrie%28T%29%2Ctail%3AArray%28T%29%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr#L541" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(elems:Array(T))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(elems : Array(T))
+
+        <a class="method-permalink" href="#new%28elems%3AArray%28T%29%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr#L549" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr#L544" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="persist!-instance-method">
+      <div class="signature">
+        
+        def <strong>persist!</strong>
+
+        <a class="method-permalink" href="#persist%21-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr#L553" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pop:Tuple(T,Immutable::Vector::Transient(T))-instance-method">
+      <div class="signature">
+        
+        def <strong>pop</strong> : Tuple(T, <a href="../../Immutable/Vector/Transient.html">Immutable::Vector::Transient</a>(T))
+
+        <a class="method-permalink" href="#pop%3ATuple%28T%2CImmutable%3A%3AVector%3A%3ATransient%28T%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr#L567" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pop?:Tuple(T|Nil,Immutable::Vector::Transient(T))-instance-method">
+      <div class="signature">
+        
+        def <strong>pop?</strong> : Tuple(T | Nil, <a href="../../Immutable/Vector/Transient.html">Immutable::Vector::Transient</a>(T))
+
+        <a class="method-permalink" href="#pop%3F%3ATuple%28T%7CNil%2CImmutable%3A%3AVector%3A%3ATransient%28T%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr#L572" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="push(elem:T)-instance-method">
+      <div class="signature">
+        
+        def <strong>push</strong>(elem : T)
+
+        <a class="method-permalink" href="#push%28elem%3AT%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr#L558" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set(i:Int,value:T)-instance-method">
+      <div class="signature">
+        
+        def <strong>set</strong>(i : Int, value : T)
+
+        <a class="method-permalink" href="#set%28i%3AInt%2Cvalue%3AT%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector.cr#L576" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
