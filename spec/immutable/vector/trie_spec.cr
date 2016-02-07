@@ -209,7 +209,9 @@ describe Immutable::Vector::Trie do
         not_in_place.should eq(1)
         # update!
         t.update!(50, 0, 42_u64)
+        t.update!(99, 0, 42_u64)
         t.get(50).should eq(0)
+        t.get(99).should eq(0)
         # pop!
         not_in_place = 0
         90.times do |i|
@@ -260,7 +262,9 @@ describe Immutable::Vector::Trie do
         t2.size.should eq(0)
         # update!
         t.update!(50, 0, 2_u64)
+        t.update!(99, 0, 2_u64)
         t.get(50).should eq(50)
+        t.get(99).should eq(99)
         # pop!
         not_in_place = 0
         t2 = t
