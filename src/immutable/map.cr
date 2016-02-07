@@ -33,10 +33,10 @@ module Immutable
     # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
     # ```
     def initialize(hash = {} of K => V : Hash(K, V))
-      @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
+      @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
         trie.set!(k, v, object_id)
       end
-      trie.clear_owner!
+      @trie.clear_owner!
       @block = nil
     end
 
@@ -48,7 +48,10 @@ module Immutable
     # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
     # ```
     def initialize(hash = {} of K => V : Hash(K, V), &block : K -> V)
-      @trie  = hash.reduce(Trie(K, V).empty) { |h, k, v| h.set(k, v) }
+      @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
+        trie.set!(k, v, object_id)
+      end
+      @trie.clear_owner!
       @block = block
     end
 
@@ -62,9 +65,16 @@ module Immutable
     # m = Immutable::Map.new([{:foo, 123}, {:bar, 321}]) # Map {foo: 123, bar: 321}
     # ```
     def self.new(e : Enumerable(Enumerable(U)))
-      e.reduce(Map(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
+      t = e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
         m.set(kv[0], kv[1])
       end
+      t.persist!
+    end
+
+    def transient
+      t = Transient.new(@trie, @block)
+      yield t
+      t.persist!
     end
 
     # Returns the number of key-value pairs in the map
@@ -165,11 +175,11 @@ module Immutable
     end
 
     def merge(hash : Hash(L, W))
-      Map(K | L, V | W).new.merge(self).merge(hash)
+      Transient(K | L, V | W).new.merge(self).merge(hash).persist!
     end
 
     def merge(map : Map(L, W))
-      Map(K | L, V | W).new.merge(self).merge(map)
+      Transient(K | L, V | W).new.merge(self).merge(map).persist!
     end
 
     # Calls the given block for each key-value and passes in a tuple of key and
@@ -356,6 +366,11 @@ module Immutable
         e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
           m.set!(kv[0], kv[1], object_id)
         end
+      end
+
+      def persist!
+        @trie.clear_owner!
+        Map.new(@trie, @block)
       end
 
       def set(key : K, value : V)
