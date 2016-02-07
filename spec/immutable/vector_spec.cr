@@ -346,11 +346,11 @@ describe Immutable do
       it "yields a transient vector and converts back to an immutable one" do
         vec = empty_vector.transient do |v|
           v.should be_a(Immutable::Vector::Transient(Int32))
-          1000.times { |i| v = v.push(i) }
+          100.times { |i| v = v.push(i) }
         end
         vec.should be_a(Immutable::Vector(Int32))
         vec.should_not be_a(Immutable::Vector::Transient(Int32))
-        vec.size.should eq(1000)
+        vec.size.should eq(100)
         empty_vector.size.should eq(0)
       end
     end

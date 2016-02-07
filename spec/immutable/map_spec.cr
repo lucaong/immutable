@@ -222,5 +222,18 @@ describe Immutable do
         m1.hash.should eq(m2.hash)
       end
     end
+
+    describe "transient" do
+      it "yields a transient map and converts back to an immutable one" do
+        map = empty_map.transient do |m|
+          m.should be_a(Immutable::Map::Transient(String, Int32))
+          100.times { |i| m = m.set(i.to_s, i) }
+        end
+        map.should be_a(Immutable::Map(String, Int32))
+        map.should_not be_a(Immutable::Map::Transient(String, Int32))
+        map.size.should eq(100)
+        empty_map.size.should eq(0)
+      end
+    end
   end
 end
