@@ -33,7 +33,10 @@ module Immutable
     # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
     # ```
     def initialize(hash = {} of K => V : Hash(K, V))
-      @trie  = hash.reduce(Trie(K, V).empty) { |h, k, v| h.set(k, v) }
+      @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
+        trie.set!(k, v, object_id)
+      end
+      trie.clear_owner!
       @block = nil
     end
 
@@ -310,11 +313,11 @@ module Immutable
     end
 
     def ==(other : Map(L, W))
-      # TODO: optimize
       return true if @trie.same?(other.trie)
       return false unless size == other.size
       all? do |kv|
-        other.trie.has_key?(kv[0]) && other.trie.get(kv[0]) == kv[1]
+        entry = other.trie.find_entry(kv[0])
+        entry && entry.value == kv[1]
       end
     end
 
