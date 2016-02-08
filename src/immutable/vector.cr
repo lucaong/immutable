@@ -62,7 +62,7 @@ module Immutable
     # same position.
     def initialize(elems : Array(T))
       leaves = elems.size - (elems.size % Trie::BLOCK_SIZE)
-      @trie = Trie(T).from(elems[0...leaves], object_id)
+      @trie = Trie(T).from(elems[0...leaves], object_id).clear_owner!
       @tail = elems[leaves..-1]
     end
 
@@ -547,7 +547,9 @@ module Immutable
       end
 
       def initialize(elems : Array(T))
-        super(elems)
+        leaves = elems.size - (elems.size % Trie::BLOCK_SIZE)
+        @trie = Trie(T).from(elems[0...leaves], object_id)
+        @tail = elems[leaves..-1]
       end
 
       def persist!

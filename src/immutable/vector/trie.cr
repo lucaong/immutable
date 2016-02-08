@@ -191,8 +191,8 @@ module Immutable
         self
       end
 
-      def self.empty(from = nil : UInt64)
-        Trie.new([] of T, from)
+      def self.empty(owner = nil : UInt64)
+        Trie.new([] of T, owner)
       end
 
       def self.from(elems : Array(T))
@@ -203,10 +203,10 @@ module Immutable
         trie
       end
 
-      def self.from(elems : Array(T), from : UInt64)
-        trie = Trie(T).empty(from)
+      def self.from(elems : Array(T), owner : UInt64)
+        trie = Trie(T).empty(owner)
         elems.each_slice(BLOCK_SIZE) do |leaf|
-          trie = trie.push_leaf!(leaf, from)
+          trie = trie.push_leaf!(leaf, owner)
         end
         trie.clear_owner!
       end
