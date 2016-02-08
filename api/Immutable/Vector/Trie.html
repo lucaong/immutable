@@ -130,7 +130,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr" target="_blank">immutable/vector/trie.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr" target="_blank">immutable/vector/trie.cr</a>
     
     <br/>
   
@@ -165,7 +165,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#empty%28from%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%29-class-method" class="signature"><strong>.empty</strong>(from = <span class="n">nil</span> : UInt64)</a>
+        <a href="#empty%28owner%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%29-class-method" class="signature"><strong>.empty</strong>(owner = <span class="n">nil</span> : UInt64)</a>
         
       </li>
     
@@ -175,7 +175,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#from%28elems%3AArray%28T%29%2Cfrom%3AUInt64%29-class-method" class="signature"><strong>.from</strong>(elems : Array(T), from : UInt64)</a>
+        <a href="#from%28elems%3AArray%28T%29%2Cowner%3AUInt64%29-class-method" class="signature"><strong>.from</strong>(elems : Array(T), owner : UInt64)</a>
         
       </li>
     
@@ -262,7 +262,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#pop_leaf%3AImmutable%3A%3AVector%3A%3ATrie%28T%29-instance-method" class="signature"><strong>#pop_leaf</strong> : Immutable::Vector::Trie(T)</a>
+        <a href="#pop_leaf%28from%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%7CNil%29%3AImmutable%3A%3AVector%3A%3ATrie%28T%29-instance-method" class="signature"><strong>#pop_leaf</strong>(from = <span class="n">nil</span> : UInt64 | Nil) : Immutable::Vector::Trie(T)</a>
         
       </li>
     
@@ -282,7 +282,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#push_leaf%28leaf%3AArray%28T%29%29%3AImmutable%3A%3AVector%3A%3ATrie%28T%29-instance-method" class="signature"><strong>#push_leaf</strong>(leaf : Array(T)) : Immutable::Vector::Trie(T)</a>
+        <a href="#push_leaf%28leaf%3AArray%28T%29%2Cfrom%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%7CNil%29%3AImmutable%3A%3AVector%3A%3ATrie%28T%29-instance-method" class="signature"><strong>#push_leaf</strong>(leaf : Array(T), from = <span class="n">nil</span> : UInt64 | Nil) : Immutable::Vector::Trie(T)</a>
         
       </li>
     
@@ -340,18 +340,18 @@
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="empty(from=&lt;spanclass=&quot;n&quot;&gt;nil&lt;/span&gt;:UInt64)-class-method">
+    <div class="entry-detail" id="empty(owner=&lt;spanclass=&quot;n&quot;&gt;nil&lt;/span&gt;:UInt64)-class-method">
       <div class="signature">
         
-        def self.<strong>empty</strong>(from = <span class="n">nil</span> : UInt64)
+        def self.<strong>empty</strong>(owner = <span class="n">nil</span> : UInt64)
 
-        <a class="method-permalink" href="#empty%28from%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%29-class-method">#</a>
+        <a class="method-permalink" href="#empty%28owner%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L194" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L194" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -367,23 +367,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L198" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L198" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="from(elems:Array(T),from:UInt64)-class-method">
+    <div class="entry-detail" id="from(elems:Array(T),owner:UInt64)-class-method">
       <div class="signature">
         
-        def self.<strong>from</strong>(elems : Array(T), from : UInt64)
+        def self.<strong>from</strong>(elems : Array(T), owner : UInt64)
 
-        <a class="method-permalink" href="#from%28elems%3AArray%28T%29%2Cfrom%3AUInt64%29-class-method">#</a>
+        <a class="method-permalink" href="#from%28elems%3AArray%28T%29%2Cowner%3AUInt64%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L206" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L206" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -399,7 +399,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -415,7 +415,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -436,7 +436,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -452,7 +452,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L189" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L189" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -468,7 +468,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L93" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L93" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -484,7 +484,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L105" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L105" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -500,7 +500,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L176" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L176" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -516,7 +516,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -532,7 +532,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L184" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L184" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -548,7 +548,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L168" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L168" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -564,7 +564,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L172" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L172" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -580,7 +580,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L180" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L180" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -596,7 +596,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -612,7 +612,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -628,23 +628,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L75" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="pop_leaf:Immutable::Vector::Trie(T)-instance-method">
+    <div class="entry-detail" id="pop_leaf(from=&lt;spanclass=&quot;n&quot;&gt;nil&lt;/span&gt;:UInt64|Nil):Immutable::Vector::Trie(T)-instance-method">
       <div class="signature">
         
-        def <strong>pop_leaf</strong> : <a href="../../Immutable/Vector/Trie.html">Immutable::Vector::Trie</a>(T)
+        def <strong>pop_leaf</strong>(from = <span class="n">nil</span> : UInt64 | Nil) : <a href="../../Immutable/Vector/Trie.html">Immutable::Vector::Trie</a>(T)
 
-        <a class="method-permalink" href="#pop_leaf%3AImmutable%3A%3AVector%3A%3ATrie%28T%29-instance-method">#</a>
+        <a class="method-permalink" href="#pop_leaf%28from%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%7CNil%29%3AImmutable%3A%3AVector%3A%3ATrie%28T%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L144" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L144" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -660,7 +660,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L155" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L155" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -676,7 +676,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -692,23 +692,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="push_leaf(leaf:Array(T)):Immutable::Vector::Trie(T)-instance-method">
+    <div class="entry-detail" id="push_leaf(leaf:Array(T),from=&lt;spanclass=&quot;n&quot;&gt;nil&lt;/span&gt;:UInt64|Nil):Immutable::Vector::Trie(T)-instance-method">
       <div class="signature">
         
-        def <strong>push_leaf</strong>(leaf : Array(T)) : <a href="../../Immutable/Vector/Trie.html">Immutable::Vector::Trie</a>(T)
+        def <strong>push_leaf</strong>(leaf : Array(T), from = <span class="n">nil</span> : UInt64 | Nil) : <a href="../../Immutable/Vector/Trie.html">Immutable::Vector::Trie</a>(T)
 
-        <a class="method-permalink" href="#push_leaf%28leaf%3AArray%28T%29%29%3AImmutable%3A%3AVector%3A%3ATrie%28T%29-instance-method">#</a>
+        <a class="method-permalink" href="#push_leaf%28leaf%3AArray%28T%29%2Cfrom%3D%3Cspanclass%3D%22n%22%3Enil%3C%2Fspan%3E%3AUInt64%7CNil%29%3AImmutable%3A%3AVector%3A%3ATrie%28T%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L111" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -724,7 +724,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L127" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L127" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -740,7 +740,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -756,7 +756,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L38" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -772,7 +772,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/17cf4f208eb4d7a63df2b7c1537fac48d49e266c/src/immutable/vector/trie.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/3053ec16acff612dd5bf068641330788657cfee4/src/immutable/vector/trie.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>

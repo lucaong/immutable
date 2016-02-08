@@ -116,10 +116,6 @@ thread-safe, garbage collector friendly and performant.</p>
 
 <p>efficient lookup and update operations</p>
 
-<p>TODO:</p>
-
-<ul><li><code>Immutable::Set</code>: unordered collection without duplicates</li></ul>
-
 <h2>Installation</h2>
 
 <p>Add this to your application's <code>shard.yml</code>:</p>
@@ -132,32 +128,52 @@ thread-safe, garbage collector friendly and performant.</p>
 
 <p>For a list of all classes and methods refer to the <a href="http://lucaong.github.io/immutable/api/" target="_blank">API documentation</a></p>
 
-<pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;immutable&quot;</span>
+<p>To use the immutable collections, require <code>immutable</code> in your code:</p>
 
-<span class="c"># Vector</span>
+<pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;immutable&quot;</span></code></pre>
+
+<h3>Vector (<a href="http://lucaong.github.io/immutable/api/Immutable/Vector.html" target="_blank">API docs</a>)</h3>
+
+<pre><code class='language-crystal'><span class="c"># Vector behaves mostly like an Array:</span>
 vector <span class="o">=</span> <span class="t">Immutable</span>.vector([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>]) <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span>
-other  <span class="o">=</span> vector.set(<span class="n">2</span>, <span class="n">0</span>).push(<span class="n">42</span>)         <span class="c"># =&gt; Vector [1, 2, 0, 4, 5, 42]</span>
+vector[<span class="n">0</span>]                                  <span class="c"># =&gt; 1</span>
+vector[<span class="n">-1</span>]                                 <span class="c"># =&gt; 5</span>
+vector.size                                <span class="c"># =&gt; 5</span>
+vector.each { <span class="o">|</span>elem<span class="o">|</span> puts elem }
 
-<span class="c"># a Vector behaves mostly like an array</span>
-other[<span class="n">2</span>]                                   <span class="c"># =&gt; 0</span>
-other.each <span class="k">do</span> <span class="o">|</span>elem<span class="o">|</span>
-  puts elem
-<span class="k">end</span>
+<span class="c"># Updating a Vector always returns a modified copy:</span>
+vector2 <span class="o">=</span> vector.set(<span class="n">2</span>, <span class="n">0</span>)                 <span class="c"># =&gt; Vector [1, 2, 0, 4, 5]</span>
+vector2 <span class="o">=</span> vector2.push(<span class="n">42</span>)                 <span class="c"># =&gt; Vector [1, 2, 0, 4, 5, 42]</span>
 
 <span class="c"># The original vector is unchanged:</span>
 vector                                     <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span>
 
-<span class="c"># Map</span>
-map <span class="o">=</span> <span class="t">Immutable</span>.map({ foo: <span class="n">1</span>, bar: <span class="n">2</span> })    <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
-map.set(<span class="n">:baz</span>, <span class="n">3</span>)                           <span class="c"># =&gt; Map {foo: 1, bar: 2, baz: 3}</span>
+<span class="c"># Bulk updates can be made faster by using `transient`:</span>
+vector3 <span class="o">=</span> vector.transient <span class="k">do</span> <span class="o">|</span>v<span class="o">|</span>
+  <span class="n">1000</span>.times { <span class="o">|</span>i<span class="o">|</span> v <span class="o">=</span> v.push(i) }
+<span class="k">end</span></code></pre>
 
-<span class="c"># a Map behaves mostly like a hash</span>
-map[<span class="n">:bar</span>]                                  <span class="c"># =&gt; 2</span>
+<h3>Map (<a href="http://lucaong.github.io/immutable/api/Immutable/Map.html" target="_blank">API docs</a>)</h3>
+
+<pre><code class='language-crystal'><span class="c"># Map behaves mostly like a Hash:</span>
+map <span class="o">=</span> <span class="t">Immutable</span>.map({ foo: <span class="n">1</span>, bar: <span class="n">2</span> })    <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
+map[<span class="n">:foo</span>]                                  <span class="c"># =&gt; 1</span>
+
+<span class="c"># Updating a Map always returns a modified copy:</span>
+map2 <span class="o">=</span> map.set(<span class="n">:baz</span>, <span class="n">3</span>)                    <span class="c"># =&gt; Map {foo: 1, bar: 2, baz: 3}</span>
+map2 <span class="o">=</span> map2.delete(<span class="n">:bar</span>)                   <span class="c"># =&gt; Map {foo: 1, baz: 3}</span>
 
 <span class="c"># The original map in unchanged:</span>
 map                                        <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
 
-<span class="c"># Nested arrays/hashes can be turned into immutable versions with the `.from`</span>
+<span class="c"># Bulk updates can be made faster by using `transient`:</span>
+map3 <span class="o">=</span> map.transient <span class="k">do</span> <span class="o">|</span>m<span class="o">|</span>
+  <span class="n">1000</span>.times { <span class="o">|</span>i<span class="o">|</span> m <span class="o">=</span> m.set(i.to_sym, i) }
+<span class="k">end</span></code></pre>
+
+<h3>Nested structures</h3>
+
+<pre><code class='language-crystal'><span class="c"># Nested arrays/hashes can be turned into immutable versions with the `.from`</span>
 <span class="c"># method:</span>
 
 nested <span class="o">=</span> <span class="t">Immutable</span>.from({ name: <span class="s">&quot;Ada&quot;</span>, colors: [<span class="n">:blue</span>, <span class="n">:green</span>, <span class="n">:red</span>] })
