@@ -16,10 +16,6 @@ At the moment, `Immutable` implements the following persistent data structures:
   - `Immutable::Map`: hash-like unordered key-value collection implementing
   efficient lookup and update operations
 
-TODO:
-
-  - `Immutable::Set`: unordered collection without duplicates
-
 
 ## Installation
 
@@ -36,32 +32,58 @@ dependencies:
 
 For a list of all classes and methods refer to the [API documentation](http://lucaong.github.io/immutable/api/)
 
+To use the immutable collections, require `immutable` in your code:
+
 ```crystal
 require "immutable"
+```
 
-# Vector
+### Vector ([API docs](http://lucaong.github.io/immutable/api/Immutable/Vector.html))
+
+```crystal
+# Vector behaves mostly like an Array:
 vector = Immutable.vector([1, 2, 3, 4, 5]) # => Vector [1, 2, 3, 4, 5]
-other  = vector.set(2, 0).push(42)         # => Vector [1, 2, 0, 4, 5, 42]
+vector[0]                                  # => 1
+vector[-1]                                 # => 5
+vector.size                                # => 5
+vector.each { |elem| puts elem }
 
-# a Vector behaves mostly like an array
-other[2]                                   # => 0
-other.each do |elem|
-  puts elem
-end
+# Updating a Vector always returns a modified copy:
+vector2 = vector.set(2, 0)                 # => Vector [1, 2, 0, 4, 5]
+vector2 = vector2.push(42)                 # => Vector [1, 2, 0, 4, 5, 42]
 
 # The original vector is unchanged:
 vector                                     # => Vector [1, 2, 3, 4, 5]
 
-# Map
-map = Immutable.map({ foo: 1, bar: 2 })    # => Map {foo: 1, bar: 2}
-map.set(:baz, 3)                           # => Map {foo: 1, bar: 2, baz: 3}
+# Bulk updates can be made faster by using `transient`:
+vector3 = vector.transient do |v|
+  1000.times { |i| v = v.push(i) }
+end
+```
 
-# a Map behaves mostly like a hash
-map[:bar]                                  # => 2
+### Map ([API docs](http://lucaong.github.io/immutable/api/Immutable/Map.html))
+
+```crystal
+# Map behaves mostly like a Hash:
+map = Immutable.map({ foo: 1, bar: 2 })    # => Map {foo: 1, bar: 2}
+map[:foo]                                  # => 1
+
+# Updating a Map always returns a modified copy:
+map2 = map.set(:baz, 3)                    # => Map {foo: 1, bar: 2, baz: 3}
+map2 = map2.delete(:bar)                   # => Map {foo: 1, baz: 3}
 
 # The original map in unchanged:
 map                                        # => Map {foo: 1, bar: 2}
 
+# Bulk updates can be made faster by using `transient`:
+map3 = map.transient do |m|
+  1000.times { |i| m = m.set(i.to_sym, i) }
+end
+```
+
+### Nested structures
+
+```crystal
 # Nested arrays/hashes can be turned into immutable versions with the `.from`
 # method:
 
