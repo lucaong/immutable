@@ -71,6 +71,15 @@ module Immutable
       t.persist!
     end
 
+    # Creates a map with the given key-values
+    #
+    # ```
+    # m = Immutable::Map[{ foo: 123, bar: 321 }] # Map {foo: 123, bar: 321}
+    # ```
+    def self.[](hash = {} of K => V : Hash(K, V))
+      new(hash)
+    end
+
     # Executes the given block passing a transient version of the map, then
     # converts the transient map back to an immutable one and returns it.
     #

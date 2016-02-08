@@ -39,8 +39,16 @@ module Immutable
     @trie : Trie(T)
     @tail : Array(T)
 
-    # Creates a new vector from the given arguments
+    # Alias for `Vector.[]`
     def self.of(*elems : T)
+      self[*elems]
+    end
+
+    # Creates a new vector from the given arguments
+    #
+    # ```
+    # vec = Immutable::Vector[1, 2, 3, 4]
+    def self.[](*elems : T)
       if (elems.size <= Trie::BLOCK_SIZE)
         new(Trie(T).empty, elems.to_a)
       else

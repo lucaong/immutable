@@ -35,6 +35,13 @@ describe Immutable do
       end
     end
 
+    describe ".[]" do
+      it "it creates and initialize an immutable map" do
+        m = Immutable::Map[{ foo: 123, bar: 321 }]
+        m[:foo].should eq(123)
+      end
+    end
+
     describe "#fetch" do
       describe "with one argument and no block" do
         it "returns value associated with key if it exists, else raise KeyError" do
