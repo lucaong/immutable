@@ -42,7 +42,7 @@ require "immutable"
 
 ```crystal
 # Vector behaves mostly like an Array:
-vector = Immutable.vector([1, 2, 3, 4, 5]) # => Vector [1, 2, 3, 4, 5]
+vector = Immutable::Vector[1, 2, 3, 4, 5]  # => Vector [1, 2, 3, 4, 5]
 vector[0]                                  # => 1
 vector[-1]                                 # => 5
 vector.size                                # => 5
@@ -65,7 +65,7 @@ end
 
 ```crystal
 # Map behaves mostly like a Hash:
-map = Immutable.map({ foo: 1, bar: 2 })    # => Map {foo: 1, bar: 2}
+map = Immutable::Map[{ foo: 1, bar: 2 }]   # => Map {foo: 1, bar: 2}
 map[:foo]                                  # => 1
 
 # Updating a Map always returns a modified copy:
