@@ -3,6 +3,7 @@
 /.crystal/
 /.shards/
 .DS_Store
+/tmp/
 
 
 # Libraries don't need dependency lock

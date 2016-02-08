@@ -6,3 +6,7 @@ docsite:
 release:
 	git fetch && git tag v$(VERSION) origin/master && git push origin v$(VERSION)
 	open https://github.com/lucaong/immutable/releases/new?tag=v$(VERSION)
+
+benchmark:
+	mkdir -p ./tmp && crystal build -o ./tmp/benchmarks --release ./benchmarks/benchmarks.cr
+	./tmp/benchmarks
