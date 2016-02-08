@@ -85,16 +85,16 @@ module Immutable
         self
       end
 
-      protected def set_at_index(index : Int32, key : K, value : V) : Trie(K, V)
+      protected def set_at_index(index : Int32, key : K, value : V, from = nil : UInt64?) : Trie(K, V)
         if leaf_of?(index)
-          set_leaf(index, key, value)
+          set_leaf(index, key, value, from)
         else
-          set_branch(index, key, value)
+          set_branch(index, key, value, from)
         end
       end
 
       protected def set_at_index!(index : Int32, key : K, value : V, from : UInt64) : Trie(K, V)
-        return set_at_index(index, key, value) unless from == @owner
+        return set_at_index(index, key, value, from) unless from == @owner
         if leaf_of?(index)
           @values[key] = value
         else
@@ -136,25 +136,25 @@ module Immutable
         (index.to_u32 >> (@levels * BITS_PER_LEVEL)) == 0
       end
 
-      private def set_leaf(index : Int32, key : K, value : V) : Trie(K, V)
+      private def set_leaf(index : Int32, key : K, value : V, from : UInt64?) : Trie(K, V)
         values = @values.dup.tap do |vs|
           vs[key] = value
         end
-        Trie.new(@children, values, @bitmap, @levels)
+        Trie.new(@children, values, @bitmap, @levels, from)
       end
 
-      private def set_branch(index : Int32, key : K, value : V) : Trie(K, V)
+      private def set_branch(index : Int32, key : K, value : V, from : UInt64?) : Trie(K, V)
         i = bit_index(index)
         if idx = child_index?(i)
           children = @children.dup.tap do |cs|
             cs[idx] = cs[idx].set_at_index(index, key, value)
           end
-          Trie.new(children, @values, @bitmap, @levels)
+          Trie.new(children, @values, @bitmap, @levels, from)
         else
-          child = Trie.new(([] of Trie(K, V)), Values(K, V).new, 0_u32, @levels + 1)
+          child = Trie.new(([] of Trie(K, V)), Values(K, V).new, 0_u32, @levels + 1, from)
             .set_at_index(index, key, value)
           bitmap = @bitmap | bitpos(i)
-          Trie.new(@children.dup.insert(child_index(i, bitmap), child), @values, bitmap, @levels)
+          Trie.new(@children.dup.insert(child_index(i, bitmap), child), @values, bitmap, @levels, from)
         end
       end
 

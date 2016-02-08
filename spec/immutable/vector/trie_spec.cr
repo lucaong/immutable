@@ -258,7 +258,7 @@ describe Immutable::Vector::Trie do
           not_in_place += 1 unless x == t
           t = x
         end
-        not_in_place.should eq(Immutable::Vector::Trie::BLOCK_SIZE + 1)
+        not_in_place.should eq(2)
         t2.size.should eq(0)
         # update!
         t.update!(50, 0, 2_u64)
