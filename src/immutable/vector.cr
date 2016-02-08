@@ -543,7 +543,7 @@ module Immutable
 
       def initialize
         @trie = Trie(T).empty(object_id)
-        @tail = [] of T
+        @tail = Array(T).new(Trie::BLOCK_SIZE)
       end
 
       def initialize(elems : Array(T))
@@ -561,7 +561,7 @@ module Immutable
         @tail << elem
         if @tail.size == Trie::BLOCK_SIZE
           @trie = @trie.push_leaf!(@tail, object_id)
-          @tail = [] of T
+          @tail = Array(T).new(Trie::BLOCK_SIZE)
         end
         self
       end
