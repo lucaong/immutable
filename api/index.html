@@ -167,8 +167,9 @@ map2 <span class="o">=</span> map2.delete(<span class="n">:bar</span>)          
 map                                        <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
 
 <span class="c"># Bulk updates can be made faster by using `transient`:</span>
-map3 <span class="o">=</span> map.transient <span class="k">do</span> <span class="o">|</span>m<span class="o">|</span>
-  <span class="n">1000</span>.times { <span class="o">|</span>i<span class="o">|</span> m <span class="o">=</span> m.set(i.to_sym, i) }
+map3 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>(<span class="t">String</span>, <span class="t">Int32</span>)<span class="o">[]</span>
+map3 <span class="o">=</span> map3.transient <span class="k">do</span> <span class="o">|</span>m<span class="o">|</span>
+  <span class="n">1000</span>.times { <span class="o">|</span>i<span class="o">|</span> m <span class="o">=</span> m.set(i.to_s, i) }
 <span class="k">end</span></code></pre>
 
 <h3>Nested structures</h3>
