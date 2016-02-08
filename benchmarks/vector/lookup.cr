@@ -12,4 +12,3 @@ Benchmark.ips do |b|
     100.times { |i| v[i] }
   end
 end
-

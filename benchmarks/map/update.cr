@@ -1,5 +1,5 @@
 Benchmark.ips do |b|
-  h = (0...100).map { |i| {i, i * 2} }.to_h
+  h = {} of Int32 => Int32
   m = Immutable.map(h)
 
   banner "Map update:"
@@ -9,12 +9,12 @@ Benchmark.ips do |b|
   end
 
   b.report("Map#set") do
-    100.times { |i| m.set(i, 0) }
+    100.times { |i| m = m.set(i, 0) }
   end
 
-  b.report("Vector#set with Transient") do
+  b.report("Map#set with Transient") do
     m.transient do |m|
-      100.times { |i| m.set(i, 0) }
+      100.times { |i| m = m.set(i, 0) }
     end
   end
 end
