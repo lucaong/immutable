@@ -76,8 +76,9 @@ map2 = map2.delete(:bar)                   # => Map {foo: 1, baz: 3}
 map                                        # => Map {foo: 1, bar: 2}
 
 # Bulk updates can be made faster by using `transient`:
-map3 = map.transient do |m|
-  1000.times { |i| m = m.set(i.to_sym, i) }
+map3 = Immutable::Map(String, Int32)[]
+map3 = map3.transient do |m|
+  1000.times { |i| m = m.set(i.to_s, i) }
 end
 ```
 
