@@ -18,5 +18,3 @@ Benchmark.ips do |b|
     end
   end
 end
-
-
