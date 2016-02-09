@@ -51,56 +51,6 @@ describe Immutable::Vector::Trie do
     end
   end
 
-  describe "#push" do
-    it "return a copy of the trie with the given value appended" do
-      t = empty_trie.push(1)
-      t.get(0).should eq(1)
-      t.size.should eq(1)
-    end
-
-    it "does not modify the original" do
-      empty_trie.push(1)
-      empty_trie.size.should eq(0)
-    end
-
-    it "works properly across leaves and levels" do
-      t = (0..99).reduce(empty_trie) do |t, elem|
-        t.push(elem)
-      end
-      t.size.should eq(100)
-      t.get(0).should eq(0)
-      t.get(99).should eq(99)
-    end
-  end
-
-  describe "#pop" do
-    it "return a copy of the trie with the last value removed" do
-      t = trie.pop
-      t.last.should eq(48)
-      t.size.should eq(trie.size - 1)
-    end
-
-    it "raises IndexError if trie is empty" do
-      expect_raises(IndexError) do
-        empty_trie.pop
-      end
-    end
-
-    it "does not modify the original" do
-      original_size = trie.size
-      trie.pop
-      trie.size.should eq(original_size)
-    end
-
-    it "works properly across leaves and levels" do
-      t = (0..1099).reduce(empty_trie) { |t, i| t.push(i) }
-      t.size.times do
-        t = t.pop
-      end
-      t.size.should eq(0)
-    end
-  end
-
   describe "#push_leaf" do
     it "return a copy of the trie with the given values appended" do
       original = Immutable::Vector::Trie(Int32).empty
@@ -197,30 +147,12 @@ describe Immutable::Vector::Trie do
 
   describe "in-place modifications" do
     describe "when modified by the owner" do
-      it "#push! #update! and #pop! modify in place" do
-        # push!
-        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
-        not_in_place = 0
-        100.times do |i|
-          x = t.push!(i, 42_u64)
-          not_in_place += 1 unless x == t
-          t = x
-        end
-        not_in_place.should eq(1)
-        # update!
+      it "#update! modifies in place" do
+        t = Immutable::Vector::Trie.from((0..99).to_a, 42_u64)
         t.update!(50, 0, 42_u64)
         t.update!(99, 0, 42_u64)
         t.get(50).should eq(0)
         t.get(99).should eq(0)
-        # pop!
-        not_in_place = 0
-        90.times do |i|
-          x = t.pop!(42_u64)
-          not_in_place += 1 unless x == t
-          t = x
-        end
-        not_in_place.should eq(1)
-        t.size.should eq(10)
       end
 
       it "#push_leaf! and #pop_leaf! modify in place" do
@@ -248,34 +180,12 @@ describe Immutable::Vector::Trie do
     end
 
     describe "when modified by an object who's not the owner" do
-      it "#push!, #update and #pop! return a modified copy" do
-        t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
-        t2 = t
-        not_in_place = 0
-        # push!
-        100.times do |i|
-          x = t.push!(i, 1_u64)
-          not_in_place += 1 unless x == t
-          t = x
-        end
-        not_in_place.should eq(2)
-        t2.size.should eq(0)
-        # update!
+      it "#update! returns a modified copy" do
+        t = Immutable::Vector::Trie.from((0..99).to_a, 42_u64)
         t.update!(50, 0, 2_u64)
         t.update!(99, 0, 2_u64)
         t.get(50).should eq(50)
         t.get(99).should eq(99)
-        # pop!
-        not_in_place = 0
-        t2 = t
-        90.times do |i|
-          x = t.pop!(3_u64)
-          not_in_place += 1 unless x == t
-          t = x
-        end
-        not_in_place.should eq(90)
-        t.size.should eq(10)
-        t2.size.should eq(100)
       end
 
       it "#push_leaf! and #pop_leaf! return a modified copy" do

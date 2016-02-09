@@ -45,51 +45,6 @@ module Immutable
         set!(index, value, from)
       end
 
-      def push(value : T) : Trie(T)
-        if full?
-          Trie.new([self], @levels + 1).push(value)
-        else
-          set(@size, value)
-        end
-      end
-
-      def push!(value : T, from : UInt64) : Trie(T)
-        if full?
-          Trie.new([self], @levels + 1, from).push!(value, from)
-        else
-          set!(@size, value, from)
-        end
-      end
-
-      def pop
-        raise IndexError.new if size == 0
-        return Trie.new(@values[0...-1]) if leaf?
-        child = @children.last.pop
-        if child.empty?
-          return @children.first if @children.size == 2
-          return Trie.new(@children[0...-1], @levels)
-        end
-        Trie.new(@children[0...-1].push(child), @levels)
-      end
-
-      def pop!(from : UInt64)
-        raise IndexError.new if size == 0
-        return pop unless from == @owner
-        if leaf?
-          @values.pop
-        else
-          child = @children.last.pop!(from)
-          if child.empty?
-            return @children.first if @children.size == 2
-            @children.pop
-          else
-            @children[-1] = child
-          end
-        end
-        @size = calculate_size
-        self
-      end
-
       def each
         i = 0
         while i < size
@@ -208,22 +163,29 @@ module Immutable
         elems.each_slice(BLOCK_SIZE) do |leaf|
           trie = trie.push_leaf!(leaf, owner)
         end
-        trie.clear_owner!
+        trie
       end
 
       protected def set(index : Int, value : T, from = nil : UInt64?) : Trie(T)
         child_idx = child_index(index)
-        return Trie.new(update_values(child_idx, value), from) if leaf?
-        Trie.new(update_children(child_idx, value, index), @levels, from)
+        if leaf?
+          values = @values.dup.tap { |vs| vs[child_idx] = value }
+          Trie.new(values, from)
+        else
+          children = @children.dup.tap do |cs|
+            cs[child_idx] = cs[child_idx].set(index, value)
+          end
+          Trie.new(children, @levels, from)
+        end
       end
 
       protected def set!(index : Int, value : T, from : UInt64) : Trie(T)
         return set(index, value, from) unless from == @owner
         child_idx = child_index(index)
         if leaf?
-          update_values!(child_idx, value, from)
+          @values[child_idx] = value
         else
-          update_children!(child_idx, value, index, from)
+          @children[child_idx] = @children[child_idx].set!(index, value, from)
         end
         @size = calculate_size
         self
@@ -254,36 +216,6 @@ module Immutable
 
       private def child_index(index)
         (index >> (@levels * BITS_PER_LEVEL)) & INDEX_MASK
-      end
-
-      private def update_children(index : Int, value : T, idx : Int) : Array(Trie(T))
-        @children.dup.tap do |cs|
-          cs << Trie(T).new([] of Trie(T), @levels - 1) if cs.size == index
-          cs[index] = cs[index].set(idx, value)
-        end
-      end
-
-      private def update_children!(index : Int, value : T, idx : Int, from : UInt64)
-        @children << Trie(T).new([] of Trie(T), @levels - 1, from) if @children.size == index
-        @children[index] = @children[index].set!(idx, value, from)
-      end
-
-      private def update_values(index : Int, value : T) : Array(T)
-        @values.dup.tap do |vs|
-          if vs.size == index
-            vs << value
-          else
-            vs[index] = value
-          end
-        end
-      end
-
-      private def update_values!(index : Int, value : T, from : UInt64)
-        if @values.size == index
-          @values << value
-        else
-          @values[index] = value
-        end
       end
 
       protected def full?
