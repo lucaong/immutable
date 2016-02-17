@@ -8,6 +8,10 @@ Benchmark.ips do |b|
     100.times { |i| a[i] = 0 }
   end
 
+  b.report("Array#[]= with dup") do
+    100.times { |i| a = a.dup; a[i] = 0 }
+  end
+
   b.report("Vector#set") do
     100.times { |i| v = v.set(i, 0) }
   end

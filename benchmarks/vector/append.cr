@@ -6,6 +6,11 @@ Benchmark.ips do |b|
     100.times { |i| a.push(i) }
   end
 
+  b.report("Array#+") do
+    a = [] of Int32
+    100.times { |i| a = a + [i] }
+  end
+
   b.report("Vector#push") do
     v = Immutable::Vector(Int32).new
     100.times { |i| v.push(i) }
