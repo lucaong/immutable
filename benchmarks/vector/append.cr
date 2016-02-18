@@ -6,9 +6,9 @@ Benchmark.ips do |b|
     100.times { |i| a.push(i) }
   end
 
-  b.report("Array#+") do
+  b.report("Array#push with dup") do
     a = [] of Int32
-    100.times { |i| a = a + [i] }
+    100.times { |i| a = a.dup.push(i) }
   end
 
   b.report("Vector#push") do
