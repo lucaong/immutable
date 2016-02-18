@@ -401,10 +401,10 @@ module Immutable
       tail = @tail as Array(T | U)
       other.each_slice(Trie::BLOCK_SIZE) do |slice|
         leaf_tail = (tail + slice)
-        trie = trie.push_leaf(leaf_tail.take(Trie::BLOCK_SIZE))
+        trie = trie.push_leaf!(leaf_tail.take(Trie::BLOCK_SIZE), object_id)
         tail = leaf_tail.skip(Trie::BLOCK_SIZE)
       end
-      Vector.new(trie, tail)
+      Vector.new(trie.clear_owner!, tail)
     end
 
     # Difference. Returns a new vector that is a copy of the original, removing

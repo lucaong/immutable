@@ -270,6 +270,8 @@ describe Immutable do
         v2 = Immutable::Vector.new((100..149).to_a)
         v3 = v1 + v2
         v3.size.should eq(150)
+        v1.size.should eq(100)
+        v2.size.should eq(50)
         v3.to_a.should eq(v1.to_a + v2.to_a)
       end
     end
