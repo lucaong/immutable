@@ -1,4 +1,4 @@
-VERSION = $(shell crystal eval 'require "yaml"; s = YAML.parse(File.read("./shard.yml")); puts s["version"] if s.is_a? Hash')
+VERSION = $(shell crystal eval 'require "yaml"; s = YAML.parse(File.read("./shard.yml")); puts s["version"]')
 
 docsite:
 	crystal docs && git checkout gh-pages && mkdir -p api && cp -r doc/. api && git add api && git commit -m "generate docs" && git push && git checkout master
