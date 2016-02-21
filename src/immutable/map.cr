@@ -8,6 +8,7 @@
 # ```
 # Immutable::Map(Symbol, Int32).new      # => Map {}
 # Immutable::Map.new({ foo: 1, bar: 2 }) # => Map {:foo => 1, :bar => 2}
+# Immutable::Map[{ foo: 1, bar: 2 }]     # => Map {:foo => 1, :bar => 2}
 # ```
 #
 # `Immutable::Map` works similarly to a regular hash, except it never mutates in
@@ -144,7 +145,7 @@ module Immutable
     # Returns a modified copy of the map where key is associated to value
     #
     # ```
-    # m  = Immutable::Map.new({ foo: 123 })
+    # m  = Immutable::Map[{ foo: 123 }]
     # m2 = m.set(:bar, 321) # => Map {:foo => 123, :bar => 321}
     # m                     # => Map {:foo => 123}
     # ```
@@ -157,7 +158,7 @@ module Immutable
     # key is not existing, it raises `KeyError`
     #
     # ```
-    # m  = Immutable::Map.new({ foo: 123, bar: 321 })
+    # m  = Immutable::Map[{ foo: 123, bar: 321 }]
     # m2 = m.delete(:bar) # => Map {:foo => 123}
     # m                   # => Map {:foo => 123, bar: 321}
     # ```
@@ -170,7 +171,7 @@ module Immutable
     # A value in the given hash takes precedence over the one in this map.
     #
     # ```
-    # map = Immutable::Map.new({"foo" => "bar"})
+    # map = Immutable::Map[{"foo" => "bar"}]
     # merged = map.merge({"baz": "qux"})
     # merged # => Map {"foo" => "bar", "baz" => "qux"}
     # map    # => Map {"foo" => "bar"}
@@ -187,8 +188,8 @@ module Immutable
     # A value in the given map takes precedence over the one in this map.
     #
     # ```
-    # map = Immutable::Map.new({"foo" => "bar"})
-    # merged = map.merge(Immutable::Map.new({"baz": "qux"}))
+    # map = Immutable::Map[{"foo" => "bar"}]
+    # merged = map.merge(Immutable::Map[{"baz": "qux"}])
     # merged # => Map {"foo" => "bar", "baz" => "qux"}
     # map    # => Map {"foo" => "bar"}
     # ```
@@ -211,7 +212,7 @@ module Immutable
     # value. The order of iteration is not specified.
     #
     # ```
-    # m = Immutable::Map.new({"foo" => "bar"})
+    # m = Immutable::Map[{"foo" => "bar"}]
     # m.each do |keyval|
     #   keyval[0] # => "foo"
     #   keyval[1] # => "bar"
@@ -226,7 +227,7 @@ module Immutable
     # and value. The order of iteration is not specified.
     #
     # ```
-    # map = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # map = Immutable::Map[{"foo" => "bar", "baz" => "qux"}]
     # iterator = map.each
     #
     # entry = iterator.next
@@ -244,7 +245,7 @@ module Immutable
     # Calls the given block for each key-value pair and passes in the key.
     #
     # ```
-    # m = Immutable::Map.new({"foo" => "bar"})
+    # m = Immutable::Map[{"foo" => "bar"}]
     # m.each_key do |key|
     #   key # => "foo"
     # end
@@ -258,7 +259,7 @@ module Immutable
     # Returns an iterator over the map keys. The order is not guaranteed.
     #
     # ```
-    # map = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # map = Immutable::Map[{"foo" => "bar", "baz" => "qux"}]
     # iterator = map.each_key
     #
     # key = iterator.next
@@ -275,7 +276,7 @@ module Immutable
     # Calls the given block for each key-value pair and passes in the value.
     #
     # ```
-    # m = Immutable::Map.new({"foo" => "bar"})
+    # m = Immutable::Map[{"foo" => "bar"}]
     # m.each_value do |val|
     #   val # => "bar"
     # end
@@ -289,7 +290,7 @@ module Immutable
     # Returns an iterator over the map values. The order is not specified.
     #
     # ```
-    # map = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # map = Immutable::Map[{"foo" => "bar", "baz" => "qux"}]
     # iterator = map.each_value
     #
     # val = iterator.next
@@ -305,7 +306,7 @@ module Immutable
     # Returns only the keys as an `Array`. The order is not specified.
     #
     # ```
-    # m = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # m = Immutable::Map[{"foo" => "bar", "baz" => "qux"}]
     # m.keys # => ["foo", "bar"]
     # ```
     def keys
@@ -315,7 +316,7 @@ module Immutable
     # Returns only the values as an `Array`. The order is not specified.
     #
     # ```
-    # m = Immutable::Map.new({"foo" => "bar", "baz" => "qux"})
+    # m = Immutable::Map[{"foo" => "bar", "baz" => "qux"}]
     # m.values # => ["bar", "qux"]
     # ```
     def values
@@ -337,7 +338,7 @@ module Immutable
     # See `Object#hash`.
     #
     # ```
-    # map = Immutable::Map.new({"foo" => "bar"})
+    # map = Immutable::Map[{"foo" => "bar"}]
     # map.hash # => 63502
     # ```
     def hash

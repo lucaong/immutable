@@ -9,7 +9,7 @@
 # ```
 # Immutable::Vector(Int32).new          # => Vector []
 # Immutable::Vector.new([1, 42, 5, 46]) # => Vector [1, 42, 5, 46]
-# Immutable::Vector.of(1, 2, 3)         # => Vector [1, 2, 3]
+# Immutable::Vector[1, 2, 3]            # => Vector [1, 2, 3]
 # ```
 #
 # When a vector is modified, the original remans unchanged and a modified copy
@@ -17,9 +17,9 @@
 # makes vector inherently thread-safe and at the same time fast:
 #
 # ```
-# vector = Immutable::Vector.new([1, 2, 3]) # => Vector [1, 2, 3]
-# vector.push(4)                            # => Vector [1, 2, 3, 4]
-# vector                                    # => Vector [1, 2, 3]
+# vector = Immutable::Vector[1, 2, 3]   # => Vector [1, 2, 3]
+# vector2 = vector.push(4)              # => Vector [1, 2, 3, 4]
+# vector                                # => Vector [1, 2, 3]
 # ```
 #
 # Vector is implemented as a "persistent bit-partitioned vector trie" with a
@@ -105,7 +105,7 @@ module Immutable
     # element as a parameter.
     #
     # ```
-    # v = Immutable::Vector.new(["a", "b", "c"])
+    # v = Immutable::Vector["a", "b", "c"]
     # v.each { |x| print x, " -- " }
     # ```
     #
@@ -123,7 +123,7 @@ module Immutable
     # Returns an `Iterator` for the elements of this vector.
     #
     # ```
-    # v = Immutable::Vector.new(["a", "b", "c"])
+    # v = Immutable::Vector["a", "b", "c"]
     # iter = v.each
     # iter.next # => "a"
     # iter.next # => "b"
@@ -137,7 +137,7 @@ module Immutable
     # index as a parameter.
     #
     # ```
-    # v = Immutable::Vector.new(["a", "b", "c"])
+    # v = Immutable::Vector["a", "b", "c"]
     # v.each_index { |x| print x, " -- " }
     # ```
     #
@@ -159,7 +159,7 @@ module Immutable
     # the value is T (which might be a type or a union of types).
     #
     # ```
-    # v = Immutable::Vector.new(["a", "b"])
+    # v = Immutable::Vector["a", "b"]
     # v.push("c") # => Vector ["a", "b", "c"]
     # v.push(1)   # => Errors, because the vector only accepts String
     #
@@ -180,7 +180,7 @@ module Immutable
     # vector is empty.
     #
     # ```
-    # v = Immutable::Vector.new([1, 2, 3, 4])
+    # v = Immutable::Vector[1, 2, 3, 4]
     # last, v2 = v.pop
     # last # => 4
     # v2   # => Vector [1, 2, 3]
@@ -208,7 +208,7 @@ module Immutable
     # Raises `IndexError` if trying to access an element outside the vector's range.
     #
     # ```
-    # vec = Immutable::Vector.new(['a', 'b', 'c'])
+    # vec = Immutable::Vector['a', 'b', 'c']
     # vec[0]  # => 'a'
     # vec[2]  # => 'c'
     # vec[-1] # => 'c'
@@ -227,7 +227,7 @@ module Immutable
     # Returns `nil` if trying to access an element outside the vector's range.
     #
     # ```
-    # vec = Immutable::Vector.new(['a', 'b', 'c'])
+    # vec = Immutable::Vector['a', 'b', 'c']
     # vec[0]?  # => 'a'
     # vec[2]?  # => 'c'
     # vec[-1]? # => 'c'
@@ -244,7 +244,7 @@ module Immutable
     # otherwise raises `IndexError`
     #
     # ```
-    # v = Immutable::Vector.new([:foo, :bar])
+    # v = Immutable::Vector[:foo, :bar]
     # v.at(0) { :baz } # => :foo
     # v.at(2) { :baz } # => IndexError
     # ```
@@ -256,7 +256,7 @@ module Immutable
     # otherwise executes the given block and returns its value.
     #
     # ```
-    # v = Immutable::Vector.new([:foo, :bar])
+    # v = Immutable::Vector[:foo, :bar]
     # v.at(0) { :baz } # => :foo
     # v.at(2) { :baz } # => :baz
     # ```
@@ -274,7 +274,7 @@ module Immutable
     # Raises `IndexError` if trying to set an element outside the vector's range.
     #
     # ```
-    # vec = Immutable::Vector.new([1, 2, 3])
+    # vec = Immutable::Vector[1, 2, 3]
     # vec.set(0, 5) # Vector [5, 2, 3]
     # vec           # Vector [1, 2, 3]
     #
@@ -320,8 +320,8 @@ module Immutable
     # for all of them, this method returns `true`. Otherwise it returns `false`.
     #
     # ```
-    # a = Immutable::Vector.new([1, 2, 3])
-    # b = Immutable::Vector.new(["a", "ab", "abc"])
+    # a = Immutable::Vector[1, 2, 3]
+    # b = Immutable::Vector["a", "ab", "abc"]
     # a.equals?(b) { |x, y| x == y.size } # => true
     # a.equals?(b) { |x, y| x == y }      # => false
     # ```
@@ -336,9 +336,9 @@ module Immutable
     # returns true for both vectors, the caller and the argument.
     #
     # ```
-    # vec = Immutable::Vector.new([1, 2, 3])
-    # vec == Immutable::Vector.new([1, 2, 3]) # => true
-    # vec == Immutable::Vector.new([2, 3])    # => false
+    # vec = Immutable::Vector[1, 2, 3]
+    # vec == Immutable::Vector[1, 2, 3] # => true
+    # vec == Immutable::Vector[2, 3]    # => false
     # ```
     def ==(other : Vector)
       return true if @trie.same?(other.trie) && @tail == other.tail
@@ -362,9 +362,9 @@ module Immutable
     # vectors.
     #
     # ```
-    # Immutable::Vector.new([8]) <=> Immutable::Vector.new([1, 2, 3]) # => 1
-    # Immutable::Vector.new([2]) <=> Immutable::Vector.new([4, 2, 3]) # => -1
-    # Immutable::Vector.new([1, 2]) <=> Immutable::Vector.new([1, 2]) # => 0
+    # Immutable::Vector[8] <=> Immutable::Vector[1, 2, 3] # => 1
+    # Immutable::Vector[2] <=> Immutable::Vector[4, 2, 3] # => -1
+    # Immutable::Vector[1, 2] <=> Immutable::Vector[1, 2] # => 0
     # ```
     def <=>(other : Vector)
       min_size = Math.min(size, other.size)
@@ -390,9 +390,9 @@ module Immutable
     # other.
     #
     # ```
-    # v1 = Immutable::Vector.new([1, 2])
-    # v2 = Immutable::Vector.new([2, 3])
-    # v3 = Immutable::Vector.new(["a"])
+    # v1 = Immutable::Vector[1, 2]
+    # v2 = Immutable::Vector[2, 3]
+    # v3 = Immutable::Vector["a"]
     # v1 + v2 # => Vector [1, 2, 2, 3]
     # v1 + v3 # => Vector [1, 2, "a"]
     # ```
@@ -412,8 +412,8 @@ module Immutable
     # preserved.
     #
     # ```
-    # v1 = Immutable::Vector.new([1, 2, 3])
-    # v2 = Immutable::Vector.new([2, 1])
+    # v1 = Immutable::Vector[1, 2, 3]
+    # v2 = Immutable::Vector[2, 1]
     # v1 - v2 => Vector [3]
     # ```
     def -(other : Vector(U))
@@ -429,8 +429,8 @@ module Immutable
     # vector.
     #
     # ```
-    # v1 = Immutable::Vector.new([1, 1, 3, 5])
-    # v2 = Immutable::Vector.new([1, 2, 3])
+    # v1 = Immutable::Vector[1, 1, 3, 5]
+    # v2 = Immutable::Vector[1, 2, 3]
     # v1 & v2 # => Vector [1, 3]
     # ```
     def &(other : Vector(U))
@@ -448,8 +448,8 @@ module Immutable
     # any duplicates and preserving the order from the original vector.
     #
     # ```
-    # v1 = Immutable::Vector.new(["a", "b", "c"])
-    # v2 = Immutable::Vector.new(["c", "d", "a"])
+    # v1 = Immutable::Vector["a", "b", "c"]
+    # v2 = Immutable::Vector["c", "d", "a"]
     # v1 | v2 # => Vector [1, 3] # => Vector ["a", "b", "c", "d"]
     # ```
     def |(other : Vector(U))
@@ -470,7 +470,7 @@ module Immutable
     # Returns a new vector by removing duplicate values in self.
     #
     # ```
-    # v = Immutable::Vector.new(["a", "a", "b", "b", "c"])
+    # v = Immutable::Vector["a", "a", "b", "b", "c"]
     # v.uniq # => Vector ["a", "b", "c"]
     # v      # => Vector ["a", "a", "b", "b", "c"]
     # ```
