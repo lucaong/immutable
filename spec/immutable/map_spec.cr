@@ -4,7 +4,7 @@ require "json"
 describe Immutable do
   describe Immutable::Map do
     empty_map = Immutable::Map(String, Int32).new
-    map       = Immutable::Map.new({ "foo" => 1, "bar" => 2, "baz" => 3 })
+    map = Immutable::Map.new({"foo" => 1, "bar" => 2, "baz" => 3})
 
     describe ".new" do
       it "creates an empty map" do
@@ -19,12 +19,12 @@ describe Immutable do
       end
 
       it "with a hash, it creates and initialize an immutable map" do
-        m = Immutable::Map.new({ foo: 123 })
+        m = Immutable::Map.new({foo: 123})
         m[:foo].should eq(123)
       end
 
       it "with a hash and a block, it creates and initialize a map with default" do
-        m = Immutable::Map.new({ foo: 123 }) { |k| 42 }
+        m = Immutable::Map.new({foo: 123}) { |k| 42 }
         m[:foo].should eq(123)
         m[:xxx].should eq(42)
       end
@@ -37,7 +37,7 @@ describe Immutable do
 
     describe ".[]" do
       it "it creates and initialize an immutable map" do
-        m = Immutable::Map[{ foo: 123, bar: 321 }]
+        m = Immutable::Map[{foo: 123, bar: 321}]
         m[:foo].should eq(123)
       end
     end
@@ -105,24 +105,24 @@ describe Immutable do
 
     describe "#merge" do
       it "returns a copy merged with the given hash" do
-        m = map.merge({ "foo" => 100, "qux" => true })
+        m = map.merge({"foo" => 100, "qux" => true})
         m.should eq(Immutable::Map.new({
           "foo" => 100,
           "bar" => 2,
           "baz" => 3,
-          "qux" => true
+          "qux" => true,
         }))
         map["foo"].should eq(1)
         map["qux"]?.should eq(nil)
       end
 
       it "returns a copy merged with the given map" do
-        m = map.merge(Immutable::Map.new({ "foo" => 100, "qux" => true }))
+        m = map.merge(Immutable::Map.new({"foo" => 100, "qux" => true}))
         m.should eq(Immutable::Map.new({
           "foo" => 100,
           "bar" => 2,
           "baz" => 3,
-          "qux" => true
+          "qux" => true,
         }))
         map["foo"].should eq(1)
         map["qux"]?.should eq(nil)
@@ -189,30 +189,30 @@ describe Immutable do
       end
 
       it "returns true for equal maps" do
-        m1 = Immutable::Map.new({ foo: 123 })
-        m2 = Immutable::Map.new({ foo: 123 })
+        m1 = Immutable::Map.new({foo: 123})
+        m2 = Immutable::Map.new({foo: 123})
         (m1 == m2).should eq(true)
       end
     end
 
     describe "#inspect" do
       it "returns a string representation of the map" do
-        m = Immutable::Map.new({ foo: 123, bar: 321 })
+        m = Immutable::Map.new({foo: 123, bar: 321})
         m.inspect.should eq("Map {:foo => 123, :bar => 321}")
       end
     end
 
     describe "#to_a" do
       it "returns an array of entries" do
-        m = Immutable::Map.new({ foo: 123, bar: 321 })
+        m = Immutable::Map.new({foo: 123, bar: 321})
         m.to_a.should eq([{:foo, 123}, {:bar, 321}])
       end
     end
 
     describe "#to_h" do
       it "returns a hash of the same entries" do
-        m = Immutable::Map.new({ foo: 123, bar: 321 })
-        m.to_h.should eq({ foo: 123, bar: 321 })
+        m = Immutable::Map.new({foo: 123, bar: 321})
+        m.to_h.should eq({foo: 123, bar: 321})
       end
     end
 

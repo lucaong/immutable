@@ -132,7 +132,6 @@ module Immutable
       @trie.each.chain(@tail.each)
     end
 
-
     # Calls the given block once for each index in this vector, passing that
     # index as a parameter.
     #
@@ -187,14 +186,14 @@ module Immutable
     # ```
     def pop : Tuple(T, Vector(T))
       vec = drop_last { raise IndexError.new("cannot pop empty vector") }
-      { last, vec }
+      {last, vec}
     end
 
     # Like `pop`, but returns a tuple of nil and empty vector if called on an
     # empty vector
     def pop? : Tuple(T?, Vector(T))
       vec = drop_last { self }
-      { last?, vec }
+      {last?, vec}
     end
 
     # Alias for `push`
@@ -576,11 +575,11 @@ module Immutable
 
       def pop : Tuple(T, Transient(T))
         raise IndexError.new("cannot pop empty vector") if empty?
-        { last, drop_last { self } }
+        {last, drop_last { self }}
       end
 
       def pop? : Tuple(T?, Transient(T))
-        { last?, drop_last { self } }
+        {last?, drop_last { self }}
       end
 
       def set(i : Int, value : T)

@@ -23,4 +23,3 @@ Benchmark.ips do |b|
     100.times { |i| v = v1 + v2 }
   end
 end
-

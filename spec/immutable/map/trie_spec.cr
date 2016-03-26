@@ -66,7 +66,7 @@ describe Immutable::Map::Trie do
   describe "#each" do
     it "iterates through tuples of key and value" do
       t = empty_trie.set(:foo, 1).set(:bar, 2).set(:baz, 3)
-      keyvals = [] of { Symbol, Int32 }
+      keyvals = [] of {Symbol, Int32}
       t.each do |kv|
         keyvals << kv
       end

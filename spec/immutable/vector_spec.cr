@@ -264,7 +264,7 @@ describe Immutable do
       end
     end
 
-    describe "#+"do
+    describe "#+" do
       it "concatenates vectors" do
         v1 = Immutable::Vector.new((0..99).to_a)
         v2 = Immutable::Vector.new((100..149).to_a)
@@ -276,7 +276,7 @@ describe Immutable do
       end
     end
 
-    describe "#-"do
+    describe "#-" do
       it "subtract the given vector from self" do
         v1 = Immutable::Vector.new([1, 2, 3, 4])
         v2 = Immutable::Vector.new([3, 2, 5])

@@ -12,4 +12,3 @@ Benchmark.ips do |b|
     m.each { |k, v| nil }
   end
 end
-

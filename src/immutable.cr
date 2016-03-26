@@ -18,7 +18,7 @@ module Immutable
     when Array
       Vector.new(object.map { |elem| from(elem) })
     when Hash
-      Map.new(object.map { |k, v| { k, from(v) } })
+      Map.new(object.map { |k, v| {k, from(v)} })
     else
       object
     end

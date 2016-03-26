@@ -2,7 +2,7 @@ Benchmark.ips do |b|
   h = (0...100).map { |i| {i, i * 2} }.to_h
   k = h.dup
   m = Immutable.map(h)
-  o = { 1 => 0, 101 => 0, 150 => 0 }
+  o = {1 => 0, 101 => 0, 150 => 0}
 
   banner "Map merge:"
 
