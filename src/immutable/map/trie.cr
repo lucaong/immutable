@@ -21,12 +21,12 @@ module Immutable
         @values : Values(K, V),
         @bitmap : UInt32,
         @levels : Int32,
-        @owner = nil : UInt64?)
+        @owner  : UInt64? = nil)
         children_size = @children.reduce(0) { |size, child| size + child.size }
         @size         = children_size + @values.size
       end
 
-      def self.empty(owner = nil : UInt64?)
+      def self.empty(owner : UInt64? = nil)
         children = [] of Trie(K, V)
         values   = Values(K, V).new
         new(children, values, 0_u32, 0, owner)
@@ -85,7 +85,7 @@ module Immutable
         self
       end
 
-      protected def set_at_index(index : Int32, key : K, value : V, from = nil : UInt64?) : Trie(K, V)
+      protected def set_at_index(index : Int32, key : K, value : V, from : UInt64? = nil) : Trie(K, V)
         if leaf_of?(index)
           set_leaf(index, key, value, from)
         else

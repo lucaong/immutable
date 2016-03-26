@@ -15,12 +15,12 @@ module Immutable
       @levels   : Int32
       @owner    : UInt64?
 
-      def initialize(@children : Array(Trie(T)), @levels : Int32, @owner = nil : UInt64?)
+      def initialize(@children : Array(Trie(T)), @levels : Int32, @owner : UInt64? = nil)
         @size   = @children.reduce(0) { |sum, child| sum + child.size }
         @values = [] of T
       end
 
-      def initialize(@values : Array(T), @owner = nil : UInt64?)
+      def initialize(@values : Array(T), @owner : UInt64? = nil)
         @size     = @values.size
         @levels   = 0
         @children = [] of Trie(T)
@@ -63,7 +63,7 @@ module Immutable
         end.flatten
       end
 
-      def push_leaf(leaf : Array(T), from = nil : UInt64?) : Trie(T)
+      def push_leaf(leaf : Array(T), from : UInt64? = nil) : Trie(T)
         raise ArgumentError.new if leaf.size > BLOCK_SIZE || size % 32 != 0
         return Trie.new([self], @levels + 1, from).push_leaf(leaf, from) if full?
         return Trie.new(leaf, from) if empty? && leaf?
@@ -96,7 +96,7 @@ module Immutable
         self
       end
 
-      def pop_leaf(from = nil : UInt64?) : Trie(T)
+      def pop_leaf(from : UInt64? = nil) : Trie(T)
         raise ArgumentError.new if empty? || size % 32 != 0
         return Trie.new([] of T, from) if leaf?
         child = @children.last.pop_leaf
@@ -146,7 +146,7 @@ module Immutable
         self
       end
 
-      def self.empty(owner = nil : UInt64)
+      def self.empty(owner : UInt64? = nil)
         Trie.new([] of T, owner)
       end
 
@@ -166,7 +166,7 @@ module Immutable
         trie
       end
 
-      protected def set(index : Int, value : T, from = nil : UInt64?) : Trie(T)
+      protected def set(index : Int, value : T, from : UInt64? = nil) : Trie(T)
         child_idx = child_index(index)
         if leaf?
           values = @values.dup.tap { |vs| vs[child_idx] = value }

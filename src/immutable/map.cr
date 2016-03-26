@@ -33,7 +33,7 @@ module Immutable
     # ```
     # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
     # ```
-    def initialize(hash = {} of K => V : Hash(K, V))
+    def initialize(hash : Hash(K, V) = {} of K => V)
       @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
         trie.set!(k, v, object_id)
       end
@@ -48,7 +48,7 @@ module Immutable
     # ```
     # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
     # ```
-    def initialize(hash = {} of K => V : Hash(K, V), &block : K -> V)
+    def initialize(hash : Hash(K, V) = {} of K => V, &block : K -> V)
       @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
         trie.set!(k, v, object_id)
       end
@@ -57,7 +57,7 @@ module Immutable
     end
 
     # :nodoc:
-    def initialize(@trie : Trie(K, V), @block = nil : (K -> V)?)
+    def initialize(@trie : Trie(K, V), @block : (K -> V)? = nil)
     end
 
     # Creates a map with the given key-values.
@@ -77,7 +77,7 @@ module Immutable
     # ```
     # m = Immutable::Map[{ foo: 123, bar: 321 }] # Map {foo: 123, bar: 321}
     # ```
-    def self.[](hash = {} of K => V : Hash(K, V))
+    def self.[](hash : Hash(K, V) = {} of K => V)
       new(hash)
     end
 
@@ -370,14 +370,14 @@ module Immutable
       @trie  : Trie(K, V)
       @block : (K -> V)?
 
-      def initialize(hash = {} of K => V : Hash(K, V))
+      def initialize(hash : Hash(K, V) = {} of K => V)
         @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, k, v|
           h.set!(k, v, object_id)
         end
         @block = nil
       end
 
-      def initialize(hash = {} of K => V : Hash(K, V), &block : K -> V)
+      def initialize(hash : Hash(K, V) = {} of K => V, &block : K -> V)
         @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, k, v|
           h.set!(k, v, object_id)
         end
@@ -385,7 +385,7 @@ module Immutable
       end
 
       # :nodoc:
-      def initialize(@trie : Trie(K, V), @block = nil : (K -> V)?)
+      def initialize(@trie : Trie(K, V), @block : (K -> V)? = nil)
       end
 
       def self.new(e : Enumerable(Enumerable(U)))
