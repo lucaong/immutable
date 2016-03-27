@@ -141,12 +141,12 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector/trie.cr" target="_blank">immutable/vector/trie.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector/trie.cr" target="_blank">immutable/vector/trie.cr</a>
     
     <br/>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr" target="_blank">immutable/vector.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr" target="_blank">immutable/vector.cr</a>
     
     <br/>
   
@@ -465,7 +465,7 @@
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="[](*elems:T)-class-method">
+    <div class="entry-detail" id="&#91;&#93;&#40;*elems:T&#41;-class-method">
       <div class="signature">
         
         def self.<strong>[]</strong>(*elems : T)
@@ -480,12 +480,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="of(*elems:T)-class-method">
+    <div class="entry-detail" id="of&#40;*elems:T&#41;-class-method">
       <div class="signature">
         
         def self.<strong>of</strong>(*elems : T)
@@ -498,12 +498,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(elems:Array(T))-class-method">
+    <div class="entry-detail" id="new&#40;elems:Array&#40;T&#41;&#41;-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(elems : Array(T))
@@ -517,7 +517,7 @@ same position.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -535,7 +535,7 @@ same position.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -545,7 +545,7 @@ same position.</p></div>
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="&amp;(other:Immutable::Vector(U))-instance-method">
+    <div class="entry-detail" id="&amp;&#40;other:Immutable::Vector&#40;U&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>&</strong>(other : <a href="../Immutable/Vector.html">Immutable::Vector</a>(U))
@@ -557,19 +557,19 @@ same position.</p></div>
 vectors, excluding any duplicates. The order is preserved from the original
 vector.</p>
 
-<pre><code>v1 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">1</span>, <span class="n">3</span>, <span class="n">5</span>])
-v2 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>])
-v1 <span class="o">&</span> v2 <span class="c"># =&gt; Vector [1, 3]</span></code></pre></div>
+<pre><code>v1 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">1</span>, <span class="n">3</span>, <span class="n">5</span>]
+v2 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+v1 <span class="o">&</span> v2 <span class="c"># &#61;&gt; Vector &#91;1, 3&#93;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L436" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L435" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="+(other:Immutable::Vector(U))-instance-method">
+    <div class="entry-detail" id="&#43;&#40;other:Immutable::Vector&#40;U&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>+</strong>(other : <a href="../Immutable/Vector.html">Immutable::Vector</a>(U))
@@ -581,21 +581,21 @@ v1 <span class="o">&</span> v2 <span class="c"># =&gt; Vector [1, 3]</span></cod
 other. The type of the new vector is the union of the types of self and
 other.</p>
 
-<pre><code>v1 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>])
-v2 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">2</span>, <span class="n">3</span>])
-v3 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>])
-v1 <span class="o">+</span> v2 <span class="c"># =&gt; Vector [1, 2, 2, 3]</span>
-v1 <span class="o">+</span> v3 <span class="c"># =&gt; Vector [1, 2, &quot;a&quot;]</span></code></pre></div>
+<pre><code>v1 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>]
+v2 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">2</span>, <span class="n">3</span>]
+v3 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;a&quot;</span>]
+v1 <span class="o">+</span> v2 <span class="c"># &#61;&gt; Vector &#91;1, 2, 2, 3&#93;</span>
+v1 <span class="o">+</span> v3 <span class="c"># &#61;&gt; Vector &#91;1, 2, &quot;a&quot;&#93;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L399" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L398" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="-(other:Immutable::Vector(U))-instance-method">
+    <div class="entry-detail" id="-&#40;other:Immutable::Vector&#40;U&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>-</strong>(other : <a href="../Immutable/Vector.html">Immutable::Vector</a>(U))
@@ -607,19 +607,19 @@ v1 <span class="o">+</span> v3 <span class="c"># =&gt; Vector [1, 2, &quot;a&quo
 any items that appear in <code>other</code>. The order of the original vector is
 preserved.</p>
 
-<pre><code>v1 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>])
-v2 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">2</span>, <span class="n">1</span>])
+<pre><code>v1 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+v2 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">2</span>, <span class="n">1</span>]
 v1 <span class="o">-</span> v2 => <span class="t">Vector</span> [<span class="n">3</span>]</code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L419" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L418" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="&lt;&lt;(elem:T)-instance-method">
+    <div class="entry-detail" id="&lt;&lt;&#40;elem:T&#41;-instance-method">
       <div class="signature">
         
         def <strong><<</strong>(elem : T)
@@ -632,12 +632,12 @@ v1 <span class="o">-</span> v2 => <span class="t">Vector</span> [<span class="n"
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L201" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L200" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="&lt;=&gt;(other:Vector)-instance-method">
+    <div class="entry-detail" id="&lt;&#61;&gt;&#40;other:Vector&#41;-instance-method">
       <div class="signature">
         
         def <strong><=></strong>(other : <a href="../Immutable/Vector.html">Vector</a>)
@@ -656,19 +656,19 @@ value, that result is the return value of the whole comparison.</p>
 <p>If all elements are equal, the comparison is based on the size of the
 vectors.</p>
 
-<pre><code><span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">8</span>]) <span class="o"><=></span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]) <span class="c"># =&gt; 1</span>
-<span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">2</span>]) <span class="o"><=></span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">4</span>, <span class="n">2</span>, <span class="n">3</span>]) <span class="c"># =&gt; -1</span>
-<span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>]) <span class="o"><=></span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>]) <span class="c"># =&gt; 0</span></code></pre></div>
+<pre><code><span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">8</span>] <span class="o"><=></span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>] <span class="c"># &#61;&gt; 1</span>
+<span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">2</span>] <span class="o"><=></span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">4</span>, <span class="n">2</span>, <span class="n">3</span>] <span class="c"># &#61;&gt; -1</span>
+<span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>] <span class="o"><=></span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>] <span class="c"># &#61;&gt; 0</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L369" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L368" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="==(other:Vector)-instance-method">
+    <div class="entry-detail" id="&#61;&#61;&#40;other:Vector&#41;-instance-method">
       <div class="signature">
         
         def <strong>==</strong>(other : <a href="../Immutable/Vector.html">Vector</a>)
@@ -679,19 +679,19 @@ vectors.</p>
         <div class="doc"><p>Equality. Returns true if it is passed a Vector and <code><a href="../Immutable/Vector.html#equals%3F%28other%3AVector%2C%26block%29-instance-method">#equals?</a></code>
 returns true for both vectors, the caller and the argument.</p>
 
-<pre><code>vec <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>])
-vec <span class="o">==</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]) <span class="c"># =&gt; true</span>
-vec <span class="o">==</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">2</span>, <span class="n">3</span>])    <span class="c"># =&gt; false</span></code></pre></div>
+<pre><code>vec <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+vec <span class="o">==</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>] <span class="c"># &#61;&gt; true</span>
+vec <span class="o">==</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">2</span>, <span class="n">3</span>]    <span class="c"># &#61;&gt; false</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L343" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L342" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="[](i:Int)-instance-method">
+    <div class="entry-detail" id="&#91;&#93;&#40;i:Int&#41;-instance-method">
       <div class="signature">
         
         def <strong>[]</strong>(i : Int)
@@ -704,11 +704,11 @@ vec <span class="o">==</span> <span class="t">Immutable</span><span class="t">::
 <p>Negative indices can be used to start counting from the end of the vector.
 Raises <code>IndexError</code> if trying to access an element outside the vector's range.</p>
 
-<pre><code>vec <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">'a'</span>, <span class="s">'b'</span>, <span class="s">'c'</span>])
-vec[<span class="n">0</span>]  <span class="c"># =&gt; &apos;a&apos;</span>
-vec[<span class="n">2</span>]  <span class="c"># =&gt; &apos;c&apos;</span>
-vec[<span class="n">-1</span>] <span class="c"># =&gt; &apos;c&apos;</span>
-vec[<span class="n">-2</span>] <span class="c"># =&gt; &apos;b&apos;</span>
+<pre><code>vec <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">'a'</span>, <span class="s">'b'</span>, <span class="s">'c'</span>]
+vec[<span class="n">0</span>]  <span class="c"># &#61;&gt; &#39;a&#39;</span>
+vec[<span class="n">2</span>]  <span class="c"># &#61;&gt; &#39;c&#39;</span>
+vec[<span class="n">-1</span>] <span class="c"># &#61;&gt; &#39;c&#39;</span>
+vec[<span class="n">-2</span>] <span class="c"># &#61;&gt; &#39;b&#39;</span>
 
 vec[<span class="n">3</span>]  <span class="c"># raises IndexError</span>
 vec[<span class="n">-4</span>] <span class="c"># raises IndexError</span></code></pre></div>
@@ -716,12 +716,12 @@ vec[<span class="n">-4</span>] <span class="c"># raises IndexError</span></code>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L220" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L219" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="[]?(i:Int)-instance-method">
+    <div class="entry-detail" id="&#91;&#93;?&#40;i:Int&#41;-instance-method">
       <div class="signature">
         
         def <strong>[]?</strong>(i : Int)
@@ -734,11 +734,11 @@ vec[<span class="n">-4</span>] <span class="c"># raises IndexError</span></code>
 <p>Negative indices can be used to start counting from the end of the vector.
 Returns <code>nil</code> if trying to access an element outside the vector's range.</p>
 
-<pre><code>vec <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">'a'</span>, <span class="s">'b'</span>, <span class="s">'c'</span>])
-vec[<span class="n">0</span>]?  <span class="c"># =&gt; &apos;a&apos;</span>
-vec[<span class="n">2</span>]?  <span class="c"># =&gt; &apos;c&apos;</span>
-vec[<span class="n">-1</span>]? <span class="c"># =&gt; &apos;c&apos;</span>
-vec[<span class="n">-2</span>]? <span class="c"># =&gt; &apos;b&apos;</span>
+<pre><code>vec <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">'a'</span>, <span class="s">'b'</span>, <span class="s">'c'</span>]
+vec[<span class="n">0</span>]?  <span class="c"># &#61;&gt; &#39;a&#39;</span>
+vec[<span class="n">2</span>]?  <span class="c"># &#61;&gt; &#39;c&#39;</span>
+vec[<span class="n">-1</span>]? <span class="c"># &#61;&gt; &#39;c&#39;</span>
+vec[<span class="n">-2</span>]? <span class="c"># &#61;&gt; &#39;b&#39;</span>
 
 vec[<span class="n">3</span>]?  <span class="c"># nil</span>
 vec[<span class="n">-4</span>]? <span class="c"># nil</span></code></pre></div>
@@ -746,7 +746,7 @@ vec[<span class="n">-4</span>]? <span class="c"># nil</span></code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L239" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L238" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -764,12 +764,12 @@ vec[<span class="n">-4</span>]? <span class="c"># nil</span></code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L384" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L383" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="at(i:Int)-instance-method">
+    <div class="entry-detail" id="at&#40;i:Int&#41;-instance-method">
       <div class="signature">
         
         def <strong>at</strong>(i : Int)
@@ -780,19 +780,19 @@ vec[<span class="n">-4</span>]? <span class="c"># nil</span></code></pre></div>
         <div class="doc"><p>Returns the element at the given index, if in bounds,
 otherwise raises <code>IndexError</code></p>
 
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">:foo</span>, <span class="n">:bar</span>])
-v.at(<span class="n">0</span>) { <span class="n">:baz</span> } <span class="c"># =&gt; :foo</span>
-v.at(<span class="n">2</span>) { <span class="n">:baz</span> } <span class="c"># =&gt; IndexError</span></code></pre></div>
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">:foo</span>, <span class="n">:bar</span>]
+v.at(<span class="n">0</span>) { <span class="n">:baz</span> } <span class="c"># &#61;&gt; :foo</span>
+v.at(<span class="n">2</span>) { <span class="n">:baz</span> } <span class="c"># &#61;&gt; IndexError</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L251" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L250" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="at(i:Int,&amp;block)-instance-method">
+    <div class="entry-detail" id="at&#40;i:Int,&amp;block&#41;-instance-method">
       <div class="signature">
         
         def <strong>at</strong>(i : Int, &block)
@@ -803,14 +803,14 @@ v.at(<span class="n">2</span>) { <span class="n">:baz</span> } <span class="c">#
         <div class="doc"><p>Returns the element at the given index, if in bounds,
 otherwise executes the given block and returns its value.</p>
 
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">:foo</span>, <span class="n">:bar</span>])
-v.at(<span class="n">0</span>) { <span class="n">:baz</span> } <span class="c"># =&gt; :foo</span>
-v.at(<span class="n">2</span>) { <span class="n">:baz</span> } <span class="c"># =&gt; :baz</span></code></pre></div>
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">:foo</span>, <span class="n">:bar</span>]
+v.at(<span class="n">0</span>) { <span class="n">:baz</span> } <span class="c"># &#61;&gt; :foo</span>
+v.at(<span class="n">2</span>) { <span class="n">:baz</span> } <span class="c"># &#61;&gt; :baz</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L263" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L262" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -825,20 +825,20 @@ v.at(<span class="n">2</span>) { <span class="n">:baz</span> } <span class="c">#
       
         <div class="doc"><p>Returns an <code>Iterator</code> for the elements of this vector.</p>
 
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>])
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>]
 iter <span class="o">=</span> v.each
-iter.<span class="k">next</span> <span class="c"># =&gt; &quot;a&quot;</span>
-iter.<span class="k">next</span> <span class="c"># =&gt; &quot;b&quot;</span></code></pre></div>
+iter.<span class="k">next</span> <span class="c"># &#61;&gt; &quot;a&quot;</span>
+iter.<span class="k">next</span> <span class="c"># &#61;&gt; &quot;b&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L131" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L131" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="each(&amp;block)-instance-method">
+    <div class="entry-detail" id="each&#40;&amp;block&#41;-instance-method">
       <div class="signature">
         
         def <strong>each</strong>(&block)
@@ -849,7 +849,7 @@ iter.<span class="k">next</span> <span class="c"># =&gt; &quot;b&quot;</span></c
         <div class="doc"><p>Calls the given block once for each element in this vector, passing that
 element as a parameter.</p>
 
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>])
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>]
 v.each { <span class="o">|</span>x<span class="o">|</span> print x, <span class="s">&quot; -- &quot;</span> }</code></pre>
 
 <p>produces:</p>
@@ -859,12 +859,12 @@ v.each { <span class="o">|</span>x<span class="o">|</span> print x, <span class=
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L117" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L117" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="each_index(&amp;block)-instance-method">
+    <div class="entry-detail" id="each_index&#40;&amp;block&#41;-instance-method">
       <div class="signature">
         
         def <strong>each_index</strong>(&block)
@@ -875,7 +875,7 @@ v.each { <span class="o">|</span>x<span class="o">|</span> print x, <span class=
         <div class="doc"><p>Calls the given block once for each index in this vector, passing that
 index as a parameter.</p>
 
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>])
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>]
 v.each_index { <span class="o">|</span>x<span class="o">|</span> print x, <span class="s">&quot; -- &quot;</span> }</code></pre>
 
 <p>produces:</p>
@@ -885,7 +885,7 @@ v.each_index { <span class="o">|</span>x<span class="o">|</span> print x, <span 
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L149" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L148" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -903,12 +903,12 @@ v.each_index { <span class="o">|</span>x<span class="o">|</span> print x, <span 
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L379" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L378" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="equals?(other:Vector,&amp;block)-instance-method">
+    <div class="entry-detail" id="equals?&#40;other:Vector,&amp;block&#41;-instance-method">
       <div class="signature">
         
         def <strong>equals?</strong>(other : <a href="../Immutable/Vector.html">Vector</a>, &block)
@@ -923,15 +923,15 @@ done by the given block.</p>
 elements from this vector and <em>other</em> in tandem: if the block returns true
 for all of them, this method returns <code>true</code>. Otherwise it returns <code>false</code>.</p>
 
-<pre><code>a <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>])
-b <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;ab&quot;</span>, <span class="s">&quot;abc&quot;</span>])
-a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span class="o">==</span> y.size } <span class="c"># =&gt; true</span>
-a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span class="o">==</span> y }      <span class="c"># =&gt; false</span></code></pre></div>
+<pre><code>a <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+b <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;a&quot;</span>, <span class="s">&quot;ab&quot;</span>, <span class="s">&quot;abc&quot;</span>]
+a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span class="o">==</span> y.size } <span class="c"># &#61;&gt; true</span>
+a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span class="o">==</span> y }      <span class="c"># &#61;&gt; false</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L328" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L327" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -950,7 +950,7 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L295" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L294" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -968,7 +968,7 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L300" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L299" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -988,12 +988,12 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L515" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L514" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="inspect(io:IO)-instance-method">
+    <div class="entry-detail" id="inspect&#40;io:IO&#41;-instance-method">
       <div class="signature">
         
         def <strong>inspect</strong>(io : IO)
@@ -1006,7 +1006,7 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L508" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L507" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1025,7 +1025,7 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L306" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L305" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1043,12 +1043,12 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L311" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L310" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="pop:Tuple(T,Immutable::Vector(T))-instance-method">
+    <div class="entry-detail" id="pop:Tuple&#40;T,Immutable::Vector&#40;T&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>pop</strong> : Tuple(T, <a href="../Immutable/Vector.html">Immutable::Vector</a>(T))
@@ -1060,20 +1060,20 @@ a.equals?(b) { <span class="o">|</span>x, y<span class="o">|</span> x <span clas
 the vector with the last element removed. Raises <code>IndexError</code> if the
 vector is empty.</p>
 
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>])
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>]
 last, v2 <span class="o">=</span> v.pop
-last <span class="c"># =&gt; 4</span>
-v2   <span class="c"># =&gt; Vector [1, 2, 3]</span></code></pre></div>
+last <span class="c"># &#61;&gt; 4</span>
+v2   <span class="c"># &#61;&gt; Vector &#91;1, 2, 3&#93;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L188" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L187" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="pop?:Tuple(T|Nil,Immutable::Vector(T))-instance-method">
+    <div class="entry-detail" id="pop?:Tuple&#40;T|Nil,Immutable::Vector&#40;T&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>pop?</strong> : Tuple(T | Nil, <a href="../Immutable/Vector.html">Immutable::Vector</a>(T))
@@ -1087,12 +1087,12 @@ empty vector</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L195" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L194" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="push(elem:T)-instance-method">
+    <div class="entry-detail" id="push&#40;elem:T&#41;-instance-method">
       <div class="signature">
         
         def <strong>push</strong>(elem : T)
@@ -1103,22 +1103,22 @@ empty vector</p></div>
         <div class="doc"><p>Returns a new vector with the given value appended to the end, given that the type of
 the value is T (which might be a type or a union of types).</p>
 
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>])
-v.push(<span class="s">&quot;c&quot;</span>) <span class="c"># =&gt; Vector [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span>
-v.push(<span class="n">1</span>)   <span class="c"># =&gt; Errors, because the vector only accepts String</span>
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>]
+v.push(<span class="s">&quot;c&quot;</span>) <span class="c"># &#61;&gt; Vector &#91;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&#93;</span>
+v.push(<span class="n">1</span>)   <span class="c"># &#61;&gt; Errors, because the vector only accepts String</span>
 
 <span class="c"># The original vector remains unchanged:</span>
-v           <span class="c"># =&gt; Vector [&quot;a&quot;, &quot;b&quot;]</span></code></pre></div>
+v           <span class="c"># &#61;&gt; Vector &#91;&quot;a&quot;, &quot;b&quot;&#93;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L169" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L168" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="set(i:Int,value:T)-instance-method">
+    <div class="entry-detail" id="set&#40;i:Int,value:T&#41;-instance-method">
       <div class="signature">
         
         def <strong>set</strong>(i : Int, value : T)
@@ -1132,16 +1132,16 @@ set to the given value.</p>
 <p>Negative indices can be used to start counting from the end of the vector.
 Raises <code>IndexError</code> if trying to set an element outside the vector's range.</p>
 
-<pre><code>vec <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>])
-vec.set(<span class="n">0</span>, <span class="n">5</span>) <span class="c"># Vector [5, 2, 3]</span>
-vec           <span class="c"># Vector [1, 2, 3]</span>
+<pre><code>vec <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+vec.set(<span class="n">0</span>, <span class="n">5</span>) <span class="c"># Vector &#91;5, 2, 3&#93;</span>
+vec           <span class="c"># Vector &#91;1, 2, 3&#93;</span>
 
-vec.set(<span class="n">3</span>, <span class="n">5</span>) <span class="c"># =&gt; IndexError</span></code></pre></div>
+vec.set(<span class="n">3</span>, <span class="n">5</span>) <span class="c"># &#61;&gt; IndexError</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L283" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L282" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1159,12 +1159,12 @@ vec.set(<span class="n">3</span>, <span class="n">5</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L100" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="to_json(io:IO)-instance-method">
+    <div class="entry-detail" id="to_json&#40;io:IO&#41;-instance-method">
       <div class="signature">
         
         def <strong>to_json</strong>(io : IO)
@@ -1178,12 +1178,12 @@ io object</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L496" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L495" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="to_s(io:IO)-instance-method">
+    <div class="entry-detail" id="to_s&#40;io:IO&#41;-instance-method">
       <div class="signature">
         
         def <strong>to_s</strong>(io : IO)
@@ -1197,12 +1197,12 @@ to the given IO object.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L489" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L488" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="transient(&amp;block)-instance-method">
+    <div class="entry-detail" id="transient&#40;&amp;block&#41;-instance-method">
       <div class="signature">
         
         def <strong>transient</strong>(&block)
@@ -1221,14 +1221,14 @@ updates in place, avoiding unnecessary object allocations.</p>
 v2 <span class="o">=</span> vec.transient <span class="k">do</span> <span class="o">|</span>v<span class="o">|</span>
   <span class="n">100</span>.times { <span class="o">|</span>i<span class="o">|</span> v <span class="o">=</span> v.push(i) }
 <span class="k">end</span>
-v2.size <span class="c"># =&gt; 100</span></code></pre>
+v2.size <span class="c"># &#61;&gt; 100</span></code></pre>
 
 <p>Note that, as the transient is mutable, it is not thread-safe.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L93" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L93" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1243,19 +1243,19 @@ v2.size <span class="c"># =&gt; 100</span></code></pre>
       
         <div class="doc"><p>Returns a new vector by removing duplicate values in self.</p>
 
-<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>])
-v.uniq <span class="c"># =&gt; Vector [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span>
-v      <span class="c"># =&gt; Vector [&quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;c&quot;]</span></code></pre></div>
+<pre><code>v <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;a&quot;</span>, <span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>]
+v.uniq <span class="c"># &#61;&gt; Vector &#91;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&#93;</span>
+v      <span class="c"># &#61;&gt; Vector &#91;&quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;c&quot;&#93;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L477" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L476" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="|(other:Immutable::Vector(U))-instance-method">
+    <div class="entry-detail" id="|&#40;other:Immutable::Vector&#40;U&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>|</strong>(other : <a href="../Immutable/Vector.html">Immutable::Vector</a>(U))
@@ -1266,14 +1266,14 @@ v      <span class="c"># =&gt; Vector [&quot;a&quot;, &quot;a&quot;, &quot;b&quo
         <div class="doc"><p>Set union: returns a new vector by joining self with other, excluding
 any duplicates and preserving the order from the original vector.</p>
 
-<pre><code>v1 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>])
-v2 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>.<span class="k">new</span>([<span class="s">&quot;c&quot;</span>, <span class="s">&quot;d&quot;</span>, <span class="s">&quot;a&quot;</span>])
-v1 <span class="o">|</span> v2 <span class="c"># =&gt; Vector [1, 3] # =&gt; Vector [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</span></code></pre></div>
+<pre><code>v1 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;a&quot;</span>, <span class="s">&quot;b&quot;</span>, <span class="s">&quot;c&quot;</span>]
+v2 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="s">&quot;c&quot;</span>, <span class="s">&quot;d&quot;</span>, <span class="s">&quot;a&quot;</span>]
+v1 <span class="o">|</span> v2 <span class="c"># &#61;&gt; Vector &#91;1, 3&#93; # &#61;&gt; Vector &#91;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&#93;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/vector.cr#L455" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/vector.cr#L454" target="_blank">View source</a>]
         
       </div>
     </div>

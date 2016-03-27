@@ -123,7 +123,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr" target="_blank">immutable/map.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr" target="_blank">immutable/map.cr</a>
     
     <br/>
   
@@ -141,12 +141,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%29-class-method" class="signature"><strong>.new</strong>(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V))</a>
+        <a href="#new%28hash%3AHash%28K%2CV%29%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%29-class-method" class="signature"><strong>.new</strong>(hash : Hash(K, V) = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%2C%26block%3AK-%3EV%29-class-method" class="signature"><strong>.new</strong>(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V), &block : K -> V)</a>
+        <a href="#new%28hash%3AHash%28K%2CV%29%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%2C%26block%3AK-%3EV%29-class-method" class="signature"><strong>.new</strong>(hash : Hash(K, V) = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span>, &block : K -> V)</a>
         
       </li>
     
@@ -278,12 +278,12 @@
 
   <h3>Class methods inherited from class <code><a href="../../Immutable/Map.html">Immutable::Map(K, V)</a></code></h3>
   
-    <a href="../../Immutable/Map.html#%5B%5D%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%29-class-method" class="tooltip">
-      <span>[](hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V))</span>
+    <a href="../../Immutable/Map.html#%5B%5D%28hash%3AHash%28K%2CV%29%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%29-class-method" class="tooltip">
+      <span>[](hash : Hash(K, V) = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span>)</span>
     []</a>, 
   
     <a href="../../Immutable/Map.html#new%28e%3AEnumerable%28Enumerable%28U%29%29%29-class-method" class="tooltip">
-      <span>new(e : Enumerable(Enumerable(U)))<br/>new(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V))<br/>new(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V), &block : K -> V)</span>
+      <span>new(e : Enumerable(Enumerable(U)))<br/>new(hash : Hash(K, V) = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span>)<br/>new(hash : Hash(K, V) = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span>, &block : K -> V)</span>
     new</a>
   
 
@@ -315,7 +315,7 @@
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="new(e:Enumerable(Enumerable(U)))-class-method">
+    <div class="entry-detail" id="new&#40;e:Enumerable&#40;Enumerable&#40;U&#41;&#41;&#41;-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(e : Enumerable(Enumerable(U)))
@@ -326,39 +326,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L390" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L391" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(hash={}&lt;spanclass=&quot;k&quot;&gt;of&lt;/span&gt;&lt;spanclass=&quot;t&quot;&gt;K&lt;/span&gt;=&gt;&lt;spanclass=&quot;t&quot;&gt;V&lt;/span&gt;:Hash(K,V))-class-method">
+    <div class="entry-detail" id="new&#40;hash:Hash&#40;K,V&#41;&#61;&#123;&#125;&lt;spanclass&#61;&quot;k&quot;&gt;of&lt;/span&gt;&lt;spanclass&#61;&quot;t&quot;&gt;K&lt;/span&gt;&#61;&gt;&lt;spanclass&#61;&quot;t&quot;&gt;V&lt;/span&gt;&#41;-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V))
+        def self.<strong>new</strong>(hash : Hash(K, V) = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span>)
 
-        <a class="method-permalink" href="#new%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28hash%3AHash%28K%2CV%29%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L372" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L373" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(hash={}&lt;spanclass=&quot;k&quot;&gt;of&lt;/span&gt;&lt;spanclass=&quot;t&quot;&gt;K&lt;/span&gt;=&gt;&lt;spanclass=&quot;t&quot;&gt;V&lt;/span&gt;:Hash(K,V),&amp;block:K-&gt;V)-class-method">
+    <div class="entry-detail" id="new&#40;hash:Hash&#40;K,V&#41;&#61;&#123;&#125;&lt;spanclass&#61;&quot;k&quot;&gt;of&lt;/span&gt;&lt;spanclass&#61;&quot;t&quot;&gt;K&lt;/span&gt;&#61;&gt;&lt;spanclass&#61;&quot;t&quot;&gt;V&lt;/span&gt;,&amp;block:K-&gt;V&#41;-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(hash = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span> : Hash(K, V), &block : K -> V)
+        def self.<strong>new</strong>(hash : Hash(K, V) = {} <span class="k">of</span> <span class="t">K</span> => <span class="t">V</span>, &block : K -> V)
 
-        <a class="method-permalink" href="#new%28hash%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%3AHash%28K%2CV%29%2C%26block%3AK-%3EV%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28hash%3AHash%28K%2CV%29%3D%7B%7D%3Cspanclass%3D%22k%22%3Eof%3C%2Fspan%3E%3Cspanclass%3D%22t%22%3EK%3C%2Fspan%3E%3D%3E%3Cspanclass%3D%22t%22%3EV%3C%2Fspan%3E%2C%26block%3AK-%3EV%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L379" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L380" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -368,7 +368,7 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="delete(key:K)-instance-method">
+    <div class="entry-detail" id="delete&#40;key:K&#41;-instance-method">
       <div class="signature">
         
         def <strong>delete</strong>(key : K)
@@ -379,12 +379,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L406" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L407" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="merge(map:Immutable::Map(K,V))-instance-method">
+    <div class="entry-detail" id="merge&#40;map:Immutable::Map&#40;K,V&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>merge</strong>(map : <a href="../../Immutable/Map.html">Immutable::Map</a>(K, V))
@@ -395,12 +395,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L418" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L419" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="merge(map:Immutable::Map(L,W))-instance-method">
+    <div class="entry-detail" id="merge&#40;map:Immutable::Map&#40;L,W&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>merge</strong>(map : <a href="../../Immutable/Map.html">Immutable::Map</a>(L, W))
@@ -411,12 +411,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L429" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L430" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="merge(hash:Hash(L,W))-instance-method">
+    <div class="entry-detail" id="merge&#40;hash:Hash&#40;L,W&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>merge</strong>(hash : Hash(L, W))
@@ -427,12 +427,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L425" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L426" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="merge(hash:Hash(K,V))-instance-method">
+    <div class="entry-detail" id="merge&#40;hash:Hash&#40;K,V&#41;&#41;-instance-method">
       <div class="signature">
         
         def <strong>merge</strong>(hash : Hash(K, V))
@@ -443,12 +443,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L411" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L412" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="persist!-instance-method">
+    <div class="entry-detail" id="persist&#33;-instance-method">
       <div class="signature">
         
         def <strong>persist!</strong>
@@ -459,12 +459,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L396" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L397" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="set(key:K,value:V)-instance-method">
+    <div class="entry-detail" id="set&#40;key:K,value:V&#41;-instance-method">
       <div class="signature">
         
         def <strong>set</strong>(key : K, value : V)
@@ -475,7 +475,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/565c1cc5f6f805ac06ca3203116c46689436af8f/src/immutable/map.cr#L401" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/98324cd93f4c7231f8c438e3cb3219c87e1ea2f6/src/immutable/map.cr#L402" target="_blank">View source</a>]
         
       </div>
     </div>

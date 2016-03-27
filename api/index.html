@@ -135,20 +135,20 @@ thread-safe, garbage collector friendly and performant.</p>
 <h3>Vector (<a href="http://lucaong.github.io/immutable/api/Immutable/Vector.html" target="_blank">API docs</a>)</h3>
 
 <pre><code class='language-crystal'><span class="c"># Vector behaves mostly like an Array:</span>
-vector <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>]  <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span>
-vector[<span class="n">0</span>]                                  <span class="c"># =&gt; 1</span>
-vector[<span class="n">-1</span>]                                 <span class="c"># =&gt; 5</span>
-vector.size                                <span class="c"># =&gt; 5</span>
+vector <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Vector</span>[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>]  <span class="c"># &#61;&gt; Vector &#91;1, 2, 3, 4, 5&#93;</span>
+vector[<span class="n">0</span>]                                  <span class="c"># &#61;&gt; 1</span>
+vector[<span class="n">-1</span>]                                 <span class="c"># &#61;&gt; 5</span>
+vector.size                                <span class="c"># &#61;&gt; 5</span>
 vector.each { <span class="o">|</span>elem<span class="o">|</span> puts elem }
 
 <span class="c"># Updating a Vector always returns a modified copy:</span>
-vector2 <span class="o">=</span> vector.set(<span class="n">2</span>, <span class="n">0</span>)                 <span class="c"># =&gt; Vector [1, 2, 0, 4, 5]</span>
-vector2 <span class="o">=</span> vector2.push(<span class="n">42</span>)                 <span class="c"># =&gt; Vector [1, 2, 0, 4, 5, 42]</span>
+vector2 <span class="o">=</span> vector.set(<span class="n">2</span>, <span class="n">0</span>)                 <span class="c"># &#61;&gt; Vector &#91;1, 2, 0, 4, 5&#93;</span>
+vector2 <span class="o">=</span> vector2.push(<span class="n">42</span>)                 <span class="c"># &#61;&gt; Vector &#91;1, 2, 0, 4, 5, 42&#93;</span>
 
 <span class="c"># The original vector is unchanged:</span>
-vector                                     <span class="c"># =&gt; Vector [1, 2, 3, 4, 5]</span>
+vector                                     <span class="c"># &#61;&gt; Vector &#91;1, 2, 3, 4, 5&#93;</span>
 
-<span class="c"># Bulk updates can be made faster by using `transient`:</span>
+<span class="c"># Bulk updates can be made faster by using &#96;transient&#96;:</span>
 vector3 <span class="o">=</span> vector.transient <span class="k">do</span> <span class="o">|</span>v<span class="o">|</span>
   <span class="n">1000</span>.times { <span class="o">|</span>i<span class="o">|</span> v <span class="o">=</span> v.push(i) }
 <span class="k">end</span></code></pre>
@@ -156,17 +156,17 @@ vector3 <span class="o">=</span> vector.transient <span class="k">do</span> <spa
 <h3>Map (<a href="http://lucaong.github.io/immutable/api/Immutable/Map.html" target="_blank">API docs</a>)</h3>
 
 <pre><code class='language-crystal'><span class="c"># Map behaves mostly like a Hash:</span>
-map <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>[{ foo: <span class="n">1</span>, bar: <span class="n">2</span> }]   <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
-map[<span class="n">:foo</span>]                                  <span class="c"># =&gt; 1</span>
+map <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>[{ foo: <span class="n">1</span>, bar: <span class="n">2</span> }]   <span class="c"># &#61;&gt; Map &#123;foo: 1, bar: 2&#125;</span>
+map[<span class="n">:foo</span>]                                  <span class="c"># &#61;&gt; 1</span>
 
 <span class="c"># Updating a Map always returns a modified copy:</span>
-map2 <span class="o">=</span> map.set(<span class="n">:baz</span>, <span class="n">3</span>)                    <span class="c"># =&gt; Map {foo: 1, bar: 2, baz: 3}</span>
-map2 <span class="o">=</span> map2.delete(<span class="n">:bar</span>)                   <span class="c"># =&gt; Map {foo: 1, baz: 3}</span>
+map2 <span class="o">=</span> map.set(<span class="n">:baz</span>, <span class="n">3</span>)                    <span class="c"># &#61;&gt; Map &#123;foo: 1, bar: 2, baz: 3&#125;</span>
+map2 <span class="o">=</span> map2.delete(<span class="n">:bar</span>)                   <span class="c"># &#61;&gt; Map &#123;foo: 1, baz: 3&#125;</span>
 
 <span class="c"># The original map in unchanged:</span>
-map                                        <span class="c"># =&gt; Map {foo: 1, bar: 2}</span>
+map                                        <span class="c"># &#61;&gt; Map &#123;foo: 1, bar: 2&#125;</span>
 
-<span class="c"># Bulk updates can be made faster by using `transient`:</span>
+<span class="c"># Bulk updates can be made faster by using &#96;transient&#96;:</span>
 map3 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>(<span class="t">String</span>, <span class="t">Int32</span>)<span class="o">[]</span>
 map3 <span class="o">=</span> map3.transient <span class="k">do</span> <span class="o">|</span>m<span class="o">|</span>
   <span class="n">1000</span>.times { <span class="o">|</span>i<span class="o">|</span> m <span class="o">=</span> m.set(i.to_s, i) }
@@ -174,11 +174,11 @@ map3 <span class="o">=</span> map3.transient <span class="k">do</span> <span cla
 
 <h3>Nested structures</h3>
 
-<pre><code class='language-crystal'><span class="c"># Nested arrays/hashes can be turned into immutable versions with the `.from`</span>
+<pre><code class='language-crystal'><span class="c"># Nested arrays/hashes can be turned into immutable versions with the &#96;.from&#96;</span>
 <span class="c"># method:</span>
 
 nested <span class="o">=</span> <span class="t">Immutable</span>.from({ name: <span class="s">&quot;Ada&quot;</span>, colors: [<span class="n">:blue</span>, <span class="n">:green</span>, <span class="n">:red</span>] })
-nested <span class="c"># =&gt; Map {:name =&gt; &quot;Ada&quot;, :colors =&gt; Vector [:blue, :green, :red]}</span></code></pre>
+nested <span class="c"># &#61;&gt; Map &#123;:name &#61;&gt; &quot;Ada&quot;, :colors &#61;&gt; Vector &#91;:blue, :green, :red&#93;&#125;</span></code></pre>
 
 <h2>Implementation</h2>
 
@@ -203,12 +203,12 @@ that also guarantees O(Log32) lookups and updates.</p>
 <p>Although not a port, this project takes inspiration from similar libraries and
 persistent data structure implementations like:</p>
 
-<ul><li><a href="http://clojure.org/reference/data_structures" target="_blank">Clojure persistent collections</a></li><li><a href="https://github.com/hamstergem/hamster" target="_blank">The Hamster gem for Ruby</a></li></ul>
+<ul><li><a href="http://clojure.org/reference/data_structures" target="_blank">Clojure persistent collections</a></li><li><a href="https://github.com/hamstergem/hamster" target="_blank">The Hamster gem for Ruby</a></li></ul></ul>
 
 <p>When researching on the topic of persistent data structure implementation, these
 blog posts have been of great help:</p>
 
-<ul><li><a href="http://hypirion.com/musings/understanding-persistent-vector-pt-1" target="_blank">Understanding Clojure's Persistent Vector</a> (also <a href="http://hypirion.com/musings/understanding-persistent-vector-pt-2" target="_blank">Part 2</a>, <a href="http://hypirion.com/musings/understanding-persistent-vector-pt-3" target="_blank">Part 3</a> and <a href="http://hypirion.com/musings/understanding-clojure-transients" target="_blank">Understanding Clojure's Transients</a>)</li><li><a href="http://blog.higher-order.net/2009/09/08/understanding-clojures-persistenthashmap-deftwice.html" target="_blank">Understanding Clojure's Persistent Hash Map</a></li></ul>
+<ul><li><a href="http://hypirion.com/musings/understanding-persistent-vector-pt-1" target="_blank">Understanding Clojure's Persistent Vector</a> (also <a href="http://hypirion.com/musings/understanding-persistent-vector-pt-2" target="_blank">Part 2</a>, <a href="http://hypirion.com/musings/understanding-persistent-vector-pt-3" target="_blank">Part 3</a> and <a href="http://hypirion.com/musings/understanding-clojure-transients" target="_blank">Understanding Clojure's Transients</a>)</li><li><a href="http://blog.higher-order.net/2009/09/08/understanding-clojures-persistenthashmap-deftwice.html" target="_blank">Understanding Clojure's Persistent Hash Map</a></li></ul></ul>
 
 <p>Big thanks to their authors for the great job explaining the internals of these
 data structures.</p>
