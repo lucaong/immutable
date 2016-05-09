@@ -58,9 +58,9 @@ module Immutable
       end
 
       def each
-        (0...size).step(BLOCK_SIZE).map do |i|
+        FlattenLeaves.new((0...size).step(BLOCK_SIZE).map do |i|
           leaf_for(i).values.each
-        end.flatten
+        end)
       end
 
       def push_leaf(leaf : Array(T), from : UInt64? = nil) : Trie(T)
@@ -221,6 +221,34 @@ module Immutable
       protected def full?
         return @values.size == BLOCK_SIZE if leaf?
         @size >> ((@levels + 1) * BITS_PER_LEVEL) > 0
+      end
+
+      # :nodoc:
+      class FlattenLeaves(T)
+        include Iterator(T)
+
+        alias RangeStep = Range::StepIterator(Range(Int32, Int32), Int32, UInt32)
+
+        @chunk : Array::ItemIterator(T) | Iterator::Stop
+
+        def initialize(@generator : Iterator::Map(RangeStep, Int32, Array::ItemIterator(T)))
+          @chunk = @generator.next
+        end
+
+        def next : T | Iterator::Stop
+          chunk = @chunk
+          if chunk.is_a?(Iterator::Stop)
+            Iterator::Stop.new
+          else
+            elem = chunk.next
+            if elem.is_a?(Iterator::Stop)
+              @chunk = @generator.next
+              self.next
+            else
+              elem
+            end
+          end
+        end
       end
     end
   end
