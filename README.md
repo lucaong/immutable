@@ -65,15 +65,15 @@ end
 
 ```crystal
 # Map behaves mostly like a Hash:
-map = Immutable::Map[{ foo: 1, bar: 2 }]   # => Map {foo: 1, bar: 2}
+map = Immutable::Map[{:a => 1, :b => 2 }]  # => Map {:a => 1, :b => 2}
 map[:foo]                                  # => 1
 
 # Updating a Map always returns a modified copy:
-map2 = map.set(:baz, 3)                    # => Map {foo: 1, bar: 2, baz: 3}
-map2 = map2.delete(:bar)                   # => Map {foo: 1, baz: 3}
+map2 = map.set(:c, 3)                      # => Map {:a => 1, :b => 2, :c => 3}
+map2 = map2.delete(:b)                     # => Map {:a => 1, :c => 3}
 
 # The original map in unchanged:
-map                                        # => Map {foo: 1, bar: 2}
+map                                        # => Map {:a => 1, :b => 2}
 
 # Bulk updates can be made faster by using `transient`:
 map3 = Immutable::Map(String, Int32)[]
@@ -88,7 +88,7 @@ end
 # Nested arrays/hashes can be turned into immutable versions with the `.from`
 # method:
 
-nested = Immutable.from({ name: "Ada", colors: [:blue, :green, :red] })
+nested = Immutable.from({:name => "Ada", :colors => [:blue, :green, :red] })
 nested # => Map {:name => "Ada", :colors => Vector [:blue, :green, :red]}
 ```
 
