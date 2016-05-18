@@ -156,15 +156,15 @@ vector3 <span class="o">=</span> vector.transient <span class="k">do</span> <spa
 <h3>Map (<a href="http://lucaong.github.io/immutable/api/Immutable/Map.html" target="_blank">API docs</a>)</h3>
 
 <pre><code class='language-crystal'><span class="c"># Map behaves mostly like a Hash:</span>
-map <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>[{ foo: <span class="n">1</span>, bar: <span class="n">2</span> }]   <span class="c"># &#61;&gt; Map &#123;foo: 1, bar: 2&#125;</span>
+map <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>[{<span class="n">:a</span> => <span class="n">1</span>, <span class="n">:b</span> => <span class="n">2</span> }]  <span class="c"># &#61;&gt; Map &#123;:a &#61;&gt; 1, :b &#61;&gt; 2&#125;</span>
 map[<span class="n">:foo</span>]                                  <span class="c"># &#61;&gt; 1</span>
 
 <span class="c"># Updating a Map always returns a modified copy:</span>
-map2 <span class="o">=</span> map.set(<span class="n">:baz</span>, <span class="n">3</span>)                    <span class="c"># &#61;&gt; Map &#123;foo: 1, bar: 2, baz: 3&#125;</span>
-map2 <span class="o">=</span> map2.delete(<span class="n">:bar</span>)                   <span class="c"># &#61;&gt; Map &#123;foo: 1, baz: 3&#125;</span>
+map2 <span class="o">=</span> map.set(<span class="n">:c</span>, <span class="n">3</span>)                      <span class="c"># &#61;&gt; Map &#123;:a &#61;&gt; 1, :b &#61;&gt; 2, :c &#61;&gt; 3&#125;</span>
+map2 <span class="o">=</span> map2.delete(<span class="n">:b</span>)                     <span class="c"># &#61;&gt; Map &#123;:a &#61;&gt; 1, :c &#61;&gt; 3&#125;</span>
 
 <span class="c"># The original map in unchanged:</span>
-map                                        <span class="c"># &#61;&gt; Map &#123;foo: 1, bar: 2&#125;</span>
+map                                        <span class="c"># &#61;&gt; Map &#123;:a &#61;&gt; 1, :b &#61;&gt; 2&#125;</span>
 
 <span class="c"># Bulk updates can be made faster by using &#96;transient&#96;:</span>
 map3 <span class="o">=</span> <span class="t">Immutable</span><span class="t">::</span><span class="t">Map</span>(<span class="t">String</span>, <span class="t">Int32</span>)<span class="o">[]</span>
@@ -177,7 +177,7 @@ map3 <span class="o">=</span> map3.transient <span class="k">do</span> <span cla
 <pre><code class='language-crystal'><span class="c"># Nested arrays/hashes can be turned into immutable versions with the &#96;.from&#96;</span>
 <span class="c"># method:</span>
 
-nested <span class="o">=</span> <span class="t">Immutable</span>.from({ name: <span class="s">&quot;Ada&quot;</span>, colors: [<span class="n">:blue</span>, <span class="n">:green</span>, <span class="n">:red</span>] })
+nested <span class="o">=</span> <span class="t">Immutable</span>.from({<span class="n">:name</span> => <span class="s">&quot;Ada&quot;</span>, <span class="n">:colors</span> => [<span class="n">:blue</span>, <span class="n">:green</span>, <span class="n">:red</span>] })
 nested <span class="c"># &#61;&gt; Map &#123;:name &#61;&gt; &quot;Ada&quot;, :colors &#61;&gt; Vector &#91;:blue, :green, :red&#93;&#125;</span></code></pre>
 
 <h2>Implementation</h2>
