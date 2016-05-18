@@ -6,9 +6,9 @@
 # A map can be constructed from a hash:
 #
 # ```
-# Immutable::Map(Symbol, Int32).new      # => Map {}
-# Immutable::Map.new({ foo: 1, bar: 2 }) # => Map {:foo => 1, :bar => 2}
-# Immutable::Map[{ foo: 1, bar: 2 }]     # => Map {:foo => 1, :bar => 2}
+# Immutable::Map(Symbol, Int32).new          # => Map {}
+# Immutable::Map.new({:foo => 1, :bar => 2}) # => Map {:foo => 1, :bar => 2}
+# Immutable::Map[{:foo => 1, :bar => 2 }]    # => Map {:foo => 1, :bar => 2}
 # ```
 #
 # `Immutable::Map` works similarly to a regular hash, except it never mutates in
@@ -31,7 +31,7 @@ module Immutable
     # Creates a map with the given key-values
     #
     # ```
-    # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
+    # m = Immutable::Map.new({:a => 1, :b => true}) # Map {:a => 1, :b => true}
     # ```
     def initialize(hash : Hash(K, V) = {} of K => V)
       @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
@@ -46,7 +46,7 @@ module Immutable
     # return value is returned.
     #
     # ```
-    # m = Immutable::Map.new({ foo: 123, bar: 321 }) # Map {foo: 123, bar: 321}
+    # m = Immutable::Map.new({:a => 123, :b => 321 }) # Map {:a => 123, :b => 321}
     # ```
     def initialize(hash : Hash(K, V) = {} of K => V, &block : K -> V)
       @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
@@ -63,7 +63,7 @@ module Immutable
     # Creates a map with the given key-values.
     #
     # ```
-    # m = Immutable::Map.new([{:foo, 123}, {:bar, 321}]) # Map {foo: 123, bar: 321}
+    # m = Immutable::Map.new([{:a, 123}, {:b, 321}]) # Map {:a => 123, :b => 321}
     # ```
     def self.new(e : Enumerable(Enumerable(U)))
       t = e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
@@ -75,7 +75,7 @@ module Immutable
     # Creates a map with the given key-values
     #
     # ```
-    # m = Immutable::Map[{ foo: 123, bar: 321 }] # Map {foo: 123, bar: 321}
+    # m = Immutable::Map[{:a => 123, :b => 321}] # Map {:a => 123, :b => 321}
     # ```
     def self.[](hash : Hash(K, V) = {} of K => V)
       new(hash)
@@ -145,7 +145,7 @@ module Immutable
     # Returns a modified copy of the map where key is associated to value
     #
     # ```
-    # m  = Immutable::Map[{ foo: 123 }]
+    # m  = Immutable::Map[{:foo => 123}]
     # m2 = m.set(:bar, 321) # => Map {:foo => 123, :bar => 321}
     # m                     # => Map {:foo => 123}
     # ```
@@ -158,7 +158,7 @@ module Immutable
     # key is not existing, it raises `KeyError`
     #
     # ```
-    # m  = Immutable::Map[{ foo: 123, bar: 321 }]
+    # m  = Immutable::Map[{:foo => 123, :bar => 321 }]
     # m2 = m.delete(:bar) # => Map {:foo => 123}
     # m                   # => Map {:foo => 123, bar: 321}
     # ```
@@ -172,7 +172,7 @@ module Immutable
     #
     # ```
     # map = Immutable::Map[{"foo" => "bar"}]
-    # merged = map.merge({"baz": "qux"})
+    # merged = map.merge({"baz" => "qux"})
     # merged # => Map {"foo" => "bar", "baz" => "qux"}
     # map    # => Map {"foo" => "bar"}
     # ```
@@ -189,7 +189,7 @@ module Immutable
     #
     # ```
     # map = Immutable::Map[{"foo" => "bar"}]
-    # merged = map.merge(Immutable::Map[{"baz": "qux"}])
+    # merged = map.merge(Immutable::Map[{"baz" => "qux"}])
     # merged # => Map {"foo" => "bar", "baz" => "qux"}
     # map    # => Map {"foo" => "bar"}
     # ```
