@@ -34,7 +34,7 @@ module Immutable
     # m = Immutable::Map.new({:a => 1, :b => true}) # Map {:a => 1, :b => true}
     # ```
     def initialize(hash : Hash(K, V) = {} of K => V)
-      @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
+      @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, (k, v)|
         trie.set!(k, v, object_id)
       end
       @trie.clear_owner!
@@ -49,7 +49,7 @@ module Immutable
     # m = Immutable::Map.new({:a => 123, :b => 321 }) # Map {:a => 123, :b => 321}
     # ```
     def initialize(hash : Hash(K, V) = {} of K => V, &block : K -> V)
-      @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, k, v|
+      @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, (k, v)|
         trie.set!(k, v, object_id)
       end
       @trie.clear_owner!
@@ -66,8 +66,8 @@ module Immutable
     # m = Immutable::Map.new([{:a, 123}, {:b, 321}]) # Map {:a => 123, :b => 321}
     # ```
     def self.new(e : Enumerable(Enumerable(U)))
-      t = e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
-        m.set(kv[0], kv[1])
+      t = e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, (k, v)|
+        m.set(k, v)
       end
       t.persist!
     end
@@ -177,7 +177,7 @@ module Immutable
     # map    # => Map {"foo" => "bar"}
     # ```
     def merge(hash : Hash(K, V))
-      trie = hash.reduce(@trie) do |trie, key, value|
+      trie = hash.reduce(@trie) do |trie, (key, value)|
         trie.set(key, value)
       end
       Map.new(trie, @block)
@@ -194,8 +194,8 @@ module Immutable
     # map    # => Map {"foo" => "bar"}
     # ```
     def merge(map : Map(K, V))
-      trie = map.reduce(@trie) do |trie, keyval|
-        trie.set(keyval[0], keyval[1])
+      trie = map.reduce(@trie) do |trie, (key, value)|
+        trie.set(key, value)
       end
       Map.new(trie, @block)
     end
@@ -269,7 +269,7 @@ module Immutable
     # key # => "baz"
     # ```
     def each_key
-      each.map { |keyval| keyval.first }
+      each.map(&.first)
     end
 
 
@@ -300,7 +300,7 @@ module Immutable
     # val # => "qux"
     # ```
     def each_value
-      each.map { |keyval| keyval.last }
+      each.map(&.last)
     end
 
     # Returns only the keys as an `Array`. The order is not specified.
@@ -342,8 +342,7 @@ module Immutable
     # map.hash # => 63502
     # ```
     def hash
-      reduce(size * 43) do |memo, keyval|
-        key, value = keyval.first, keyval.last
+      reduce(size * 43) do |memo, (key, value)|
         43 * memo + (key.hash ^ value.hash)
       end
     end
@@ -371,14 +370,14 @@ module Immutable
       @block : (K -> V)?
 
       def initialize(hash : Hash(K, V) = {} of K => V)
-        @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, k, v|
+        @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, (k, v)|
           h.set!(k, v, object_id)
         end
         @block = nil
       end
 
       def initialize(hash : Hash(K, V) = {} of K => V, &block : K -> V)
-        @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, k, v|
+        @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, (k, v)|
           h.set!(k, v, object_id)
         end
         @block = block
@@ -389,8 +388,8 @@ module Immutable
       end
 
       def self.new(e : Enumerable(Enumerable(U)))
-        e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, kv|
-          m.set!(kv[0], kv[1], object_id)
+        e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, (k, v)|
+          m.set!(k, v, object_id)
         end
       end
 
@@ -410,15 +409,15 @@ module Immutable
       end
 
       def merge(hash : Hash(K, V))
-        @trie = hash.reduce(@trie) do |trie, key, value|
+        @trie = hash.reduce(@trie) do |trie, (key, value)|
           trie.set!(key, value, object_id)
         end
         self
       end
 
       def merge(map : Map(K, V))
-        @trie = map.reduce(@trie) do |trie, keyval|
-          trie.set!(keyval[0], keyval[1], object_id)
+        @trie = map.reduce(@trie) do |trie, (key, value)|
+          trie.set!(key, value, object_id)
         end
         self
       end
