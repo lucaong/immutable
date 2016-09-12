@@ -66,10 +66,7 @@ module Immutable
     # m = Immutable::Map.new([{:a, 123}, {:b, 321}]) # Map {:a => 123, :b => 321}
     # ```
     def self.new(e : Enumerable(Enumerable(U)))
-      t = e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, (k, v)|
-        m.set(k, v)
-      end
-      t.persist!
+      Transient.new(e).persist!
     end
 
     # Creates a map with the given key-values
@@ -366,19 +363,16 @@ module Immutable
     end
 
     class Transient(K, V) < Map(K, V)
-      @trie  : Trie(K, V)
-      @block : (K -> V)?
-
       def initialize(hash : Hash(K, V) = {} of K => V)
-        @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, (k, v)|
-          h.set!(k, v, object_id)
+        @trie = hash.reduce(Trie(K, V).empty(object_id)) do |t, (k, v)|
+          t.set!(k, v, object_id)
         end
         @block = nil
       end
 
       def initialize(hash : Hash(K, V) = {} of K => V, &block : K -> V)
-        @trie  = hash.reduce(Trie(K, V).empty(object_id)) do |h, (k, v)|
-          h.set!(k, v, object_id)
+        @trie = hash.reduce(Trie(K, V).empty(object_id)) do |t, (k, v)|
+          t.set!(k, v, object_id)
         end
         @block = block
       end
@@ -389,7 +383,7 @@ module Immutable
 
       def self.new(e : Enumerable(Enumerable(U)))
         e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, (k, v)|
-          m.set!(k, v, object_id)
+          m.set(k, v)
         end
       end
 

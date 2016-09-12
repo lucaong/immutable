@@ -59,7 +59,7 @@ module Immutable
 
       def each
         FlattenLeaves.new((0...size).step(BLOCK_SIZE).map do |i|
-          leaf_for(i).values.each
+          leaf_for(i).values.each.as(Iterator(T))
         end)
       end
 
@@ -227,11 +227,9 @@ module Immutable
       class FlattenLeaves(T)
         include Iterator(T)
 
-        alias RangeStep = Range::StepIterator(Range(Int32, Int32), Int32, UInt32)
+        @chunk : Iterator(T) | Iterator::Stop
 
-        @chunk : Array::ItemIterator(T) | Iterator::Stop
-
-        def initialize(@generator : Iterator::Map(RangeStep, Int32, Array::ItemIterator(T)))
+        def initialize(@generator : Iterator(Iterator(T)))
           @chunk = @generator.next
         end
 

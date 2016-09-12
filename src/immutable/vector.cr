@@ -396,8 +396,8 @@ module Immutable
     # v1 + v3 # => Vector [1, 2, "a"]
     # ```
     def +(other : Vector(U))
-      trie = @trie as Trie(T | U)
-      tail = @tail as Array(T | U)
+      trie = @trie.as(Trie(T | U))
+      tail = @tail.as(Array(T | U))
       other.each_slice(Trie::BLOCK_SIZE) do |slice|
         leaf_tail = (tail + slice)
         trie = trie.push_leaf!(leaf_tail.first(Trie::BLOCK_SIZE), object_id)
@@ -435,7 +435,7 @@ module Immutable
     def &(other : Vector(U))
       return Vector(T).new if empty? || other.empty?
       set = other.to_lookup_set
-      intersection = select do |elem|
+      intersection = self.select do |elem|
         in_set = set.includes?(elem)
         set.delete(elem)
         in_set
@@ -542,9 +542,6 @@ module Immutable
     end
 
     class Transient(T) < Vector(T)
-      @trie : Trie(T)
-      @tail : Array(T)
-
       def initialize(@trie : Trie(T), @tail : Array(T))
       end
 

@@ -71,7 +71,7 @@ module Immutable
 
       def each
         children_iter = @children.each.map do |child|
-          child.each as Iterator::Chain(Array::ItemIterator({K, V}), EntryIterator(K, V), {K, V}, {K, V})
+          child.each.as(Iterator({K, V}))
         end
         @values.each.chain(EntryIterator(K, V).new(children_iter))
       end
@@ -321,11 +321,8 @@ module Immutable
       class EntryIterator(K, V)
         include Iterator(Tuple(K, V))
 
-        @iterator  : Map(Array::ItemIterator(Trie(K, V)), Trie(K, V), Chain(Array::ItemIterator({K, V}), Trie::EntryIterator(K, V), {K, V}, {K, V}))
-
-        @generator : Chain(Array::ItemIterator({K, V}), Trie::EntryIterator(K, V), {K, V}, {K, V}) |
-                     Map(Array::ItemIterator(Trie(K, V)), Trie(K, V), Chain(Array::ItemIterator({K, V}), Trie::EntryIterator(K, V), {K, V}, {K, V}))
-
+        @iterator  : Iterator(Iterator({K, V}))
+        @generator : Iterator({K, V}) | Iterator(Iterator({K, V}))
         @top : Bool
 
         def initialize(@iterator)
