@@ -197,11 +197,11 @@ module Immutable
       Map.new(trie, @block)
     end
 
-    def merge(hash : Hash(L, W))
+    def merge(hash : Hash(L, W)) forall L, W
       Transient(K | L, V | W).new.merge(self).merge(hash).persist!
     end
 
-    def merge(map : Map(L, W))
+    def merge(map : Map(L, W)) forall L, W
       Transient(K | L, V | W).new.merge(self).merge(map).persist!
     end
 
@@ -344,12 +344,12 @@ module Immutable
       end
     end
 
-    def ==(other : Map(L, W))
+    def ==(other : Map)
       return true if @trie.same?(other.trie)
       return false unless size == other.size
       all? do |kv|
         entry = other.trie.find_entry(kv[0])
-        entry && entry.value == kv[1]
+        entry && (entry.value == kv[1])
       end
     end
 
@@ -416,11 +416,11 @@ module Immutable
         self
       end
 
-      def merge(hash : Hash(L, W))
+      def merge(hash : Hash(L, W)) forall L, W
         Transient(K | L, V | W).new.merge(self).merge(hash)
       end
 
-      def merge(map : Map(L, W))
+      def merge(map : Map(L, W)) forall L, W
         Transient(K | L, V | W).new.merge(self).merge(map)
       end
     end
