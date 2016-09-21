@@ -123,7 +123,7 @@ module Immutable
         self
       end
 
-      protected def lookup(index : Int32, &block : Values(K, V) -> U)
+      protected def lookup(index : Int32, &block : Values(K, V) -> U) forall U
         if leaf_of?(index)
           yield @values
         else

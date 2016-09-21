@@ -395,7 +395,7 @@ module Immutable
     # v1 + v2 # => Vector [1, 2, 2, 3]
     # v1 + v3 # => Vector [1, 2, "a"]
     # ```
-    def +(other : Vector(U))
+    def +(other : Vector(U)) forall U
       trie = @trie.as(Trie(T | U))
       tail = @tail.as(Array(T | U))
       other.each_slice(Trie::BLOCK_SIZE) do |slice|
@@ -415,7 +415,7 @@ module Immutable
     # v2 = Immutable::Vector[2, 1]
     # v1 - v2 => Vector [3]
     # ```
-    def -(other : Vector(U))
+    def -(other : Vector(U)) forall U
       set = other.to_lookup_set
       elems = reject do |elem|
         set.includes?(elem)
@@ -432,7 +432,7 @@ module Immutable
     # v2 = Immutable::Vector[1, 2, 3]
     # v1 & v2 # => Vector [1, 3]
     # ```
-    def &(other : Vector(U))
+    def &(other : Vector(U)) forall U
       return Vector(T).new if empty? || other.empty?
       set = other.to_lookup_set
       intersection = self.select do |elem|
@@ -451,7 +451,7 @@ module Immutable
     # v2 = Immutable::Vector["c", "d", "a"]
     # v1 | v2 # => Vector [1, 3] # => Vector ["a", "b", "c", "d"]
     # ```
-    def |(other : Vector(U))
+    def |(other : Vector(U)) forall U
       set = Set(T | U).new
       union = reduce([] of T | U) do |union, elem|
         union << elem unless set.includes?(elem)
