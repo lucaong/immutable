@@ -29,7 +29,7 @@ describe Immutable do
         m[:xxx].should eq(42)
       end
 
-      it "with an enumerable, it creates and initialize an immutable map" do
+      it "with an Enumerable of {key, val} tuples, it creates and initialize an immutable map" do
         m = Immutable::Map.new([{:foo, 1}, {:bar, 2}])
         m[:bar].should eq(2)
       end

@@ -65,7 +65,7 @@ module Immutable
     # ```
     # m = Immutable::Map.new([{:a, 123}, {:b, 321}]) # Map {:a => 123, :b => 321}
     # ```
-    def self.new(e : Enumerable(Enumerable(U)))
+    def self.new(e : Enumerable({_, _}))
       Transient.new(e).persist!
     end
 
@@ -118,7 +118,7 @@ module Immutable
 
     # Returns the value associated with the given key, if existing, else
     # executes the given block and returns its value
-    def fetch(key : K, &block : K -> U)
+    def fetch(key : K, &block : K -> _)
       @trie.fetch(key, &block)
     end
 
@@ -381,8 +381,8 @@ module Immutable
       def initialize(@trie : Trie(K, V), @block : (K -> V)? = nil)
       end
 
-      def self.new(e : Enumerable(Enumerable(U)))
-        e.reduce(Transient(typeof(e.first[0]), typeof(e.first[1])).new) do |m, (k, v)|
+      def self.new(e : Enumerable({L, W}))
+        e.reduce(Transient(L, W).new) do |m, (k, v)|
           m.set(k, v)
         end
       end

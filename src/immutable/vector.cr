@@ -415,7 +415,7 @@ module Immutable
     # v2 = Immutable::Vector[2, 1]
     # v1 - v2 => Vector [3]
     # ```
-    def -(other : Vector(U)) forall U
+    def -(other : Vector(_))
       set = other.to_lookup_set
       elems = reject do |elem|
         set.includes?(elem)
@@ -432,7 +432,7 @@ module Immutable
     # v2 = Immutable::Vector[1, 2, 3]
     # v1 & v2 # => Vector [1, 3]
     # ```
-    def &(other : Vector(U)) forall U
+    def &(other : Vector(_))
       return Vector(T).new if empty? || other.empty?
       set = other.to_lookup_set
       intersection = self.select do |elem|

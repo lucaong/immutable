@@ -36,7 +36,7 @@ module Immutable
         lookup(key.hash) { |hash| hash[key] }
       end
 
-      def fetch(key : K, &block : K -> U)
+      def fetch(key : K, &block : K -> _)
         lookup(key.hash) { |hash| hash.fetch(key, &block) }
       end
 
@@ -123,7 +123,7 @@ module Immutable
         self
       end
 
-      protected def lookup(index : Int32, &block : Values(K, V) -> U) forall U
+      protected def lookup(index : Int32, &block : Values(K, V) -> _)
         if leaf_of?(index)
           yield @values
         else
