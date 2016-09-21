@@ -5,7 +5,10 @@ GIT_STATUS = $(shell git status -s)
 docsite:
 	crystal docs && git checkout gh-pages && mkdir -p api && cp -r doc/. api && git add api && git commit -m "generate docs" && git push && git checkout master
 
-release:
+test:
+	crystal spec
+
+release: test
 	@test "$(VERSION)" == "$(CONST_VERSION)" || { echo "Error: version in shards.yml does not match version in code"; exit 1; }
 	@test "$(GIT_STATUS)" == "" || { echo "Error: uncommitted changes"; exit 1; }
 	git fetch && git tag v$(VERSION) origin/master && git push origin v$(VERSION)
