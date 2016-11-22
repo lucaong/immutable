@@ -33,7 +33,7 @@ require "./vector/trie"
 module Immutable
   class Vector(T)
     include Enumerable(T)
-    include Iterable
+    include Iterable(T)
     include Comparable(Vector)
 
     @trie : Trie(T)
