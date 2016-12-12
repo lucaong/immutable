@@ -31,10 +31,6 @@ module Immutable
         puts ""
     end
 
-    def access_trie
-        @trie
-    end
-
     def uncons
         h = head?
         t = tail?
