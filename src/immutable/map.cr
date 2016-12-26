@@ -381,7 +381,7 @@ module Immutable
       def initialize(@trie : Trie(K, V), @block : (K -> V)? = nil)
       end
 
-      def self.new(e : Enumerable({L, W}))
+      def self.new(e : Enumerable({L, W})) forall L, W
         e.reduce(Transient(L, W).new) do |m, (k, v)|
           m.set(k, v)
         end
