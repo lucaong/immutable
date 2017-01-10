@@ -216,6 +216,13 @@ describe Immutable do
       end
     end
 
+    describe "#to_json" do
+      it "serializes the same way as hash" do
+        m = Immutable::Map.new({:foo => 123, :bar => 321})
+        m.to_json.should eq({:foo => 123, :bar => 321}.to_json)
+      end
+    end
+
     describe "#hash" do
       it "returns a different hash code for different maps" do
         m1 = Immutable::Map.new({"foo" => "bar"})

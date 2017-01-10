@@ -332,6 +332,17 @@ module Immutable
       to_h.to_s(io)
     end
 
+    # Returns the JSON serialization of this map
+    def to_json(json : JSON::Builder)
+      json.object do
+        each do |key, value|
+          json.field key do
+            value.to_json(json)
+          end
+        end
+      end
+    end
+
     # See `Object#hash`.
     #
     # ```
