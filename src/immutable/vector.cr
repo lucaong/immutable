@@ -492,14 +492,9 @@ module Immutable
 
     # Appends a JSON string representation of this vector to the given
     # io object
-    def to_json(io : IO)
-      if empty?
-        io << "[]"
-        return
-      end
-
-      io.json_array do |array|
-        each { |elem| array << elem }
+    def to_json(json : JSON::Builder)
+      json.array do
+        each &.to_json(json)
       end
     end
 
