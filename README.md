@@ -66,7 +66,7 @@ end
 ```crystal
 # Map behaves mostly like a Hash:
 map = Immutable::Map[{:a => 1, :b => 2 }]  # => Map {:a => 1, :b => 2}
-map[:foo]                                  # => 1
+map[:a]                                  # => 1
 
 # Updating a Map always returns a modified copy:
 map2 = map.set(:c, 3)                      # => Map {:a => 1, :b => 2, :c => 3}
