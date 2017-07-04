@@ -198,14 +198,19 @@ describe Immutable do
     describe "#inspect" do
       it "returns a string representation of the map" do
         m = Immutable::Map.new({:foo => 123, :bar => 321})
-        m.inspect.should eq("Map {:foo => 123, :bar => 321}")
+        [
+          "Map {:foo => 123, :bar => 321}",
+          "Map {:bar => 321, :foo => 123}"
+        ].should contain(m.inspect)
       end
     end
 
     describe "#to_a" do
       it "returns an array of entries" do
         m = Immutable::Map.new({:foo => 123, :bar => 321})
-        m.to_a.should eq([{:foo, 123}, {:bar, 321}])
+        a = m.to_a
+        a.should contain({:foo, 123})
+        a.should contain({:bar, 321})
       end
     end
 
@@ -217,9 +222,9 @@ describe Immutable do
     end
 
     describe "#to_json" do
-      it "serializes the same way as hash" do
+      it "serializes as a JSON object" do
         m = Immutable::Map.new({:foo => 123, :bar => 321})
-        m.to_json.should eq({:foo => 123, :bar => 321}.to_json)
+        JSON.parse(m.to_json).should eq({"foo" => 123, "bar" => 321})
       end
     end
 
