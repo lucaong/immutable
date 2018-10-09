@@ -15,5 +15,5 @@ release: test
 	open https://github.com/lucaong/immutable/releases/new?tag=v$(VERSION)
 
 benchmark:
-	mkdir -p ./tmp && crystal compile -o ./tmp/benchmarks --release ./benchmarks/benchmarks.cr
+	mkdir -p ./tmp && crystal build -o ./tmp/benchmarks --release ./benchmarks/benchmarks.cr
 	./tmp/benchmarks
