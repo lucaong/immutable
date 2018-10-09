@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.26.0">
+
+
+<link href="../../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../../";
+</script>
+
   <meta id="repository-name" content="github.com/lucaong/immutable">
-  <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="../../../js/doc.js"></script>
   <title>Immutable::Map::Trie::Values(K, V) - github.com/lucaong/immutable</title>
 </head>
 <body>
 
-<div id="types-list">
-  <div id="search-box">
-    <input type="search" id="search-input" placeholder="Search...">
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../../index.html">README</a>
+    </div>
   </div>
 
-  <ul>
-    <li><a href="../../../index.html">README</a></li>
-  </ul>
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
 
-  <ul>
+  <div class="types-list">
+    <ul>
   
   <li class="parent open current" data-id="github.com/lucaong/immutable/Immutable" data-name="immutable">
       <a href="../../../Immutable.html">Immutable</a>
@@ -92,9 +108,11 @@
   
 </ul>
 
+  </div>
 </div>
 
-<div id="main-content">
+
+<div class="main-content">
 <h1 class="type-name">
 
   <span class="kind">struct</span> Immutable::Map::Trie::Values(K, V)
@@ -123,7 +141,9 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L246" target="_blank">immutable/map/trie.cr</a>
+      <a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L240" target="_blank">
+        immutable/map/trie.cr
+      </a>
     
     <br/>
   
@@ -132,7 +152,7 @@
 
 
 
-  <h2>Class Method Summary</h2>
+  <h2>Constructors</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
@@ -146,6 +166,8 @@
       </li>
     
   </ul>
+
+
 
 
 
@@ -221,6 +243,9 @@
     
 
 
+    
+
+
   
     
 
@@ -228,7 +253,13 @@
     
 
 
+    
+
+
   
+    
+
+
     
 
 
@@ -239,9 +270,9 @@
 </div>
 
 
-  <h2>Class Method Detail</h2>
+  <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new&#40;entries:Array&#40;Immutable::Map::Trie::Entry&#40;K,V&#41;&#41;&#41;-class-method">
+    <div class="entry-detail" id="new(entries:Array(Immutable::Map::Trie::Entry(K,V)))-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(entries : Array(<a href="../../../Immutable/Map/Trie/Entry.html">Immutable::Map::Trie::Entry</a>(K, V)))
@@ -252,7 +283,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L253" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L247" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -268,7 +299,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L249" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L243" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -276,9 +307,11 @@
 
 
 
+
+
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="&#91;&#93;&#40;key:K&#41;:V-instance-method">
+    <div class="entry-detail" id="[](key:K):V-instance-method">
       <div class="signature">
         
         def <strong>[]</strong>(key : K) : V
@@ -289,12 +322,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L264" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L258" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="&#91;&#93;&#61;&#40;key:K,value:V&#41;-instance-method">
+    <div class="entry-detail" id="[]=(key:K,value:V)-instance-method">
       <div class="signature">
         
         def <strong>[]=</strong>(key : K, value : V)
@@ -305,12 +338,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L305" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L299" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="&#91;&#93;?&#40;key:K&#41;:V?-instance-method">
+    <div class="entry-detail" id="[]?(key:K):V?-instance-method">
       <div class="signature">
         
         def <strong>[]?</strong>(key : K) : V?
@@ -321,12 +354,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L268" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L262" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="delete&#40;key:K&#41;:V-instance-method">
+    <div class="entry-detail" id="delete(key:K):V-instance-method">
       <div class="signature">
         
         def <strong>delete</strong>(key : K) : V
@@ -337,7 +370,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L283" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L277" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -353,7 +386,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L316" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L310" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -369,12 +402,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L260" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L254" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="fetch&#40;key:K,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="fetch(key:K,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>fetch</strong>(key : K, &block)
@@ -385,12 +418,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L272" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L266" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="fetch&#40;key:K,default&#41;-instance-method">
+    <div class="entry-detail" id="fetch(key:K,default)-instance-method">
       <div class="signature">
         
         def <strong>fetch</strong>(key : K, default)
@@ -401,12 +434,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L279" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L273" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="find_entry&#40;key:K&#41;:Immutable::Map::Trie::Entry&#40;K,V&#41;?-instance-method">
+    <div class="entry-detail" id="find_entry(key:K):Immutable::Map::Trie::Entry(K,V)?-instance-method">
       <div class="signature">
         
         def <strong>find_entry</strong>(key : K) : <a href="../../../Immutable/Map/Trie/Entry.html">Immutable::Map::Trie::Entry</a>(K, V)?
@@ -417,12 +450,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L293" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L287" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="has_key?&#40;key:K&#41;:Bool-instance-method">
+    <div class="entry-detail" id="has_key?(key:K):Bool-instance-method">
       <div class="signature">
         
         def <strong>has_key?</strong>(key : K) : Bool
@@ -433,7 +466,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L300" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L294" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -449,7 +482,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/9286cb5228b9e9506825bb07f45253bc6f1e5595/src/immutable/map/trie.cr#L256" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L250" target="_blank">View source</a>]
         
       </div>
     </div>
