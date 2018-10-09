@@ -3,7 +3,7 @@ CONST_VERSION = $(shell crystal eval 'require "./src/immutable/version"; puts Im
 GIT_STATUS = $(shell git status -s)
 
 docsite:
-	crystal docs && git checkout gh-pages && mkdir -p api && cp -r doc/. api && git add api && git commit -m "generate docs" && git push && git checkout master
+	crystal docs && git checkout gh-pages && mkdir -p api && cp -r docs/. api && git add api && git commit -m "generate docs" && git push && git checkout master
 
 test:
 	crystal spec
