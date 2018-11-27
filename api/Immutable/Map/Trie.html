@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.26.0">
+<meta name="generator" content="Crystal Docs 0.26.1">
 
 
 <link href="../../css/style.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
-      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
     </div>
 
     <div class="repository-links">
@@ -46,8 +46,18 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Transient" data-name="immutable::map::transient(k, v)">
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map/Transient" data-name="immutable::map::transient(k, v)">
       <a href="../../Immutable/Map/Transient.html">Transient</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Transient/Invalid" data-name="immutable::map::transient::invalid">
+      <a href="../../Immutable/Map/Transient/Invalid.html">Invalid</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -86,8 +96,18 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Transient" data-name="immutable::vector::transient(t)">
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Vector/Transient" data-name="immutable::vector::transient(t)">
       <a href="../../Immutable/Vector/Transient.html">Transient</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Transient/Invalid" data-name="immutable::vector::transient::invalid">
+      <a href="../../Immutable/Vector/Transient/Invalid.html">Invalid</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -148,7 +168,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L3" target="_blank">
+      <a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L3" target="_blank">
         immutable/map/trie.cr
       </a>
     
@@ -162,18 +182,23 @@
   
   <dl>
     
+      <dt class="entry-const" id="BITMAP_MASK">
+        <strong>BITMAP_MASK</strong> = <code>((<span class="n">2_u64</span> <span class="o">**</span> <span class="t">BLOCK_SIZE</span>) <span class="o">-</span> <span class="n">1_u64</span>)</code>
+      </dt>
+      
+    
       <dt class="entry-const" id="BITS_PER_LEVEL">
         <strong>BITS_PER_LEVEL</strong> = <code><span class="n">5_u64</span></code>
       </dt>
       
     
       <dt class="entry-const" id="BLOCK_SIZE">
-        <strong>BLOCK_SIZE</strong> = <code>(<span class="n">2</span> <span class="o">**</span> <span class="t">BITS_PER_LEVEL</span>).to_u64</code>
+        <strong>BLOCK_SIZE</strong> = <code><span class="n">2_u64</span> <span class="o">**</span> <span class="t">BITS_PER_LEVEL</span></code>
       </dt>
       
     
       <dt class="entry-const" id="INDEX_MASK">
-        <strong>INDEX_MASK</strong> = <code><span class="t">BLOCK_SIZE</span> <span class="o">-</span> <span class="n">1</span></code>
+        <strong>INDEX_MASK</strong> = <code><span class="t">BLOCK_SIZE</span> <span class="o">-</span> <span class="n">1_u64</span></code>
       </dt>
       
     
@@ -332,7 +357,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -353,7 +378,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -374,7 +399,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L83" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L84" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -390,7 +415,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -406,7 +431,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L63" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -422,7 +447,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L67" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -438,7 +463,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L73" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -454,7 +479,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -470,7 +495,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -486,7 +511,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -502,7 +527,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L36" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -518,7 +543,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -534,7 +559,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -550,7 +575,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L52" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -566,7 +591,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -582,7 +607,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/lucaong/immutable/blob/e3fca057fd005e7b46a273ad75fe09d446d8c78b/src/immutable/map/trie.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>

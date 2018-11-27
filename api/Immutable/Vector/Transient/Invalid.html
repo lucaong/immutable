@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/lucaong/immutable">
-  <title>Immutable::Map::Trie::EntryIterator(K, V) - github.com/lucaong/immutable</title>
+  <title>Immutable::Vector::Transient::Invalid - github.com/lucaong/immutable</title>
 </head>
 <body>
 
@@ -41,7 +41,7 @@
       
         <ul>
   
-  <li class="parent open current" data-id="github.com/lucaong/immutable/Immutable/Map" data-name="immutable::map(k, v)">
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map" data-name="immutable::map(k, v)">
       <a href="../../../Immutable/Map.html">Map</a>
       
         <ul>
@@ -61,7 +61,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/lucaong/immutable/Immutable/Map/Trie" data-name="immutable::map::trie(k, v)">
+  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Map/Trie" data-name="immutable::map::trie(k, v)">
       <a href="../../../Immutable/Map/Trie.html">Trie</a>
       
         <ul>
@@ -71,7 +71,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
+  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Map/Trie/EntryIterator" data-name="immutable::map::trie::entryiterator(k, v)">
       <a href="../../../Immutable/Map/Trie/EntryIterator.html">EntryIterator</a>
       
     </li>
@@ -91,17 +91,17 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Vector" data-name="immutable::vector(t)">
+  <li class="parent open current" data-id="github.com/lucaong/immutable/Immutable/Vector" data-name="immutable::vector(t)">
       <a href="../../../Immutable/Vector.html">Vector</a>
       
         <ul>
   
-  <li class="parent " data-id="github.com/lucaong/immutable/Immutable/Vector/Transient" data-name="immutable::vector::transient(t)">
+  <li class="parent open current" data-id="github.com/lucaong/immutable/Immutable/Vector/Transient" data-name="immutable::vector::transient(t)">
       <a href="../../../Immutable/Vector/Transient.html">Transient</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/lucaong/immutable/Immutable/Vector/Transient/Invalid" data-name="immutable::vector::transient::invalid">
+  <li class=" current" data-id="github.com/lucaong/immutable/Immutable/Vector/Transient/Invalid" data-name="immutable::vector::transient::invalid">
       <a href="../../../Immutable/Vector/Transient/Invalid.html">Invalid</a>
       
     </li>
@@ -135,12 +135,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Immutable::Map::Trie::EntryIterator(K, V)
+  <span class="kind">class</span> Immutable::Vector::Transient::Invalid
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Immutable/Map/Trie/EntryIterator.html">Immutable::Map::Trie::EntryIterator(K, V)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Immutable/Vector/Transient/Invalid.html">Immutable::Vector::Transient::Invalid</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -148,13 +148,6 @@
 
 
 
-
-  <h2>Included Modules</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type">Iterator({K, V})</li>
-  
-  </ul>
 
 
 
@@ -168,8 +161,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L316" target="_blank">
-        immutable/map/trie.cr
+      <a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/vector.cr#L615" target="_blank">
+        immutable/vector.cr
       </a>
     
     <br/>
@@ -179,29 +172,9 @@
 
 
 
-  <h2>Constructors</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new%28iterator%29-class-method" class="signature"><strong>.new</strong>(iterator)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
-
-
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#next%3ATuple%28K%2CV%29%7CStop-instance-method" class="signature"><strong>#next</strong> : Tuple(K, V) | Stop</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -239,60 +212,12 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
-  <h2>Constructor Detail</h2>
-  
-    <div class="entry-detail" id="new(iterator)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(iterator)
-
-        <a class="method-permalink" href="#new%28iterator%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L323" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
-
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="next:Tuple(K,V)|Stop-instance-method">
-      <div class="signature">
-        
-        def <strong>next</strong> : Tuple(K, V) | Stop
-
-        <a class="method-permalink" href="#next%3ATuple%28K%2CV%29%7CStop-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/lucaong/immutable/blob/93563f08f8f7503bd8244230276fb8f7587e83e2/src/immutable/map/trie.cr#L328" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
