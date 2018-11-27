@@ -2,8 +2,9 @@ module Immutable
   class Map(K, V)
     class Trie(K, V)
       BITS_PER_LEVEL = 5_u64
-      BLOCK_SIZE = (2 ** BITS_PER_LEVEL).to_u64
-      INDEX_MASK = BLOCK_SIZE - 1
+      BLOCK_SIZE = 2_u64 ** BITS_PER_LEVEL
+      INDEX_MASK = BLOCK_SIZE - 1_u64
+      BITMAP_MASK = (2_u64 ** BLOCK_SIZE - 1_u64)
 
       include Enumerable(Tuple(K, V))
 
@@ -183,7 +184,7 @@ module Immutable
         child = @children[idx].delete_at_index(index, key)
         if child.empty?
           children = @children.dup.tap { |cs| cs.delete_at(idx) }
-          bitmap   = @bitmap & (i ^ INDEX_MASK)
+          bitmap   = @bitmap & (bitpos(i) ^ BITMAP_MASK)
         else
           children = @children.dup.tap { |cs| cs[idx] = child }
           bitmap   = @bitmap
@@ -197,7 +198,7 @@ module Immutable
         child = @children[idx].delete_at_index!(index, key, from)
         if child.empty?
           @children.delete_at(idx)
-          @bitmap = @bitmap & (i ^ INDEX_MASK)
+          @bitmap = @bitmap & (bitpos(i) ^ BITMAP_MASK)
         else
           @children[idx] = child
         end
