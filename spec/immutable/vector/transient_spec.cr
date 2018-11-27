@@ -28,16 +28,24 @@ describe Immutable::Vector::Transient do
   end
 
   describe "#persist!" do
-    it "returns a persistent immutable vector unaffected by further changes" do
+    it "returns a persistent immutable vector and invalidates the transient" do
       tr = Immutable::Vector::Transient(Int32).new
       100.times { |i| tr = tr.push(i) }
       v = tr.persist!
       v.should be_a(Immutable::Vector(Int32))
-      _, tr = tr.pop
-      _, tr = tr.pop
-      tr = tr.push(100).set(50, 0).set(98, 0)
-      tr.size.should eq(99)
-      tr.last.should eq(0)
+      v.should_not be_a(Immutable::Vector::Transient(Int32))
+      expect_raises Immutable::Vector::Transient::Invalid do
+        tr.pop
+      end
+      expect_raises Immutable::Vector::Transient::Invalid do
+        tr.push(100)
+      end
+      expect_raises Immutable::Vector::Transient::Invalid do
+        tr.set(50, 0)
+      end
+      v.push(100).set(50, 0).set(98, 0)
+      tr.size.should eq(100)
+      tr.last.should eq(99)
       v.size.should eq(100)
       v[50].should eq(50)
       v.last.should eq(99)

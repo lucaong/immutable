@@ -23,13 +23,23 @@ describe Immutable::Map::Transient do
   end
 
   describe "#persist!" do
-    it "returns a persistent immutable vector unaffected by further changes" do
+    it "returns a persistent immutable vector and invalidates the transient" do
       tr = Immutable::Map::Transient(Symbol, Int32).new({:foo => 1, :bar => 2})
       m = tr.persist!
       m.should be_a(Immutable::Map(Symbol, Int32))
       m.should_not be_a(Immutable::Map::Transient(Symbol, Int32))
-      tr = tr.delete(:foo).set(:baz, 3).merge({:qux => 4, :quux => 5})
-      tr.to_h.should eq({:bar => 2, :baz => 3, :qux => 4, :quux => 5})
+      expect_raises Immutable::Map::Transient::Invalid do
+        tr.set(:baz, 3)
+      end
+      expect_raises Immutable::Map::Transient::Invalid do
+        tr.delete(:foo)
+      end
+      expect_raises Immutable::Map::Transient::Invalid do
+        tr.merge({ :qux => 123 })
+        nil
+      end
+      m.delete(:foo).set(:baz, 3).merge({:qux => 4, :quux => 5})
+      tr.to_h.should eq({:foo => 1, :bar => 2})
       m.to_h.should eq({:foo => 1, :bar => 2})
     end
   end

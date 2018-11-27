@@ -374,7 +374,10 @@ module Immutable
     end
 
     class Transient(K, V) < Map(K, V)
+      @valid : Bool
+
       def initialize(hash : Hash(K, V) = {} of K => V)
+        @valid = true
         @trie = hash.reduce(Trie(K, V).empty(object_id)) do |t, (k, v)|
           t.set!(k, v, object_id)
         end
@@ -382,6 +385,7 @@ module Immutable
       end
 
       def initialize(hash : Hash(K, V) = {} of K => V, &block : K -> V)
+        @valid = true
         @trie = hash.reduce(Trie(K, V).empty(object_id)) do |t, (k, v)|
           t.set!(k, v, object_id)
         end
@@ -390,6 +394,7 @@ module Immutable
 
       # :nodoc:
       def initialize(@trie : Trie(K, V), @block : (K -> V)? = nil)
+        @valid = true
       end
 
       def self.new(e : Enumerable({L, W})) forall L, W
@@ -399,21 +404,26 @@ module Immutable
       end
 
       def persist!
+        check_validity!
+        @valid = false
         @trie.clear_owner!
         Map.new(@trie, @block)
       end
 
       def set(key : K, value : V)
+        check_validity!
         @trie = @trie.set!(key, value, object_id)
         self
       end
 
       def delete(key : K)
+        check_validity!
         @trie = @trie.delete!(key, object_id)
         self
       end
 
       def merge(hash : Hash(K, V))
+        check_validity!
         @trie = hash.reduce(@trie) do |trie, (key, value)|
           trie.set!(key, value, object_id)
         end
@@ -421,6 +431,7 @@ module Immutable
       end
 
       def merge(map : Map(K, V))
+        check_validity!
         @trie = map.reduce(@trie) do |trie, (key, value)|
           trie.set!(key, value, object_id)
         end
@@ -428,12 +439,22 @@ module Immutable
       end
 
       def merge(hash : Hash(L, W)) forall L, W
+        check_validity!
         Transient(K | L, V | W).new.merge(self).merge(hash)
       end
 
       def merge(map : Map(L, W)) forall L, W
+        check_validity!
         Transient(K | L, V | W).new.merge(self).merge(map)
       end
+
+      private def check_validity!
+        unless @valid
+          raise Invalid.new("Attempt to use transient map after persisting it")
+        end
+      end
+
+      class Invalid < Exception; end
     end
   end
 end

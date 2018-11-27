@@ -537,26 +537,33 @@ module Immutable
     end
 
     class Transient(T) < Vector(T)
+      @valid : Bool
+
       def initialize(@trie : Trie(T), @tail : Array(T))
+        @valid = true
       end
 
       def initialize
         @trie = Trie(T).empty(object_id)
         @tail = Array(T).new(Trie::BLOCK_SIZE)
+        @valid = true
       end
 
       def initialize(elems : Array(T))
         leaves = elems.size - (elems.size % Trie::BLOCK_SIZE)
         @trie = Trie(T).from(elems[0...leaves], object_id)
         @tail = elems[leaves..-1]
+        @valid = true
       end
 
       def persist!
         @trie.clear_owner!
+        @valid = false
         Vector.new(@trie, @tail.dup)
       end
 
       def push(elem : T)
+        check_validity!
         @tail << elem
         if @tail.size == Trie::BLOCK_SIZE
           @trie = @trie.push_leaf!(@tail, object_id)
@@ -566,15 +573,18 @@ module Immutable
       end
 
       def pop : Tuple(T, Transient(T))
+        check_validity!
         raise IndexError.new("cannot pop empty vector") if empty?
         {last, drop_last { self }}
       end
 
       def pop? : Tuple(T?, Transient(T))
+        check_validity!
         {last?, drop_last { self }}
       end
 
       def set(i : Int, value : T)
+        check_validity!
         i = size + i if i < 0
         raise IndexError.new if i < 0 || i >= size
         if in_tail?(i)
@@ -595,6 +605,14 @@ module Immutable
         end
         self
       end
+
+      private def check_validity!
+        unless @valid
+          raise Invalid.new("Attempt to use transient vector after persisting it")
+        end
+      end
+
+      class Invalid < Exception; end
     end
   end
 end
