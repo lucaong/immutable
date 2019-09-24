@@ -350,8 +350,8 @@ module Immutable
     # map.hash # => 63502
     # ```
     def hash
-      reduce(size * 43) do |memo, (key, value)|
-        43 * memo + (key.hash ^ value.hash)
+      reduce(size &* 43) do |memo, (key, value)|
+        43 &* memo &+ (key.hash ^ value.hash)
       end
     end
 

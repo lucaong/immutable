@@ -134,7 +134,7 @@ module Immutable
       end
 
       private def leaf_of?(index)
-        (index.to_u32 >> (@levels * BITS_PER_LEVEL)) == 0
+        (index.to_u32! >> (@levels * BITS_PER_LEVEL)) == 0
       end
 
       private def set_leaf(index : UInt64, key : K, value : V, from : UInt64?) : Trie(K, V)

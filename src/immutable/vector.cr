@@ -507,8 +507,8 @@ module Immutable
     #
     # See `Object#hash`.
     def hash
-      reduce(41 * size) do |memo, elem|
-        41 * memo + elem.hash
+      reduce(41 &* size) do |memo, elem|
+        41 &* memo &+ elem.hash
       end
     end
 
