@@ -1,5 +1,5 @@
 Benchmark.ips do |b|
-  a  = [] of Int32
+  a = [] of Int32
   a1 = (0..50).to_a
   a2 = (50..100).to_a
   v1 = Immutable::Vector.new(a1)

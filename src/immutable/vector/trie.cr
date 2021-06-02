@@ -2,27 +2,27 @@ module Immutable
   class Vector(T)
     class Trie(T)
       BITS_PER_LEVEL = 5_u32
-      BLOCK_SIZE = (2 ** BITS_PER_LEVEL).to_u32
-      INDEX_MASK = BLOCK_SIZE - 1
+      BLOCK_SIZE     = (2 ** BITS_PER_LEVEL).to_u32
+      INDEX_MASK     = BLOCK_SIZE - 1
 
       include Enumerable(T)
 
       getter :size, :levels
 
       @children : Array(Trie(T))
-      @values   : Array(T)
-      @size     : Int32
-      @levels   : Int32
-      @owner    : UInt64?
+      @values : Array(T)
+      @size : Int32
+      @levels : Int32
+      @owner : UInt64?
 
       def initialize(@children : Array(Trie(T)), @levels : Int32, @owner : UInt64? = nil)
-        @size   = @children.reduce(0) { |sum, child| sum + child.size }
+        @size = @children.reduce(0) { |sum, child| sum + child.size }
         @values = [] of T
       end
 
       def initialize(@values : Array(T), @owner : UInt64? = nil)
-        @size     = @values.size
-        @levels   = 0
+        @size = @values.size
+        @levels = 0
         @children = [] of Trie(T)
       end
 

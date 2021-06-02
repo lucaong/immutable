@@ -8,7 +8,7 @@
 # ```
 # Immutable::Map(Symbol, Int32).new          # => Map {}
 # Immutable::Map.new({:foo => 1, :bar => 2}) # => Map {:foo => 1, :bar => 2}
-# Immutable::Map[{:foo => 1, :bar => 2 }]    # => Map {:foo => 1, :bar => 2}
+# Immutable::Map[{:foo => 1, :bar => 2}]     # => Map {:foo => 1, :bar => 2}
 # ```
 #
 # `Immutable::Map` works similarly to a regular hash, except it never mutates in
@@ -23,7 +23,7 @@ require "./map/trie"
 
 module Immutable
   class Map(K, V)
-    @trie  : Trie(K, V)
+    @trie : Trie(K, V)
     @block : (K -> V)?
 
     include Enumerable(Tuple(K, V))
@@ -46,7 +46,7 @@ module Immutable
     # return value is returned.
     #
     # ```
-    # m = Immutable::Map.new({:a => 123, :b => 321 }) # Map {:a => 123, :b => 321}
+    # m = Immutable::Map.new({:a => 123, :b => 321}) # Map {:a => 123, :b => 321}
     # ```
     def initialize(hash : Hash(K, V) = {} of K => V, &block : K -> V)
       @trie = hash.reduce(Trie(K, V).empty(object_id)) do |trie, (k, v)|
@@ -142,7 +142,7 @@ module Immutable
     # Returns a modified copy of the map where key is associated to value
     #
     # ```
-    # m  = Immutable::Map[{:foo => 123}]
+    # m = Immutable::Map[{:foo => 123}]
     # m2 = m.set(:bar, 321) # => Map {:foo => 123, :bar => 321}
     # m                     # => Map {:foo => 123}
     # ```
@@ -150,12 +150,11 @@ module Immutable
       Map.new(@trie.set(key, value), @block)
     end
 
-
     # Returns a modified copy of the map with the key-value pair removed. If the
     # key is not existing, it raises `KeyError`
     #
     # ```
-    # m  = Immutable::Map[{:foo => 123, :bar => 321 }]
+    # m = Immutable::Map[{:foo => 123, :bar => 321}]
     # m2 = m.delete(:bar) # => Map {:foo => 123}
     # m                   # => Map {:foo => 123, bar: 321}
     # ```
@@ -268,7 +267,6 @@ module Immutable
     def each_key
       each.map(&.first)
     end
-
 
     # Calls the given block for each key-value pair and passes in the value.
     #
