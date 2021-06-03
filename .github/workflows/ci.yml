@@ -1,0 +1,36 @@
+name: CI
+on: [push, workflow_dispatch]
+jobs:
+  style:
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal
+    steps:
+      - uses: actions/checkout@v2
+      - name: Format
+        run: crystal tool format --check
+      - name: Lint
+        uses: crystal-ameba/github-action@v0.2.12
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        crystal:
+          -  latest
+          -  nightly
+          -  1.0.0
+          -  0.36.1
+          -  0.35.1
+    runs-on: ${{matrix.os}}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: oprypin/install-crystal@v1
+        with:
+          crystal: ${{matrix.crystal}}
+      - run: shards install --ignore-crystal-version
+      - run: crystal spec --error-trace -v

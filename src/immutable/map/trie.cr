@@ -2,34 +2,35 @@ module Immutable
   class Map(K, V)
     class Trie(K, V)
       BITS_PER_LEVEL = 5_u64
-      BLOCK_SIZE = 2_u64 ** BITS_PER_LEVEL
-      INDEX_MASK = BLOCK_SIZE - 1_u64
-      BITMAP_MASK = (2_u64 ** BLOCK_SIZE - 1_u64)
+      BLOCK_SIZE     = 2_u64 ** BITS_PER_LEVEL
+      INDEX_MASK     = BLOCK_SIZE - 1_u64
+      BITMAP_MASK    = (2_u64 ** BLOCK_SIZE - 1_u64)
 
       include Enumerable(Tuple(K, V))
 
       getter :size, :levels
 
       @children : Array(Trie(K, V))
-      @bitmap   : UInt64
-      @values   : Values(K, V)
-      @size     : Int32
-      @levels   : Int32
-      @owner    : UInt64?
+      @bitmap : UInt64
+      @values : Values(K, V)
+      @size : Int32
+      @levels : Int32
+      @owner : UInt64?
 
       def initialize(
         @children : Array(Trie(K, V)),
         @values : Values(K, V),
         @bitmap : UInt64,
         @levels : Int32,
-        @owner  : UInt64? = nil)
+        @owner : UInt64? = nil
+      )
         children_size = @children.reduce(0) { |size, child| size + child.size }
-        @size         = children_size + @values.size
+        @size = children_size + @values.size
       end
 
       def self.empty(owner : UInt64? = nil)
         children = [] of Trie(K, V)
-        values   = Values(K, V).new
+        values = Values(K, V).new
         new(children, values, 0_u32, 0, owner)
       end
 
@@ -184,10 +185,10 @@ module Immutable
         child = @children[idx].delete_at_index(index, key)
         if child.empty?
           children = @children.dup.tap { |cs| cs.delete_at(idx) }
-          bitmap   = @bitmap & (bitpos(i) ^ BITMAP_MASK)
+          bitmap = @bitmap & (bitpos(i) ^ BITMAP_MASK)
         else
           children = @children.dup.tap { |cs| cs[idx] = child }
-          bitmap   = @bitmap
+          bitmap = @bitmap
         end
         Trie.new(children, @values, bitmap, @levels)
       end
@@ -316,7 +317,7 @@ module Immutable
       class EntryIterator(K, V)
         include Iterator(Tuple(K, V))
 
-        @iterator  : Iterator(Iterator({K, V}))
+        @iterator : Iterator(Iterator({K, V}))
         @generator : Iterator({K, V}) | Iterator(Iterator({K, V}))
         @top : Bool
 
@@ -340,7 +341,7 @@ module Immutable
         private def flatten(value) : Tuple(K, V) | Stop
           if value.is_a? Iterator
             @generator = value
-            @top       = false
+            @top = false
             self.next
           else
             value

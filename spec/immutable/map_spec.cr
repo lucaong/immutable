@@ -200,7 +200,7 @@ describe Immutable do
         m = Immutable::Map.new({:foo => 123, :bar => 321})
         [
           "Map {:foo => 123, :bar => 321}",
-          "Map {:bar => 321, :foo => 123}"
+          "Map {:bar => 321, :foo => 123}",
         ].should contain(m.inspect)
       end
     end

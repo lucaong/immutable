@@ -17,9 +17,9 @@
 # makes vector inherently thread-safe and at the same time fast:
 #
 # ```
-# vector = Immutable::Vector[1, 2, 3]   # => Vector [1, 2, 3]
-# vector2 = vector.push(4)              # => Vector [1, 2, 3, 4]
-# vector                                # => Vector [1, 2, 3]
+# vector = Immutable::Vector[1, 2, 3] # => Vector [1, 2, 3]
+# vector2 = vector.push(4)            # => Vector [1, 2, 3, 4]
+# vector                              # => Vector [1, 2, 3]
 # ```
 #
 # Vector is implemented as a "persistent bit-partitioned vector trie" with a
@@ -163,7 +163,7 @@ module Immutable
     # v.push(1)   # => Errors, because the vector only accepts String
     #
     # # The original vector remains unchanged:
-    # v           # => Vector ["a", "b"]
+    # v # => Vector ["a", "b"]
     # ```
     def push(elem : T)
       new_tail = @tail + [elem]

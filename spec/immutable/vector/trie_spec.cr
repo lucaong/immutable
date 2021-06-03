@@ -2,7 +2,7 @@ require "../../spec_helper"
 
 describe Immutable::Vector::Trie do
   empty_trie = Immutable::Vector::Trie(Int32).empty
-  trie       = Immutable::Vector::Trie.from((0..49).to_a)
+  trie = Immutable::Vector::Trie.from((0..49).to_a)
 
   describe "#size" do
     it "returns the number of elements in the trie" do

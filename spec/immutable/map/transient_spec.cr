@@ -35,7 +35,7 @@ describe Immutable::Map::Transient do
         tr.delete(:foo)
       end
       expect_raises Immutable::Map::Transient::Invalid do
-        tr.merge({ :qux => 123 })
+        tr.merge({:qux => 123})
         nil
       end
       m.delete(:foo).set(:baz, 3).merge({:qux => 4, :quux => 5})
