@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lucaong/immutable.svg?branch=master)](https://travis-ci.org/lucaong/immutable)
+[![Build Status](https://github.com/lucaong/immutable/workflows/ci/badge.svg)](https://github.com/lucaong/immutable/actions)
 
 # Immutable
 
