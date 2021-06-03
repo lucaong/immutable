@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/lucaong/immutable/workflows/ci/badge.svg)](https://github.com/lucaong/immutable/actions)
+[![Build Status](https://github.com/lucaong/immutable/workflows/CI/badge.svg)](https://github.com/lucaong/immutable/actions)
 
 # Immutable
 
