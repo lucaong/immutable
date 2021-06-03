@@ -1,6 +1,8 @@
 name: immutable
 version: 0.1.24
 
+crystal: ">= 0.35"
+
 authors:
   - Luca Ongaro <lukeongaro@gmail.com>
 
