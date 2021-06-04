@@ -17,8 +17,8 @@ Benchmark.ips do |b|
   end
 
   b.report("Vector#set with Transient") do
-    v.transient do |v|
-      100.times { |i| v = v.set(i, 0) }
+    v.transient do |t|
+      100.times { |i| t = t.set(i, 0) }
     end
   end
 end

@@ -18,8 +18,8 @@ Benchmark.ips do |b|
 
   b.report("Vector#push with Transient") do
     v = Immutable::Vector(Int32).new
-    v.transient do |v|
-      100.times { |i| v.push(i) }
+    v.transient do |t|
+      100.times { |i| t.push(i) }
     end
   end
 end

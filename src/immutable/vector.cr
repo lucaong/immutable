@@ -366,7 +366,6 @@ module Immutable
     # Immutable::Vector[1, 2] <=> Immutable::Vector[1, 2] # => 0
     # ```
     def <=>(other : Vector)
-      min_size = Math.min(size, other.size)
       each.zip(other.each).each do |tuple|
         n = tuple.first <=> tuple.last
         return n if n != 0
@@ -453,15 +452,15 @@ module Immutable
     # ```
     def |(other : Vector(U)) forall U
       set = Set(T | U).new
-      union = reduce([] of T | U) do |union, elem|
-        union << elem unless set.includes?(elem)
+      union = reduce([] of T | U) do |u, elem|
+        u << elem unless set.includes?(elem)
         set.add(elem)
-        union
+        u
       end
-      union = other.reduce(union) do |union, elem|
-        union << elem unless set.includes?(elem)
+      union = other.reduce(union) do |u, elem|
+        u << elem unless set.includes?(elem)
         set.add(elem)
-        union
+        u
       end
       Vector(T | U).new(union)
     end

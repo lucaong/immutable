@@ -208,7 +208,7 @@ describe Immutable do
       end
 
       it "returns self" do
-        v = vector.each do |elem|; end
+        v = vector.each do |_elem|; end
         v.should eq(vector)
       end
 

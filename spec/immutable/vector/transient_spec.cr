@@ -1,8 +1,6 @@
 require "../../spec_helper"
 
 describe Immutable::Vector::Transient do
-  empty_transient = Immutable::Vector::Transient(Int32).new
-
   describe "#push" do
     it "pushes elements into the transient" do
       tr = Immutable::Vector::Transient(Int32).new

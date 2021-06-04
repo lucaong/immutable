@@ -13,7 +13,7 @@ describe Immutable::Map::Trie do
     end
 
     it "does not modify the original" do
-      t = trie.set(:foo, 0).set(:x, 5)
+      trie.set(:foo, 0).set(:x, 5)
       trie.get(:foo).should eq(42)
       expect_raises(KeyError) { trie.get(:x) }
     end
@@ -39,7 +39,7 @@ describe Immutable::Map::Trie do
     end
 
     it "does not modify the original" do
-      t = trie.delete(:foo)
+      trie.delete(:foo)
       trie.get(:foo).should eq(42)
       expect_raises(KeyError) { trie.get(:x) }
     end
