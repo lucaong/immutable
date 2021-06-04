@@ -173,13 +173,13 @@ describe Immutable do
 
     describe "#keys" do
       it "returs an array of all the keys" do
-        map.keys.sort.should eq(["bar", "baz", "foo"])
+        map.keys.sort!.should eq(["bar", "baz", "foo"])
       end
     end
 
     describe "#values" do
       it "returs an array of all the values" do
-        map.values.sort.should eq([1, 2, 3])
+        map.values.sort!.should eq([1, 2, 3])
       end
     end
 
