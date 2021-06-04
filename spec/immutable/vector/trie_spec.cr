@@ -169,7 +169,7 @@ describe Immutable::Vector::Trie do
         t.size.should eq(block_size * (block_size + 1))
         # pop_leaf!
         not_in_place = 0
-        block_size.times do |i|
+        block_size.times do |_i|
           x = t.pop_leaf!(42_u64)
           not_in_place += 1 unless x == t
           t = x
@@ -191,7 +191,7 @@ describe Immutable::Vector::Trie do
       it "#push_leaf! and #pop_leaf! return a modified copy" do
         block_size = Immutable::Vector::Trie::BLOCK_SIZE
         t = Immutable::Vector::Trie.new([] of Int32, 42_u64)
-        3.times do |i|
+        3.times do |_i|
           t = t.push_leaf!((0...block_size).to_a, 42_u64)
         end
         x = t.push_leaf!((0...block_size).to_a, 1_u64)

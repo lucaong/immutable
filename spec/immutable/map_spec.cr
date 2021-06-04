@@ -14,7 +14,7 @@ describe Immutable do
       end
 
       it "with a block, it creates a map with default" do
-        m = Immutable::Map(String, Int32).new { |k| 42 }
+        m = Immutable::Map(String, Int32).new { |_k| 42 }
         m["xxx"].should eq(42)
       end
 
@@ -24,7 +24,7 @@ describe Immutable do
       end
 
       it "with a hash and a block, it creates and initialize a map with default" do
-        m = Immutable::Map.new({:foo => 123}) { |k| 42 }
+        m = Immutable::Map.new({:foo => 123}) { |_k| 42 }
         m[:foo].should eq(123)
         m[:xxx].should eq(42)
       end
@@ -173,13 +173,13 @@ describe Immutable do
 
     describe "#keys" do
       it "returs an array of all the keys" do
-        map.keys.sort.should eq(["bar", "baz", "foo"])
+        map.keys.sort!.should eq(["bar", "baz", "foo"])
       end
     end
 
     describe "#values" do
       it "returs an array of all the values" do
-        map.values.sort.should eq([1, 2, 3])
+        map.values.sort!.should eq([1, 2, 3])
       end
     end
 

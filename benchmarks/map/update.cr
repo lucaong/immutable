@@ -18,8 +18,8 @@ Benchmark.ips do |b|
   end
 
   b.report("Map#set with Transient") do
-    m.transient do |m|
-      100.times { |i| m = m.set(i, 0) }
+    m.transient do |t|
+      100.times { |i| t = t.set(i, 0) }
     end
   end
 end

@@ -173,8 +173,8 @@ module Immutable
     # map    # => Map {"foo" => "bar"}
     # ```
     def merge(hash : Hash(K, V))
-      trie = hash.reduce(@trie) do |trie, (key, value)|
-        trie.set(key, value)
+      trie = hash.reduce(@trie) do |t, (key, value)|
+        t.set(key, value)
       end
       Map.new(trie, @block)
     end
@@ -190,8 +190,8 @@ module Immutable
     # map    # => Map {"foo" => "bar"}
     # ```
     def merge(map : Map(K, V))
-      trie = map.reduce(@trie) do |trie, (key, value)|
-        trie.set(key, value)
+      trie = map.reduce(@trie) do |t, (key, value)|
+        t.set(key, value)
       end
       Map.new(trie, @block)
     end
